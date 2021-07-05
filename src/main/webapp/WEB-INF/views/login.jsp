@@ -37,6 +37,8 @@
             <div class="panel-heading">
                 <div class="panel-title">환영합니다!</div>
             </div>
+            
+            
             <div class="panel-body">
                 <form id="login-form" method="post" action="/loginProcess.do">
                     <div>
