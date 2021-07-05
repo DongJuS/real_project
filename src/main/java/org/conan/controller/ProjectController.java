@@ -52,6 +52,10 @@ public class ProjectController {
 	public void main(HttpServletRequest request) {
 		log.info("메인페이지");
 	}
+	@GetMapping("/chatbot")
+	public void chat(HttpServletRequest request) {
+		log.info("chat");
+	}
 	
 	  @GetMapping("/board/get")
 	    public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {

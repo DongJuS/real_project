@@ -34,4 +34,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 		</bean>
 		<mybatis-spring:scan base-package="org.conan.mapper"/>
+		
+		
 </beans>
