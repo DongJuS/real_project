@@ -18,7 +18,9 @@ public interface RecipeMapper {
 	public List<String> readIngreNames(int rid);
 	public int recipeCount();
 	public int recipeCount(Criteria cri);
-	
+	public void recipeinsert(RecipeVO recipe);
+	public void ingreinsert(IngreVO ingre); 
+	public void proceinsert(ProceVO proce);
 	
 	public List<RecipeVO> getList();
 	public List<RecipeVO> getListWithPaging(Criteria cri);

@@ -143,13 +143,33 @@ public class ProjectController {
 		log.info("register: " + recipe);
 
 		service.register(recipe);
+		
+		
+		/*
+		 * if(recipe.getFileupload()!=null) {
+		 * recipe.getFileupload().forEach(fileupload->{ log.info(fileupload); }); }
+		 * 
+		 * log.info(recipe.getFileupload());
+		 */
+		List<IngreVO> list = new ArrayList<IngreVO>();
+		List<ProceVO> prolist = new ArrayList<ProceVO>();
+		String[] ing1 = ingre.getIngre_count().split(",");
+		String[] ing2 = ingre.getIngre_name().split(",");
+		String[] ing3 = ingre.getIngre_unit().split(",");
+		String[] pro1 = proce.getTxt().split(",");
+		String[] pro2 = proce.getPimg().split(",");
+		for (int i = 0; i < ing1.length; i++) {
+			list.add(new IngreVO(ing1[i], ing2[i], ing3[i]));
+			log.info(i + "번째 " + ing1[i]);
+		}
+		for (int i = 0; i < pro1.length; i++) {
+			prolist.add(new ProceVO(pro1[i], pro2[i]));
+			log.info(i + "번째 " + pro1[i]);
+		}
 
-		List<IngreVO> list=new ArrayList<IngreVO>();
-		list.add(new IngreVO(2922,"test2"));
-		list.add(new IngreVO(2922,"test3"));
-		service.register1(list); 
-		service.register2(proce);
-
+		/* log.info(str[1]); */
+		service.register1(list);
+		service.register2(prolist);
 
 		rttr.addFlashAttribute("result", recipe.getRid());
 		return "redirect: /recipe/list";

@@ -49,7 +49,7 @@ public class RecipeServiceImpl implements RecipeService {
 		return mapper.readIngreNames(rid);
 	}
 	@Override
-	public int recipeCount() {		//병석이형의 getTotalCount와 동일
+	public int recipeCount() {		//蹂묒꽍�씠�삎�쓽 getTotalCount�� �룞�씪
 		// TODO Auto-generated method stub
 		return mapper.recipeCount();
 	}
@@ -72,20 +72,28 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 	@Override
 	public void register(RecipeVO recipe) {
-		// TODO Auto-generated method stub
+		mapper.recipeinsert(recipe);
 		
 	}
 	@Override
 	public void register1(List<IngreVO> ingre) {
-		// TODO Auto-generated method stub
+		if (ingre != null) {
+			for (IngreVO ing : ingre) {
+				
+				mapper.ingreinsert(ing);
+			}
+		}
 		
 	}
 	@Override
-	public void register2(ProceVO proce) {
-		// TODO Auto-generated method stub
-		
+	public void register2(List<ProceVO> proce) {
+		if (proce != null) {
+			for (ProceVO pro : proce) {
+				mapper.proceinsert(pro);
+			}
+		}
 	}
-	/* 동주 내가 넣기 시작 */
+	/* �룞二� �궡媛� �꽔湲� �떆�옉 */
 	
 //	@Override 
 //	public List<BoardVO> getList(){
