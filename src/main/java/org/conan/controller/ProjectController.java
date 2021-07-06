@@ -49,8 +49,9 @@ public class ProjectController {
 	private RecipeService service;
 
 	@GetMapping("/main")
-	public void main(HttpServletRequest request) {
+	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
+		model.addAttribute("list", service.getList(cri));
 	}
 	@GetMapping("/chatbot")
 	public void chat(HttpServletRequest request) {
