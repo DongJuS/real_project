@@ -78,119 +78,11 @@ font-weight: bold
 .fade{
 opacity: 0.9;
 }
-/* 추가 헤더부분 시작*/
-<style>
-.logo_image {
-	width: 100px;
-    margin: 10px 0 0 15px;
-}
-
-.logo_text {
-	margin: 0 auto;
-}
-
-.logotext {
-	width: 300px;
-	top: 18px;
-	position: relative;
-}
-
-.main_top_container {
-	width: 100%;
-	height: 250px;
-	background: orange;
-	min-width: 600px;
-}
-
-.top_top {
-	width: 100%;
-	height: 80px;
-	display: inline-flex;
-}
-
-.top_bottom {
-	width: 100%;
-	height: 170px;
-	text-align: center;
-	position: relative;
-}
-
-.logo {
-	display: inline;
-	width: 0px;
-}
-
-.nav_bar {
-	    display: inline;
-    color: white;
-    right: 15px;
-    position: absolute;
-    font-size: 14px;
-    top: 10px;
-}
-
-.nav_bar a{
-    color: white;
-}
-
-.nav_bar a:link {
-	text-decoration: none;
-}
-
-#search_bar {
-	width: 70%;
-	height: 45px;
-	padding-right: 45px;
-	border-radius: 100px;
-	border-style: solid;
-}
-
-.fa-search:before {
-	content: "\f002";
-	position: relative;
-	right: 30px;
-	cursor: pointer;
-}
-#autoMaker {
-	
-	position: relative;
-	width: 50%;
-	height: auto;
-	background: white;
-	cursor: pointer;
-	    margin: 0 auto;
-	        border-radius: 10px;
-	            z-index: 100;
-	
-}
-
-#autoMaker>div {
-	border: 1px solid #a09c9c;
-	margin: 3px 3px;
-	border-radius: 15px;
-}
-
-#autoMaker>div:hover {
-	background: #a09c9c;
-}
-#search_area>div {
-    background-color: white;
-    width: auto;
-    border: 1px solid black;
-    border-radius: 100px;
-    padding: 5px;
-    display: inline-block;
-    margin: 3px;
-}
-.icon1{
-    border-radius: 100px;
-    width: 20px;
-}
-/* 추가 끝 */
-
 </style><%-- 
- <%-- <jsp:include page="../board/header.jsp"></jsp:include> --%>
-  
+ <header class="pt-5">
+
+	<jsp:include page="../include2/topLayout.jsp"></jsp:include>
+</header> --%> 
 
 <!-- Bootstrap Core CSS -->
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -222,6 +114,8 @@ opacity: 0.9;
     
      <!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+ <jsp:include page="../project/include/header.jsp"></jsp:include>
   
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
@@ -230,7 +124,7 @@ opacity: 0.9;
            
       var operForm = $("#operForm");
       $('button[data-oper="modify"]').on("click",function(e) {
-       operForm.attr("action", "/project/board/modify").submit();
+       operForm.attr("action", "/board/modify").submit();
         });
       $('button[data-oper="list"]').on("click", function(e) {
           operForm.find("#bno").remove();
@@ -525,30 +419,13 @@ opacity: 0.9;
 </script>
 
 <!--       ------------------------------------------------------------------------------- -->
-<div class="main_top_container">
-		<div class="top_top">
-			<div class="logo">
-				<a href="/project/main"><img class="logo_image"
-					src="/resources/proimg/logo.png"></a>
-			</div>
-
-			<div class="nav_bar">
-				<a href="#">로그인</a> | <a href="#">회원가입</a> | <a href="#">마이페이지</a>
-			</div>
-			<div class="logo_text">
-				<a href='/project/main'><img class="logotext" src="/resources/proimg/logotext2.png"></a>
-			</div>
-		</div>
-		<div class="top_bottom">
-		
-				<input id="search_bar" type="text" name="search"
-					placeholder=" 가지고 계신 식재료를 입력해 주세요!"><span class="icon"><i class="fa fa-search"></i></span>
-				<div id="autoMaker"></div>
-				<div id="search_area"></div>
-		</div>
-	</div>
-	
 <div class="container">
+<div class="row">
+   <div class="col-lg-12">
+      <h1 class="page-header">Board Register</h1>
+   </div>
+   <!-- /.col-lg-12 -->
+</div>
 <!-- /.row -->
 <div class="row">
    <div class="col-lg-12">
