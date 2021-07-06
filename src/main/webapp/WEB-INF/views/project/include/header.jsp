@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +124,14 @@
 			</div>
 
 			<div class="nav_bar">
-				<a href="#">로그인</a> | <a href="#">회원가입</a> | <a href="#">마이페이지</a>
+  <c:if test="${member == null }">
+
+				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+				
+</c:if>	
+<c:if test="${member !=null}">
+${member.id} | <a href="/update">마이페이지</a>
+</c:if>
 			</div>
 			<div class="logo_text">
 				<img class="logotext" src="/resources/proimg/logotext2.png">
