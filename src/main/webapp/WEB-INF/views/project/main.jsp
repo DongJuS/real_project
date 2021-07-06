@@ -181,6 +181,8 @@ position: fixed;
 </style>
 </head>
 <body>
+
+
 	<jsp:include page="include/header.jsp" />
 
 	<div class="main_bottom_container">
