@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,11 @@
 .hidden {
 	visibility: hidden;
 }
+a{
+text-decoration:none;
+
+}
+
 
 .main_bottom_container {
 	width: 100%;
@@ -41,7 +47,7 @@
 }
 
 .main_board {
-	
+	background-color: yellow;
 	margin: 0 auto;
 	height: 250px;
 }
@@ -93,7 +99,7 @@
 
 .post-slider .post-wrapper2 {
 	width: 90%;
-	height: 220px;
+	height: 250px;
 	margin: 0px auto;
 	overflow: hidden;
 }
@@ -109,7 +115,7 @@
 
 .post-slider .post-wrapper2 .post {
 	width: 300px;
-	height: 300px;
+	height: 350px;
 	margin: 0px 10px;
 	display: inline-block;
 	background: white;
@@ -166,17 +172,20 @@
 	right: 52px;
 }
 
+
 .free_board {
 	margin-left: 50px;
 }
-.page-wrapper{
-min-width: 800px;
-position: relative;
+
+.page-wrapper {
+	min-width: 800px;
+	position: relative;
 }
-.kakao_icon{
-position: fixed;
-    bottom: 6px;
-    right: 10px;
+
+.kakao_icon {
+	position: fixed;
+	bottom: 6px;
+	right: 10px;
 }
 </style>
 </head>
@@ -276,10 +285,9 @@ position: fixed;
 
 			</div>
 			<div class="situational_recommend">
-
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"><span
-						class="icon_text">상황별 추천메뉴</span>
+					<img src="/resources/proimg/star.png" class="main_icon"> <a
+						href='recipe/list'><span class="icon_text">전체 레시피</span></a>
 				</div>
 				<div class="icon_wrapper">
 					<i class="prevButton"><img class="cttIcon b_l prev2"
@@ -287,72 +295,26 @@ position: fixed;
 						class="cttIcon b_r next2" style="top: 600px;"
 						src="/resources/proimg/nexticon.png"></i>
 				</div>
-				<div class="page-wrapper">
+				<div class="page-wrapper" style="position: relative;">
 					<!--page slider -->
 					<div class="post-slider">
 
 						<div class="post-wrapper2">
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#" class="post-subject">김치볶음밥 </a>
-									</h4>
+							<c:forEach var='list' items='${list }'>
+								<div class="post">
+									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
+										src="<c:out value='${list.img }'/>" width='250px'
+										height='175px'></a>
+									<div class='post-info'>
+										<h4>
+											<a href='recipe/get?rid=<c:out value='${list.rid }'/>'>${list.name }</a>
+										</h4>
+									</div>
 								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#"> 계란말이 </a>
-									</h4>
-								</div>
-							</div>
-							<div class="post">
-								<img src="/resources/proimg/star.png" class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">간장공장공장장 </a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img src="/resources/proimg/star.png" class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">캐러셀개헬</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">믿을수없어</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">뽀잉</a>
-									</h4>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
+
 					<!--post slider-->
 				</div>
 
@@ -371,17 +333,37 @@ position: fixed;
 			</div>
 		</div>
 		<div class="kakao_icon">
-			<a id="channel-chat-button" href="#" onclick="void chatChannel();"><img src="/resources/proimg/kakao_icon.png"
-				style="width: 66px;"></a>
+			<a id="channel-chat-button" href="#" onclick="void chatChannel();"><img
+				src="/resources/proimg/kakao_icon.png" style="width: 66px;"></a>
 		</div>
 		<p id="token-result"></p>
 
 	</div>
 
+
 	<jsp:include page="include/footer.jsp" />
 	<script src="/resources/projs/ex2.js"></script>
 	<script src="/resources/projs/slick.js"></script>
-
+	<script>
+		$(document).ready(function() {
+			$('.post-wrapper').slick({
+				slidesToShow : 4,
+				slidesToScroll : 2,
+				autoplay : true,
+				autoplaySpeed : 10000,
+				nextArrow : $('.next'),
+				prevArrow : $('.prev')
+			});
+			$('.post-wrapper2').slick({
+				slidesToShow : 4,
+				slidesToScroll : 2,
+				autoplay : true,
+				autoplaySpeed : 10000,
+				nextArrow : $('.next2'),
+				prevArrow : $('.prev2')
+			});
+		})
+	</script>
 
 </body>
 </html>

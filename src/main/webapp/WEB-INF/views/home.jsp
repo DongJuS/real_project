@@ -3,6 +3,9 @@
 <html>
 <head>
 	<title>Home</title>
+	<script>
+      location.href = '/project/main';
+   </script>
 </head>
 <body>
 <h1>
