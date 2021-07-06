@@ -2,36 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.conan.mapper.RecipeMapper">
-<select resultType="org.conan.domain.RecipeVO" id="readRecipe">select * from t_recipe where rid=#{rid} </select>
-<select resultType="org.conan.domain.IngreVO" id="readIngre">select * from t_ingre where rid=#{rid} </select>
-<select resultType="org.conan.domain.ProceVO" id="readProce">select * from t_proce where rid=#{rid} </select>
-<select resultType="String" id="readAllIngreNames">select ingre_name from t_ingre</select>
-<select resultType="String" id="readIngreNames">select ingre_name from t_ingre where rid=#{rid}</select>
-<select resultType="int" id="recipeCount">select count(rid) from t_recipe</select>
-<select resultType="org.conan.domain.RecipeVO" id="getList">select * from t_recipe</select>
+	<select resultType="org.conan.domain.RecipeVO" id="readRecipe">select * from
+		t_recipe where rid=#{rid}
+	</select>
+	<select resultType="org.conan.domain.IngreVO" id="readIngre">select * from
+		t_ingre where rid=#{rid}
+	</select>
+	<select resultType="org.conan.domain.ProceVO" id="readProce">select * from
+		t_proce where rid=#{rid}
+	</select>
+	<select resultType="String" id="readAllIngreNames">select ingre_name from t_ingre
+	</select>
+	<select resultType="String" id="readIngreNames">select ingre_name from t_ingre
+		where rid = #{rid}
+	</select>
+	<select resultType="int" id="recipeCount">select count(rid) from t_recipe
+	</select>
+	<select resultType="org.conan.domain.RecipeVO" id="getList">select * from
+		t_recipe
+	</select>
+	<insert id='recipeinsert'>
+		<selectKey keyProperty="rid" order="BEFORE" resultType="int">select
+			r_seq.nextval from dual
+		</selectKey>
+		insert into t_recipe(rid, name, img,summary)
+		values
+		(#{rid}, #{name},
+		#{img}, #{summary})
+	</insert>
+	<insert id='ingreinsert'>
+		insert into t_ingre
+		values((select max(rid) from
+		t_recipe),#{ingre_name},#{ingre_count},#{ingre_unit})
+	</insert>
+	<insert id='proceinsert'>
+		insert into t_proce
+		values((select max(rid) from
+		t_recipe),#{txt},#{pimg})
+	</insert>
 
-
-<select id="getListWithPaging"
+	<select id="getListWithPaging"
 		resultType="org.conan.domain.RecipeVO">
 <![CDATA[select * from(
 select /*+INDEX_DESC(t_recipe pk_recipe)*/
 rownum rn,rid,name,img,summary
 from t_recipe
 where]]>
-	<!-- 	<include refid='criteria'></include> -->
+		<!-- <include refid='criteria'></include> -->
 <![CDATA[ rownum <=#{pageNum}*#{amount}
 )
 where rn>(#{pageNum}-1)*#{amount}]]>
 	</select>
-	
+
 	<insert id='insertRecipe'>
 		insert into t_recipe(rid, name, img,summary)
 		values
 		(2000, #{name}, #{img}, #{summary})
 	</insert>
-	
-	
-	
+
+
+
 	<select id="b_getList" resultType="org.conan.domain.BoardVO">
 		select * from tbl_board where
 		bno>0
@@ -42,11 +72,11 @@ where rn>(#{pageNum}-1)*#{amount}]]>
 		values(seq_board.nextval, #{title},#{content},#{writer})
 	</insert>
 
-<update id="updateReplyCnt">
-update tbl_board
-set replycnt = replycnt+#{amount}
-where bno =#{bno}
-</update>
+	<update id="updateReplyCnt">
+		update tbl_board
+		set replycnt = replycnt+#{amount}
+		where bno =#{bno}
+	</update>
 
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="bno" order="BEFORE"
@@ -72,7 +102,7 @@ where bno =#{bno}
 	</update>
 
 	<sql id='criteria'>
-	<trim prefix="(" suffix=")AND" prefixOverrides="OR">
+		<trim prefix="(" suffix=")AND" prefixOverrides="OR">
 			<foreach item='type' collection='typeArr'>
 				<trim prefix='OR'>
 					<choose>
@@ -101,10 +131,10 @@ where rn>(#{pageNum}-1)*#{amount}]]>
 	<select id="b_getTotalCount" resultType="int">
 		select count(*) from
 		tbl_board
-		where 
+		where
 		<include refid='criteria'></include>
 		bno>0
 	</select>
-	
-	
+
+
 </mapper>

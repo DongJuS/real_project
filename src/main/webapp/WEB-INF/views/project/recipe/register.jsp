@@ -41,6 +41,11 @@ header {
 			str += " <input type='file' multiple name='pimg'><br>"
 			$('.proce').append(str)
 		})
+		
+		$('#back').on("click",function(e){
+			e.preventDefault()
+			history.back()
+		})
 
 	})
 </script>
