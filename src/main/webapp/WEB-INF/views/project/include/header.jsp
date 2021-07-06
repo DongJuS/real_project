@@ -118,7 +118,7 @@
 <div class="main_top_container">
 		<div class="top_top">
 			<div class="logo">
-				<a href="main"><img class="logo_image"
+				<a href="/project/main"><img class="logo_image"
 					src="/resources/proimg/logo.png"></a>
 			</div>
 
@@ -126,7 +126,7 @@
 				<a href="#">로그인</a> | <a href="#">회원가입</a> | <a href="#">마이페이지</a>
 			</div>
 			<div class="logo_text">
-				<img class="logotext" src="/resources/proimg/logotext2.png">
+				<a href='/project/main'><img class="logotext" src="/resources/proimg/logotext2.png"></a>
 			</div>
 		</div>
 		<div class="top_bottom">
