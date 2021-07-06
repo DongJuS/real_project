@@ -35,7 +35,7 @@ $(document).ready(function() {
       }); */
     $('button[data-oper="list"]').on("click", function(e) {
         operForm.find("#rid").remove();
-        operForm.attr("action", "/recipe/list");
+        operForm.attr("action", "/project/recipe/list");
         operForm.submit();
      });
 })
@@ -110,45 +110,7 @@ $(document).ready(function() {
 	</form>
 	<!-- 컨테이너 끝 -->
 	<br>
-	<!-- 댓글 시작 -->
 
-	<div class='container'>
-		<div class='veiw_reply'>
-			<div>
-				<div class='media_reply_list'>
-					<div>
-						<h4>
-							<strong>여기에 아이디</strong> 댓글단 시간
-						</h4>
-						<span>댓글 내용 내용 내용내용내용</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="panel-heading">
-			<i class="fa fa-comments fa-fw"></i>Reply
-
-			<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
-				Reply</button>
-
-		</div>
-		<div class="panel-body">
-			<ul class="chat">
-				<li class="left clearfix" data-rno="12">
-					<div>
-						<div class="header">
-							<!-- <strong class="primary-font"> user00</strong> <small
-									class="pull-right text-muted">2021-05-18-13:13</small> -->
-						</div>
-						<!-- <p>Good job</p> -->
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
 		<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

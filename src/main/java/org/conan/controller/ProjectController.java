@@ -51,7 +51,9 @@ public class ProjectController {
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
+		Criteria cri1=new Criteria(1,7);
 		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("board", service.b_getList(cri1));
 	}
 	
 	  @GetMapping("/board/get")
@@ -173,7 +175,7 @@ public class ProjectController {
 		service.register2(prolist);
 
 		rttr.addFlashAttribute("result", recipe.getRid());
-		return "redirect: /recipe/list";
+		return "redirect: /project/recipe/list";
 	}
 	@GetMapping("/recipe/get")
 	public void get(@RequestParam("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
