@@ -13,15 +13,20 @@
 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> 
 		
- 	  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
+ 	   <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="scott"></property>
-		<property name="password" value="tiger"></property>
+		<property name="password" value="tiger"></property> 
     
  
-    <!-- <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/users/didsu/Wallet_DB202106291126"></property>
+   <!--   <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=C:\Users\didsu\Wallet_DB202106291126"></property>
+		<property name="username" value="admin"></property>
+		<property name="password" value="Finalprojectfinal1"></property>
+		  -->
+    
+     <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/users/didsu/Wallet_DB202106291126"></property>
 		<property name="username" value="admin"></property>
 		<property name="password" value="Finalprojectfinal1"></property> 
-   -->
+     -->
 		
 		<!-- <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=C:\Programs\sqldeveloper\Wallet_DB202106291126"></property>
       <property name="username" value="admin"></property>

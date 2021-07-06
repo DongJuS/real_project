@@ -74,7 +74,8 @@
 	
 	$("#showHide").on('click',function(e){
 	
-		var obj = document.getElementById("kakaoT");
+		/* 		aJax형식
+		var obj = document.getElementById("kakaoT");  */
 		var obj=$("#kakaoT")
 		
 		alert('누르셨습니다.');
