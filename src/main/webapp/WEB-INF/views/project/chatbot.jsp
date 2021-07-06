@@ -39,13 +39,13 @@
 				<div class="col" style="width:20%;height:200px; text-align: center; ">
 				
 				<div id="first" class="col" >
-				처음
+				<span>처음</span>
 				</div>
 				<div id="second" class="col" >
-				둘
+				<span>둘</span>
 				</div>
 				<div id="third" class="col">
-				셋
+				<span>셋</span>
 				</div>
 				
 				
@@ -61,6 +61,7 @@
    $("#first").on('click',function(e){
 		console.log("처음을 누르셨습니다.");
 		alert('처음');
+		
 	})
     $("#second").on('click',function(e){
 		console.log("둘을 누르셨습니다.");
@@ -73,7 +74,6 @@
 	
 	
 	$("#showHide").on('click',function(e){
-	
 		/* 		aJax형식
 		var obj = document.getElementById("kakaoT");  */
 		var obj=$("#kakaoT")
@@ -84,7 +84,6 @@
 				$("#kakaoT").show();
 				alert('show됨.');
 				/* show */
-				
 				kakao=kakao-1;
 			}
 			else{
@@ -94,7 +93,9 @@
 				kakao=kakao-1;
 			}
 			alert(kakao);
-	})/* show hide */
+	})/* 
+	chat bot 부분
+	show hide */
 	
    });
 	</script>
