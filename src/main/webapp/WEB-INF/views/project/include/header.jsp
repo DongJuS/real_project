@@ -123,7 +123,7 @@
 			</div>
 
 			<div class="nav_bar">
-				<a href="#">로그인</a> | <a href="#">회원가입</a> | <a href="#">마이페이지</a>
+				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
 			</div>
 			<div class="logo_text">
 				<a href='/project/main'><img class="logotext" src="/resources/proimg/logotext2.png"></a>
