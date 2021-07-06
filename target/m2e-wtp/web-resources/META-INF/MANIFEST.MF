@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: User
+=======
+Built-By: lowshot
+>>>>>>> origin/정배
 Build-Jdk: 11.0.7
 Created-By: Maven Integration for Eclipse
 
