@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -321,15 +322,24 @@ text-decoration:none;
 				</div>
 
 			</div>
+			<br>
+			<br>
+			<br>
+			
 			<div class="main_board">
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"><span
-						class="icon_text">자유게시판</span>
+					<img src="/resources/proimg/star.png" class="main_icon">
+					<a href='board/list'><span class="icon_text">자유게시판</span></a>
 				</div>
 				<div class="free_board">
-					인기글 Best4<br> 진짜 광기의 국산 캐릭터.jpg (36)<br> 법무부, "나라 팔아먹는
-					국적법 개정?... (30)<br> GS가 현 상황을 타개할 수 있는 유일...(27)<br> 어릴때
-					학교에서 주던 존맛음료 (82)<br> 미국식 화장법 vs 한국식 화장법 (43)<br>
+					<ul>
+						<c:forEach var='board' items='${board }'>
+							<li>
+							<a href='board/get?bno=<c:out value="${board.bno }"/>'>
+							<c:out value='${board.title }'/></a></li>
+							
+						</c:forEach>
+					</ul>
 				</div>
 
 			</div>
@@ -341,6 +351,7 @@ text-decoration:none;
 		<p id="token-result"></p>
 
 	</div>
+	
 
 
 	<jsp:include page="include/footer.jsp" />
@@ -364,6 +375,8 @@ text-decoration:none;
 				nextArrow : $('.next2'),
 				prevArrow : $('.prev2')
 			});
+			
+			
 		})
 	</script>
 

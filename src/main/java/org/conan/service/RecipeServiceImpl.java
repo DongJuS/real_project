@@ -8,6 +8,7 @@ import org.conan.domain.IngreVO;
 import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.mapper.RecipeMapper;
+import org.conan.mapper.UploadFileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import lombok.extern.log4j.Log4j;
 public class RecipeServiceImpl implements RecipeService {
 	@Setter(onMethod_=@Autowired)
 	private RecipeMapper mapper;
+	@Setter(onMethod_ = @Autowired)
+	private UploadFileMapper uploadmapper;
 	
 	@Override
 	public RecipeVO readRecipe(int rid) {
@@ -73,6 +76,13 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void register(RecipeVO recipe) {
 		mapper.recipeinsert(recipe);
+		if(recipe.getFileupload()==null||recipe.getFileupload().size()<=0) {
+			return;
+		}
+		recipe.getFileupload().forEach(upload->{
+			upload.setRid(recipe.getRid());
+			uploadmapper.insert(upload);
+		});
 		
 	}
 	@Override

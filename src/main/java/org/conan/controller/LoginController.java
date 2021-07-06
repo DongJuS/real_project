@@ -20,27 +20,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import lombok.extern.log4j.Log4j;
-
 @Controller
 @Log4j
 @RequestMapping("/*")
 public class LoginController {
 	@Autowired
 	MemberService service;
-
-
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public void Update() {
 		log.info("정보수정");
@@ -61,7 +46,7 @@ public class LoginController {
 	public String joinProc(MemberVO vo)throws Exception {
 		log.info(vo);
 		service.register(vo);
-		return "redirect:/main";
+		return "redirect:/project/main";
 	}
 	@GetMapping("/main")
 	public void main() {
@@ -81,7 +66,7 @@ public class LoginController {
 
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
-			return "redirect:/login";
+			return "redirect:/project/main";
 
 		}
 

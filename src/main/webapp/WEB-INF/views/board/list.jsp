@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 
@@ -69,7 +70,7 @@ border:1px solid black;
 	<%--  <jsp:include page="../include/header.jsp"></jsp:include>
   --%>
 
-	<jsp:include page="../project/include/header.jsp"></jsp:include>
+	<jsp:include page="../board/header.jsp"></jsp:include>
 </header>
 
 <script type="text/javascript">
@@ -127,7 +128,7 @@ border:1px solid black;
 																	"href")
 															+ "'/>")
 											actionForm.attr("action",
-													"/board/get")
+													"/project/board/get")
 											actionForm.submit()
 										})
 
@@ -170,6 +171,7 @@ border:1px solid black;
 					Total
 					<c:out value='${pageMaker.total }' />
 					건
+
 				</div>
 
 
@@ -207,8 +209,8 @@ border:1px solid black;
 	<div class="row">
 		<div class="col-lg-12">
 
-			<table class="table" >
-			
+			<table class="table">
+
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
@@ -222,16 +224,16 @@ border:1px solid black;
 				<tbody>
 					<c:forEach var="board" items="${list }">
 						<tr>
-							<td  scope="row">${board.bno }</td>
-							<td style="width:550px" scope="row"  id="center"><a class='move'
-								href='<c:out value="${board.bno }"/>'>${board.title } <b>[<c:out
-											value="${board.replyCnt }" /> ]
+							<td scope="row">${board.bno }</td>
+							<td style="width: 550px" scope="row" id="center"><a
+								class='move' href='<c:out value="${board.bno }"/>'>${board.title }
+									<b>[<c:out value="${board.replyCnt }" /> ]
 								</b>
 							</a></td>
 							<td></td>
 							<td scope="row">${board.writer }</td>
-							<td scope="row" id="center"><fmt:formatDate pattern="yyyy/MM/dd"
-							value="${board.regdate }"/></td>
+							<td scope="row" id="center"><fmt:formatDate
+									pattern="yyyy/MM/dd" value="${board.regdate }" /></td>
 						</tr>
 					</c:forEach>
 
@@ -247,49 +249,49 @@ border:1px solid black;
 	<button id='regBtn' type='button'>글쓰기</button>
 
 
-<div class='pull-right'>
-	<ul class='pagination'>
-		<c:if test="${pageMaker.prev }">
-			<li class='paginate_button previous'><a
-				href="${pageMaker.startPage-1 }">Previous</a></li>
-		</c:if>
-		<c:forEach var='num' begin='${pageMaker.startPage }'
-			end='${pageMaker.endPage }'>
-			<li class="paginate_button ${pageMaker.cri.pageNum==num?"active":""}">
-				<a href="${num }">${num }</a>
-			</li>
-		</c:forEach>
-		<c:if test="${pageMaker.next }">
-			<li class='paginate_button next'><a
-				href="${pageMaker.endPage+1 }">Next</a></li>
-		</c:if>
-	</ul>
-</div>
-<form id='actionForm' action='/board/list' method='get'>
-	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
-	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
-	<input type='hidden' name='type' value="${pageMaker.cri.type }">
-	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+	<div class='pull-right'>
+		<ul class='pagination'>
+			<c:if test="${pageMaker.prev }">
+				<li class='paginate_button previous'><a
+					href="${pageMaker.startPage-1 }">Previous</a></li>
+			</c:if>
+			<c:forEach var='num' begin='${pageMaker.startPage }'
+				end='${pageMaker.endPage }'>
+				<li class="paginate_button ${pageMaker.cri.pageNum==num?"active":""}">
+					<a href="${num }">${num }</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pageMaker.next }">
+				<li class='paginate_button next'><a
+					href="${pageMaker.endPage+1 }">Next</a></li>
+			</c:if>
+		</ul>
+	</div>
+	<form id='actionForm' action='/board/list' method='get'>
+		<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
+		<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
+		<input type='hidden' name='type' value="${pageMaker.cri.type }">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 
-</form>
-<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
-	aria-labelledby='myModallabel' aria-hidden='true'>
-	<div class='modal-dialog'>
-		<div class='modal-content'>
-			<div class='modal-header'>
-				<button type='button' class='close' data-dismiss='modal'
-					aria-hidden='true'>&times;</button>
-				<h4 class='modal-title' id='myModalLable'>Modal title</h4>
-			</div>
-			<div class='modal-body'>처리가 완료되었습니다.</div>
-			<div class='modal-footer'>
-				<button type='button' class='btn btn-info' data-dismiss='modal'>Close</button>
-				<button type='button' class='btn btn-primary'>Save Changes</button>
+	</form>
+	<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
+		aria-labelledby='myModallabel' aria-hidden='true'>
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<button type='button' class='close' data-dismiss='modal'
+						aria-hidden='true'>&times;</button>
+					<h4 class='modal-title' id='myModalLable'>Modal title</h4>
+				</div>
+				<div class='modal-body'>처리가 완료되었습니다.</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-info' data-dismiss='modal'>Close</button>
+					<button type='button' class='btn btn-primary'>Save Changes</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- /.table-responsive -->
+	<!-- /.table-responsive -->
 
 
 
@@ -316,7 +318,7 @@ border:1px solid black;
 						}
 
 						$("#regBtn").on("click", function() {
-							self.location = "/board/register"
+							self.location = "/project/board/register"
 						})
 
 						//내꺼 오타천국 
@@ -351,7 +353,7 @@ border:1px solid black;
 																	"href")
 															+ "'/>")
 											actionForm.attr("action",
-													"/board/get")
+													"/project/board/get")
 											actionForm.submit()
 										})
 
