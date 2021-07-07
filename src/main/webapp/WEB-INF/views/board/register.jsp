@@ -223,7 +223,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Board Register</h1>
+			<h1 class="page-header">자유게시판</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -243,10 +243,8 @@
 							<textarea class='form-control' rows='3' name='content'></textarea>
 						</div>
 						<div class='form-group'>
-							<label>Writer</label><input class='form-control' name='writer'
-								value='<sec:authentication
-                   property="principal.username"/>'
-								readonly="readonly">
+							<label>Writer</label>
+							<input class='form-control' name='writer' value='${member.id}'	readonly="readonly">
 						</div>
 						<button type='submit' class='btn btn-default'>Submit</button>
 						<button type='reset' class='btn btn-default'>Reset</button>

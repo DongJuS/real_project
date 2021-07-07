@@ -47,7 +47,7 @@ text-decoration:none;
 }
 
 .main_board {
-	background-color: yellow;
+	/* background-color: yellow; */
 	margin: 0 auto;
 	height: 250px;
 }
@@ -197,9 +197,14 @@ position: relative;
 	bottom: 6px;
 	right: 10px;
 }
+<<<<<<< HEAD
 h4 a:link{
 text-decoration:none;
 color:black;
+=======
+ul{
+	list-style: none;
+>>>>>>> origin/병석
 }
 </style>
 </head>
@@ -316,67 +321,6 @@ color:black;
 					<div class="post-slider">
 
 						<div class="post-wrapper2">
-<<<<<<< HEAD
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/11/f539b81359c57948bb3bd27bc34163e01.png"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#" class="post-subject">소시지로 만들 수 있는 음식 종류들!? </a>
-									</h4>
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/bdd5bfdaf1e06827b47c18c9cf55928e1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#"> 여름에 먹기 좋은 음식! </a>
-									</h4>
-								</div>
-							</div>
-							<div class="post">
-								<img src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/976c395176a9bdad0a0c4ff015ce8d251.png" class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">과일로 간단하게 만들 수 있는 요리! </a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/3b2337e097db65122581a69d6f4a8e321.jpg" class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">단언컨대 가장 완벽한 닭고기 음식들!</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/545c9adc63d830df9b36d0b97b023bda1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">편스토랑 메뉴들 총집합!</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/f0052c15da83da76b26acf99443271da1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">토마토를 이용한 맛깔나는 음식들 모음집</a>
-									</h4>
-								</div>
-							</div>
-=======
 							<c:forEach var='list' items='${list }'>
 								<div class="post">
 									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
@@ -389,7 +333,6 @@ color:black;
 									</div>
 								</div>
 							</c:forEach>
->>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 						</div>
 					</div>
 
@@ -404,23 +347,17 @@ color:black;
 			<div class="main_board">
 				<div class="best_text">
 					<img src="/resources/proimg/star.png" class="main_icon">
-					<a href='board/list'><span class="icon_text">자유게시판</span></a>
+					<a href='/board/list'><span class="icon_text">자유게시판</span></a>
 				</div>
 				<div class="free_board">
-<<<<<<< HEAD
-					<strong>인기글 Best5</strong><br> 진짜 광기의 국산 캐릭터.jpg (36)<br> 법무부, "나라 팔아먹는
-					국적법 개정?... (30)<br> GS가 현 상황을 타개할 수 있는 유일...(27)<br> 어릴때
-					학교에서 주던 존맛음료 (82)<br> 미국식 화장법 vs 한국식 화장법 (43)<br>
-=======
 					<ul>
 						<c:forEach var='board' items='${board }'>
 							<li>
-							<a href='board/get?bno=<c:out value="${board.bno }"/>'>
+							<a href='/board/get?bno=<c:out value="${board.bno }"/>'>
 							<c:out value='${board.title }'/></a></li>
 							
 						</c:forEach>
 					</ul>
->>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 				</div>
 
 			</div>

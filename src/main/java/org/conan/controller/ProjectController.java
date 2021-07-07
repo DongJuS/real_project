@@ -19,6 +19,7 @@ import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
 import org.conan.mapper.RecipeMapper;
+import org.conan.service.BoardService;
 import org.conan.service.RecipeService;
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
@@ -47,13 +48,14 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ProjectController {
 	private RecipeService service;
+	private BoardService board;
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
 		Criteria cri1=new Criteria(1,7);
 		model.addAttribute("list", service.getList(cri));
-		/* model.addAttribute("board", service.b_getList(cri1)); */
+		model.addAttribute("board", board.getList(cri1)); 
 	}
 	@GetMapping("/chatbot")
 	public void chat(HttpServletRequest request) {

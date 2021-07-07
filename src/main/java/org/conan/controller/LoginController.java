@@ -2,7 +2,11 @@ package org.conan.controller;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.conan.domain.MemberVO;
@@ -57,30 +61,39 @@ public class LoginController {
 		log.info("로그인");
 	}
 	@PostMapping("/loginProc")
-	public String loginProc(HttpServletRequest request,  MemberVO vo, RedirectAttributes rttr) {
-		log.info("loginProc!!");
-		log.info(vo);
-		HttpSession session = request.getSession();
-		MemberVO lvo = service.login(vo); //lvo 揶쏅�れ뱽筌띾슢諭억옙堉긴빳�꼷苑� �룯�뜃由곤옙�넅 占쎈뻻占쎄땀
-		if(lvo == null) {                                // 占쎌뵬燁살꼹釉�筌욑옙 占쎈륫占쎈뮉 占쎈툡占쎌뵠占쎈탵, �뜮袁⑨옙甕곕뜇�깈 占쎌뿯占쎌젾 野껋럩�뒭
+	public String loginProc(HttpServletRequest request,  MemberVO vo, RedirectAttributes rttr)  {
+	   log.info("loginProc!!");
+	   log.info(vo);
+	   HttpSession session = request.getSession();
+	   MemberVO lvo = service.login(vo); //lvo 객체값 저장
+	    if(lvo == null) {                                // 로그인하지않으면 로그인으로
+	        
+	        int result = 0;
+	        rttr.addFlashAttribute("result", result);
+	        return "redirect:/login";
 
-			int result = 0;
-			rttr.addFlashAttribute("result", result);
-			return "redirect:/project/main";
-
-		}
-
-		session.setAttribute("member", lvo);             // 占쎌뵬燁살꼹釉�占쎈뮉 占쎈툡占쎌뵠占쎈탵, �뜮袁⑨옙甕곕뜇�깈 野껋럩�뒭 (嚥≪뮄�젃占쎌뵥 占쎄쉐�⑨옙)
-
-		return "redirect:/main";
-
+	        
+	        
+	    }
+	    
+	    session.setAttribute("member", lvo);             //  lvo에 저장된 객체값을 member에다가 저장
+	    
+	    return "redirect:project/main";
+	   
 	}
-	@PostMapping("/logout")
+
+	/*
+	 * @PostMapping("/logout") public String logout(HttpServletRequest request) {
+	 * log.info("濡쒓렇�븘�썐"); HttpSession session = request.getSession();
+	 * session.invalidate(); return "redirect:/main"; }
+	 */
+	
+	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		log.info("濡쒓렇�븘�썐");
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:/main";
+		return "redirect:/project/main";
 	}
 	@GetMapping("/test")
 	public String test(HttpSession session) {
