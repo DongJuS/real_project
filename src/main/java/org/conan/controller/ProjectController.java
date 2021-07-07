@@ -55,7 +55,7 @@ public class ProjectController {
 		log.info("메인페이지");
 		Criteria cri1=new Criteria(1,7);
 		model.addAttribute("list", service.getList(cri));
-		 model.addAttribute("board", board.getList(cri1)); 
+		model.addAttribute("board", board.getList(cri1)); 
 	}
 	@GetMapping("/chatbot")
 	public void chat(HttpServletRequest request) {
