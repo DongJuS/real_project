@@ -23,8 +23,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardController {
 	private BoardService service;
-	private RecipeService Re_service;
-	
 	@GetMapping("/list") 
 	public void list(Criteria cri, Model model) {
 		log.info("list : "+cri);
