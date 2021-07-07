@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+=======
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+>>>>>>> origin/master
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,6 +130,20 @@
 			</div>
 
 			<div class="nav_bar">
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <c:if test="${member == null }">
+
+				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+				
+</c:if>	
+<c:if test="${member !=null}">
+${member.id} | <a href="/update">마이페이지</a>
+</c:if>
+=======
+				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+>>>>>>> origin/병석
+=======
 				<c:if test="${member == null }">
 
 					<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
@@ -133,6 +152,7 @@
 				<c:if test="${member !=null}">
 					${member.id}님  | <a href="/update">마이페이지</a> |<a href="/logout">로그아웃</a>
 				</c:if>
+>>>>>>> origin/master
 			</div>
 			<div class="logo_text">
 				<a href="/project/main"><img class="logotext"
