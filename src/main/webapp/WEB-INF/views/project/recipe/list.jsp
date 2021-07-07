@@ -33,7 +33,7 @@ header {
 		})
 		
 		$("#regBtn").on("click", function() {
-			self.location = "/register"
+			self.location = "/project/recipe/register"
 		})
 		
 		
@@ -48,7 +48,7 @@ header {
 	<div class='container'>
 			<div class='row'>
 			<p><c:out value='${pageMaker.total }'/>개의 결과가 검색됨</p>
-			<button id='regBtn' type='button' >글쓰기</button>
+			<!-- <button id='regBtn' type='button' >글쓰기</button> -->
 	<table>
 		<c:forEach var='list' items='${list }'>
 				<tr>

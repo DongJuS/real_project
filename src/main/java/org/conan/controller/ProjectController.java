@@ -19,6 +19,7 @@ import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
 import org.conan.mapper.RecipeMapper;
+import org.conan.service.BoardService;
 import org.conan.service.RecipeService;
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
@@ -47,74 +48,23 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ProjectController {
 	private RecipeService service;
+	private BoardService board;
 
 	@GetMapping("/main")
-	public void main(HttpServletRequest request) {
+	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
+		Criteria cri1=new Criteria(1,7);
+		model.addAttribute("list", service.getList(cri));
+		 model.addAttribute("board", board.getList(cri1)); 
+	}
+	@GetMapping("/chatbot")
+	public void chat(HttpServletRequest request) {
+		log.info("chat");
 	}
 	
-	  @GetMapping("/board/get")
-	    public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-	        log.info("/get or /modify"+cri);
-	        model.addAttribute("board", service.get(bno));
-	    }
-	  @GetMapping("/board/register")
-	    public void register2() {
-	        
-	    }
-	  
-	  
-	@GetMapping("/board/list") 
-	public void b_list(Criteria cri, Model model) {
-		log.info("list : "+cri);
-		model.addAttribute("list", service.b_getList(cri));
-		int total=service.getTotal(cri);
-		log.info("total : "+ total);	
-		model.addAttribute("pageMaker", new pageDTO(cri, total));
 
-	}
+	  
 	
-	  @PostMapping("/board/register")
-	    public String register(BoardVO board, RedirectAttributes rttr) {
-	        log.info("register : "+ board);    
-	        
-	        service.register(board);
-	        rttr.addFlashAttribute("result", board.getBno());
-	        return "redirect:/project/board/list";
-	        
-	    }
-	  
-	  @PostMapping("/board/modify")
-	    public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-	        log.info("modify : "+board);
-	        if(service.modify(board)) {
-	            rttr.addFlashAttribute("result","success");
-	        }
-	        /*
-	         * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-	         * cri.getAmount()); rttr.addAttribute("keyword", cri.getKeyword());
-	         * rttr.addAttribute("type", cri.getType());
-	         */
-	        return "redirect:/project/board/list"+cri.getListLink();
-	    }
-	    @PostMapping("/board/remove")
-	    public String remove(@RequestParam("bno") Long bno,
-	             @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-	        
-	        log.info("remove......."+bno);
-	        
-	        
-	    
-	        /*
-	         * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-	         * cri.getAmount()); rttr.addAttribute("keyword", cri.getKeyword());
-	         * rttr.addAttribute("type", cri.getType());
-	         */
-	        return "redirect:/project/board/list"+cri.getListLink();
-	        
-	    }
-
-
 	@GetMapping("/index")
 	public void test(HttpServletRequest request) {
 		log.info("겟으로 인덱스");
@@ -143,16 +93,36 @@ public class ProjectController {
 		log.info("register: " + recipe);
 
 		service.register(recipe);
+		
+		
+		/*
+		 * if(recipe.getFileupload()!=null) {
+		 * recipe.getFileupload().forEach(fileupload->{ log.info(fileupload); }); }
+		 * 
+		 * log.info(recipe.getFileupload());
+		 */
+		List<IngreVO> list = new ArrayList<IngreVO>();
+		List<ProceVO> prolist = new ArrayList<ProceVO>();
+		String[] ing1 = ingre.getIngre_count().split(",");
+		String[] ing2 = ingre.getIngre_name().split(",");
+		String[] ing3 = ingre.getIngre_unit().split(",");
+		String[] pro1 = proce.getTxt().split(",");
+		String[] pro2 = proce.getPimg().split(",");
+		for (int i = 0; i < ing1.length; i++) {
+			list.add(new IngreVO(ing1[i], ing2[i], ing3[i]));
+			log.info(i + "번째 " + ing1[i]);
+		}
+		for (int i = 0; i < pro1.length; i++) {
+			prolist.add(new ProceVO(pro1[i], pro2[i]));
+			log.info(i + "번째 " + pro1[i]);
+		}
 
-		List<IngreVO> list=new ArrayList<IngreVO>();
-		list.add(new IngreVO(2922,"test2"));
-		list.add(new IngreVO(2922,"test3"));
-		service.register1(list); 
-		service.register2(proce);
-
+		/* log.info(str[1]); */
+		service.register1(list);
+		service.register2(prolist);
 
 		rttr.addFlashAttribute("result", recipe.getRid());
-		return "redirect: /recipe/list";
+		return "redirect: /project/recipe/list";
 	}
 	@GetMapping("/recipe/get")
 	public void get(@RequestParam("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {

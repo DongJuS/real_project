@@ -2,23 +2,23 @@ package org.conan.domain;
 
 import java.util.List;
 
+import org.conan.domain.UploadFile;
+
 import lombok.Data;
 
 @Data
-public class RecipeVO {		//레시피 상세내용
-   private int rid;			//레시피번호
-   private String name;		//레시피이름
-   private String img;		//음식 이미지
-   private String summary;	//상세 정보
+public class RecipeVO {		//�젅�떆�뵾 �긽�꽭�궡�슜
+   private int rid;			//�젅�떆�뵾踰덊샇
+   private String name;		//�젅�떆�뵾�씠由�
+   private String img;		//�쓬�떇 �씠誘몄�
+   private String summary;	//�긽�꽭 �젙蹂�
+   
+	private List<UploadFile> fileupload; 
+
    
    
-public RecipeVO(int rid, String name, String img, String summary) {
-	super();
-	this.rid = rid;
-	this.name = name;
-	this.img = img;
-	this.summary = summary;
-}
+ 
+
 
 
 

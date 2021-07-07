@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/java/org/conan/controller/LoginController.java=UTF-8
 encoding//src/main/java/org/conan/controller/ProjectController.java=UTF-8
+encoding//src/main/java/org/conan/controller/WebSocketChat.java=UTF-8
+encoding//src/main/java/org/conan/domain/IngreVO.java=UTF-8
+encoding//src/main/java/org/conan/domain/ProceVO.java=UTF-8
+encoding//src/main/java/org/conan/domain/RecipeVO.java=UTF-8
+encoding//src/main/java/org/conan/service/RecipeService.java=UTF-8
+encoding//src/main/java/org/conan/service/RecipeServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8

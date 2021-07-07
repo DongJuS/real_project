@@ -119,11 +119,12 @@
 <div class="main_top_container">
 		<div class="top_top">
 			<div class="logo">
-				<a href="main"><img class="logo_image"
+				<a href="/project/main"><img class="logo_image"
 					src="/resources/proimg/logo.png"></a>
 			</div>
 
 			<div class="nav_bar">
+<<<<<<< HEAD
   <c:if test="${member == null }">
 
 				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
@@ -132,9 +133,12 @@
 <c:if test="${member !=null}">
 ${member.id} | <a href="/update">마이페이지</a>
 </c:if>
+=======
+				<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+>>>>>>> origin/병석
 			</div>
 			<div class="logo_text">
-				<img class="logotext" src="/resources/proimg/logotext2.png">
+				<a href='/project/main'><img class="logotext" src="/resources/proimg/logotext2.png"></a>
 			</div>
 		</div>
 		<div class="top_bottom">

@@ -41,6 +41,11 @@ header {
 			str += " <input type='file' multiple name='pimg'><br>"
 			$('.proce').append(str)
 		})
+		
+		$('#back').on("click",function(e){
+			e.preventDefault()
+			history.back()
+		})
 
 	})
 </script>
@@ -48,7 +53,7 @@ header {
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
 	<div class='container'>
-		<form role='form' action='/recipe/register' method='post' >
+		<form role='form' action='/project/recipe/register' method='post' >
 		<table>
 			<tr>
 				<td>주제</td>
