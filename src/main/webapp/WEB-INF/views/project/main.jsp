@@ -39,16 +39,15 @@ text-decoration:none;
 
 .best_menu {
 	margin: 0 auto;
-	height: 250px;
+	
 }
 
 .situational_recommend {
 	margin: 0 auto;
-	height: 250px;
 }
 
 .main_board {
-	background-color: yellow;
+	/* background-color: yellow; */
 	margin: 0 auto;
 	height: 250px;
 }
@@ -66,6 +65,7 @@ text-decoration:none;
 	width: 100%;
 	margin: 0px auto;
 	position: relative;
+	text-align: -webkit-center;
 }
 
 .post-slider .silder-title {
@@ -93,16 +93,16 @@ text-decoration:none;
 
 .post-slider .post-wrapper {
 	width: 90%;
-	height: 220px;
 	margin: 0px auto;
-	overflow: hidden;
 }
 
 .post-slider .post-wrapper2 {
 	width: 90%;
+<<<<<<< HEAD
+=======
 	height: 250px;
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 	margin: 0px auto;
-	overflow: hidden;
 }
 
 .post-slider .post-wrapper .post {
@@ -127,12 +127,14 @@ text-decoration:none;
 	font-size: 15px;
 	height: 30%;
 	padding-left: 10px;
+	text-align: center;
 }
 
 .post-slider .post-wrapper2 .post .post-info {
 	font-size: 15px;
 	height: 30%;
 	padding-left: 10px;
+	text-align: center;
 }
 
 .post-slider .post-wrapper .post .slider-image {
@@ -177,16 +179,32 @@ text-decoration:none;
 .free_board {
 	margin-left: 50px;
 }
+<<<<<<< HEAD
+.page-wrapper{
+min-width: 800px;
+position: relative;
+    margin-top: 15px;
+=======
 
 .page-wrapper {
 	min-width: 800px;
 	position: relative;
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 }
 
 .kakao_icon {
 	position: fixed;
 	bottom: 6px;
 	right: 10px;
+}
+<<<<<<< HEAD
+h4 a:link{
+text-decoration:none;
+color:black;
+=======
+ul{
+	list-style: none;
+>>>>>>> origin/병석
 }
 </style>
 </head>
@@ -217,64 +235,64 @@ text-decoration:none;
 						<div class="post-wrapper">
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/29/34ace1011c503e33c17e852be9cbcab01.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#" class="post-subject">김치볶음밥 </a>
+										<a style="color: black;" href="#" class="post-subject">알싸한 생강향과 레몬아이싱으로 덮은 홈베이킹 진저케이크 ♥ </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/28/3ae1b00cdf1fc46005cd08c3fd3d0cb51.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#"> 계란말이 </a>
+										<a style="color: black;" href="#"> 간식으로 감기예방하기! 식빵과 찰떡! 유자생강잼 ♥ </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/c642c221cdc7ddeaa01e236feb28815a1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/f040772d9f85f1fc7503ac323aec20ac1.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">간장공장공장장 </a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/c642c221cdc7ddeaa01e236feb28815a1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">캐러셀개헬</a>
+										<a style="color: black;" href="#">햄 대신 두부와 땡초를 넣은 두부땡초김밥 ♥ </a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/da40834e75235bc52032a615117b750b1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/26/a9aa4cc2557c77dae0cb15ca11713c441.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">믿을수없어</a>
+										<a style="color: black;" href="#">고급 식재료, 일상에서 쉽게 만나자! 감태 레시피 모음집♥</a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/da40834e75235bc52032a615117b750b1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/18/091a901de3cb6d0bf428f9dc0ef8ce061.png"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">뽀잉</a>
+										<a style="color: black;" href="#">추운날씨, 단호박솥밥 한그릇으로 따뜻함을 채워요! </a>
+									</h4>
+
+								</div>
+							</div>
+							<div class="post">
+								<img
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/ff4314a4fd79cb845d6df84ad27655531.png"
+									class="slider-image">
+								<div class="post-info">
+									<h4>
+										<a style="color: black;" href="#">볶음밥을 와플팬에 구우면?! 맛있다! 라이스와플 </a>
 									</h4>
 								</div>
 							</div>
@@ -295,7 +313,7 @@ text-decoration:none;
 				<div class="icon_wrapper">
 					<i class="prevButton"><img class="cttIcon b_l prev2"
 						src="/resources/proimg/previcon.png"></i> <i class="nextButton"><img
-						class="cttIcon b_r next2" style="top: 600px;"
+						class="cttIcon b_r next2" style="top: 700px;"
 						src="/resources/proimg/nexticon.png"></i>
 				</div>
 				<div class="page-wrapper" style="position: relative;">
