@@ -65,6 +65,7 @@ text-decoration:none;
 	width: 100%;
 	margin: 0px auto;
 	position: relative;
+	text-align: -webkit-center;
 }
 
 .post-slider .silder-title {
