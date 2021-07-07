@@ -48,7 +48,7 @@ text-decoration:none;
 }
 
 .main_board {
-	background-color: yellow;
+	/* background-color: yellow; */
 	margin: 0 auto;
 	height: 250px;
 }
@@ -187,6 +187,9 @@ text-decoration:none;
 	position: fixed;
 	bottom: 6px;
 	right: 10px;
+}
+ul{
+	list-style: none;
 }
 </style>
 </head>
