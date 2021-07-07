@@ -116,9 +116,9 @@ opacity: 0.9;
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
  <jsp:include page="../project/include/header.jsp"></jsp:include>
-  
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
+
 <script>
    $(document).ready(function() {
            
@@ -219,8 +219,8 @@ opacity: 0.9;
                   var modalRemoveBtn = $("#modalRemoveBtn");
                   var modalRegisterBtn = $("#modalRegisterBtn");
                   
-                  
-                  var replyer = null;
+               
+             	      var replyer = null;
 					  var csrfHeaderName="${_csrf.headerName}";
 				      var csrfTokenValue="${_csrf.token}";
                   $("#addReplyBtn").on("click",function(e){
