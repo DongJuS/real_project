@@ -32,12 +32,11 @@
 
 .best_menu {
 	margin: 0 auto;
-	height: 250px;
+	
 }
 
 .situational_recommend {
 	margin: 0 auto;
-	height: 250px;
 }
 
 .main_board {
@@ -86,16 +85,12 @@
 
 .post-slider .post-wrapper {
 	width: 90%;
-	height: 220px;
 	margin: 0px auto;
-	overflow: hidden;
 }
 
 .post-slider .post-wrapper2 {
 	width: 90%;
-	height: 220px;
 	margin: 0px auto;
-	overflow: hidden;
 }
 
 .post-slider .post-wrapper .post {
@@ -120,12 +115,14 @@
 	font-size: 15px;
 	height: 30%;
 	padding-left: 10px;
+	text-align: center;
 }
 
 .post-slider .post-wrapper2 .post .post-info {
 	font-size: 15px;
 	height: 30%;
 	padding-left: 10px;
+	text-align: center;
 }
 
 .post-slider .post-wrapper .post .slider-image {
@@ -172,11 +169,16 @@
 .page-wrapper{
 min-width: 800px;
 position: relative;
+    margin-top: 15px;
 }
 .kakao_icon{
 position: fixed;
     bottom: 6px;
     right: 10px;
+}
+h4 a:link{
+text-decoration:none;
+color:black;
 }
 </style>
 </head>
@@ -205,64 +207,64 @@ position: fixed;
 						<div class="post-wrapper">
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/29/34ace1011c503e33c17e852be9cbcab01.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#" class="post-subject">김치볶음밥 </a>
+										<a style="color: black;" href="#" class="post-subject">알싸한 생강향과 레몬아이싱으로 덮은 홈베이킹 진저케이크 ♥ </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/28/3ae1b00cdf1fc46005cd08c3fd3d0cb51.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#"> 계란말이 </a>
+										<a style="color: black;" href="#"> 간식으로 감기예방하기! 식빵과 찰떡! 유자생강잼 ♥ </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/c642c221cdc7ddeaa01e236feb28815a1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/f040772d9f85f1fc7503ac323aec20ac1.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">간장공장공장장 </a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/c642c221cdc7ddeaa01e236feb28815a1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">캐러셀개헬</a>
+										<a style="color: black;" href="#">햄 대신 두부와 땡초를 넣은 두부땡초김밥 ♥ </a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/da40834e75235bc52032a615117b750b1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/26/a9aa4cc2557c77dae0cb15ca11713c441.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">믿을수없어</a>
+										<a style="color: black;" href="#">고급 식재료, 일상에서 쉽게 만나자! 감태 레시피 모음집♥</a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/da40834e75235bc52032a615117b750b1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/18/091a901de3cb6d0bf428f9dc0ef8ce061.png"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">뽀잉</a>
+										<a style="color: black;" href="#">추운날씨, 단호박솥밥 한그릇으로 따뜻함을 채워요! </a>
+									</h4>
+
+								</div>
+							</div>
+							<div class="post">
+								<img
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/ff4314a4fd79cb845d6df84ad27655531.png"
+									class="slider-image">
+								<div class="post-info">
+									<h4>
+										<a style="color: black;" href="#">볶음밥을 와플팬에 구우면?! 맛있다! 라이스와플 </a>
 									</h4>
 								</div>
 							</div>
@@ -284,7 +286,7 @@ position: fixed;
 				<div class="icon_wrapper">
 					<i class="prevButton"><img class="cttIcon b_l prev2"
 						src="/resources/proimg/previcon.png"></i> <i class="nextButton"><img
-						class="cttIcon b_r next2" style="top: 600px;"
+						class="cttIcon b_r next2" style="top: 700px;"
 						src="/resources/proimg/nexticon.png"></i>
 				</div>
 				<div class="page-wrapper">
@@ -294,60 +296,60 @@ position: fixed;
 						<div class="post-wrapper2">
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/11/f539b81359c57948bb3bd27bc34163e01.png"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#" class="post-subject">김치볶음밥 </a>
+										<a style="color: black;" href="#" class="post-subject">소시지로 만들 수 있는 음식 종류들!? </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/22f6278827685ecc50bdde1cb8b4cdc51.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/bdd5bfdaf1e06827b47c18c9cf55928e1.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#"> 계란말이 </a>
+										<a style="color: black;" href="#"> 여름에 먹기 좋은 음식! </a>
 									</h4>
 								</div>
 							</div>
 							<div class="post">
-								<img src="/resources/proimg/star.png" class="slider-image">
+								<img src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/976c395176a9bdad0a0c4ff015ce8d251.png" class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">간장공장공장장 </a>
+										<a style="color: black;" href="#">과일로 간단하게 만들 수 있는 요리! </a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
-								<img src="/resources/proimg/star.png" class="slider-image">
+								<img src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/3b2337e097db65122581a69d6f4a8e321.jpg" class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">캐러셀개헬</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a href="#">믿을수없어</a>
+										<a style="color: black;" href="#">단언컨대 가장 완벽한 닭고기 음식들!</a>
 									</h4>
 
 								</div>
 							</div>
 							<div class="post">
 								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/06/11/a2d3e08d10ea4992a0ed605b7c69d66d1.jpg"
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/545c9adc63d830df9b36d0b97b023bda1.jpg"
 									class="slider-image">
 								<div class="post-info">
 									<h4>
-										<a href="#">뽀잉</a>
+										<a style="color: black;" href="#">편스토랑 메뉴들 총집합!</a>
+									</h4>
+
+								</div>
+							</div>
+							<div class="post">
+								<img
+									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/22/f0052c15da83da76b26acf99443271da1.jpg"
+									class="slider-image">
+								<div class="post-info">
+									<h4>
+										<a style="color: black;" href="#">토마토를 이용한 맛깔나는 음식들 모음집</a>
 									</h4>
 								</div>
 							</div>
@@ -363,7 +365,7 @@ position: fixed;
 						class="icon_text">자유게시판</span>
 				</div>
 				<div class="free_board">
-					인기글 Best4<br> 진짜 광기의 국산 캐릭터.jpg (36)<br> 법무부, "나라 팔아먹는
+					<strong>인기글 Best5</strong><br> 진짜 광기의 국산 캐릭터.jpg (36)<br> 법무부, "나라 팔아먹는
 					국적법 개정?... (30)<br> GS가 현 상황을 타개할 수 있는 유일...(27)<br> 어릴때
 					학교에서 주던 존맛음료 (82)<br> 미국식 화장법 vs 한국식 화장법 (43)<br>
 				</div>

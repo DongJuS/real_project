@@ -12,64 +12,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/resources/procss/ind_get.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>요들넷-검색결과</title>
 <style>
-.foodImg {
-	width: 40%;
-	margin: 10px;
-	height: 200px;
-}
 
-.result_container {
-	width: 80%;
-	margin: 0 auto;
-	min-width: 600px;
-}
-
-.result_div {
-	display: flex;
-}
-
-.recip_name {
-	font-size: 17px;
-	font-weight: 550;
-}
-
-.recip_ingsCountText {
-	font-size: 12px;
-}
-
-.recipe_text {
-	margin: 10px;
-}
-
-.needIngs_list {
-	font-size: 14px;
-	color: #bfbfbf;
-}
-
-.haveIngs_list {
-	font-size: 14px;
-}
-
-.summary {
-	font-size: 15px;
-}
-
-.your_ings {
-	
-}
-
-#guide_text1 {
-	color: gray;
-	font-size: 11px;
-}
 </style>
 </head>
 <body>
 	<jsp:include page="include/header.jsp" />
 	<%-- <% ArrayList<SearchResultVO> srvo = (ArrayList<SearchResultVO>)request.getAttribute("srvo");%> --%>
+	<div class="back_container">
 	<div class="result_container">
 		<jsp:useBean id="srvo" scope="request" class="java.util.ArrayList"
 			type="java.util.ArrayList<SearchResultVO>" />
@@ -82,17 +35,17 @@
 				id="guide_text1">&nbsp;&nbsp; *부족한 재료는 회색으로 표시됩니다!</span>
 		</div>
 
-		<hr>
+		<hr class="line1">
 		<c:forEach var="i" begin="0" end="${max}">
 			<c:forEach var="recip" items="${srvo}" begin="0" end="${srvo.size()}">
 
 				<c:if test="${i eq recip.needIngs.size()}">
 
-					<div class="result_div">
+					<a href="recipe/get?rid=${recip.rid }"><div class="result_div">
 						<img class="foodImg" src="${recip.img}">
 						<div class="recipe_text">
 							<span class="recip_name">${recip.name}</span> <br>
-							<span class="haveIngs_list">필요한 재료 : <c:if
+							<span class="haveIngs_list">재료 목록 : <c:if
 									test="${not empty recip.haveIngs}">${recip.haveIngs}</c:if></span>&nbsp;<span
 								class="needIngs_list"> <c:if
 									test="${not empty recip.needIngs}">${recip.needIngs}</c:if></span>
@@ -128,7 +81,7 @@
 
 
 						</div>
-					</div>
+					</div></a>
 				</c:if>
 			</c:forEach>
 		</c:forEach>
@@ -152,6 +105,7 @@ for(int i=0;i<=2;i++){
 %> --%>
 
 
+	</div>
 	</div>
 	<jsp:include page="include/footer.jsp" />
 </body>
