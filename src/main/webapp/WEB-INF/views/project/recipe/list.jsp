@@ -33,7 +33,7 @@ header {
 		})
 		
 		$("#regBtn").on("click", function() {
-			self.location = "/register"
+			self.location = "/project/recipe/register"
 		})
 		
 		

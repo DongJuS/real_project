@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +20,11 @@
 .hidden {
 	visibility: hidden;
 }
+a{
+text-decoration:none;
+
+}
+
 
 .main_bottom_container {
 	width: 100%;
@@ -40,7 +47,7 @@
 }
 
 .main_board {
-	
+	background-color: yellow;
 	margin: 0 auto;
 	height: 250px;
 }
@@ -90,6 +97,10 @@
 
 .post-slider .post-wrapper2 {
 	width: 90%;
+<<<<<<< HEAD
+=======
+	height: 250px;
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 	margin: 0px auto;
 }
 
@@ -104,7 +115,7 @@
 
 .post-slider .post-wrapper2 .post {
 	width: 300px;
-	height: 300px;
+	height: 350px;
 	margin: 0px 10px;
 	display: inline-block;
 	background: white;
@@ -163,18 +174,27 @@
 	right: 52px;
 }
 
+
 .free_board {
 	margin-left: 50px;
 }
+<<<<<<< HEAD
 .page-wrapper{
 min-width: 800px;
 position: relative;
     margin-top: 15px;
+=======
+
+.page-wrapper {
+	min-width: 800px;
+	position: relative;
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 }
-.kakao_icon{
-position: fixed;
-    bottom: 6px;
-    right: 10px;
+
+.kakao_icon {
+	position: fixed;
+	bottom: 6px;
+	right: 10px;
 }
 h4 a:link{
 text-decoration:none;
@@ -183,6 +203,8 @@ color:black;
 </style>
 </head>
 <body>
+
+
 	<jsp:include page="include/header.jsp" />
 
 	<div class="main_bottom_container">
@@ -278,10 +300,9 @@ color:black;
 
 			</div>
 			<div class="situational_recommend">
-
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"><span
-						class="icon_text">상황별 추천메뉴</span>
+					<img src="/resources/proimg/star.png" class="main_icon"> <a
+						href='recipe/list'><span class="icon_text">전체 레시피</span></a>
 				</div>
 				<div class="icon_wrapper">
 					<i class="prevButton"><img class="cttIcon b_l prev2"
@@ -289,11 +310,12 @@ color:black;
 						class="cttIcon b_r next2" style="top: 700px;"
 						src="/resources/proimg/nexticon.png"></i>
 				</div>
-				<div class="page-wrapper">
+				<div class="page-wrapper" style="position: relative;">
 					<!--page slider -->
 					<div class="post-slider">
 
 						<div class="post-wrapper2">
+<<<<<<< HEAD
 							<div class="post">
 								<img
 									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/11/f539b81359c57948bb3bd27bc34163e01.png"
@@ -353,37 +375,90 @@ color:black;
 									</h4>
 								</div>
 							</div>
+=======
+							<c:forEach var='list' items='${list }'>
+								<div class="post">
+									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
+										src="<c:out value='${list.img }'/>" width='250px'
+										height='175px'></a>
+									<div class='post-info'>
+										<h4>
+											<a href='recipe/get?rid=<c:out value='${list.rid }'/>'>${list.name }</a>
+										</h4>
+									</div>
+								</div>
+							</c:forEach>
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 						</div>
 					</div>
+
 					<!--post slider-->
 				</div>
 
 			</div>
+			<br>
+			<br>
+			<br>
+			
 			<div class="main_board">
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"><span
-						class="icon_text">자유게시판</span>
+					<img src="/resources/proimg/star.png" class="main_icon">
+					<a href='board/list'><span class="icon_text">자유게시판</span></a>
 				</div>
 				<div class="free_board">
+<<<<<<< HEAD
 					<strong>인기글 Best5</strong><br> 진짜 광기의 국산 캐릭터.jpg (36)<br> 법무부, "나라 팔아먹는
 					국적법 개정?... (30)<br> GS가 현 상황을 타개할 수 있는 유일...(27)<br> 어릴때
 					학교에서 주던 존맛음료 (82)<br> 미국식 화장법 vs 한국식 화장법 (43)<br>
+=======
+					<ul>
+						<c:forEach var='board' items='${board }'>
+							<li>
+							<a href='board/get?bno=<c:out value="${board.bno }"/>'>
+							<c:out value='${board.title }'/></a></li>
+							
+						</c:forEach>
+					</ul>
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 				</div>
 
 			</div>
 		</div>
 		<div class="kakao_icon">
-			<a id="channel-chat-button" href="#" onclick="void chatChannel();"><img src="/resources/proimg/kakao_icon.png"
-				style="width: 66px;"></a>
+			<a id="channel-chat-button" href="#" onclick="void chatChannel();"><img
+				src="/resources/proimg/kakao_icon.png" style="width: 66px;"></a>
 		</div>
 		<p id="token-result"></p>
 
 	</div>
+	
+
 
 	<jsp:include page="include/footer.jsp" />
 	<script src="/resources/projs/ex2.js"></script>
 	<script src="/resources/projs/slick.js"></script>
-
+	<script>
+		$(document).ready(function() {
+			$('.post-wrapper').slick({
+				slidesToShow : 4,
+				slidesToScroll : 2,
+				autoplay : true,
+				autoplaySpeed : 10000,
+				nextArrow : $('.next'),
+				prevArrow : $('.prev')
+			});
+			$('.post-wrapper2').slick({
+				slidesToShow : 4,
+				slidesToScroll : 2,
+				autoplay : true,
+				autoplaySpeed : 10000,
+				nextArrow : $('.next2'),
+				prevArrow : $('.prev2')
+			});
+			
+			
+		})
+	</script>
 
 </body>
 </html>

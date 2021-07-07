@@ -32,6 +32,7 @@ public class Criteria {
 		this(1,10);
 	}
 	
+	
 	public Criteria(int pageNum, int amount) {
 		this.amount=amount;
 		this.pageNum=pageNum;

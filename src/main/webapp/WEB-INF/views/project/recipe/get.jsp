@@ -95,6 +95,7 @@ margin:10px;
 <meta charset="UTF-8">
 <title>요들넷</title>
 <script>
+<<<<<<< HEAD
 	$(document).ready(function() {
 		var operForm = $("#operForm");
 		/*   $('button[data-oper="modify"]').on("click",function(e) {
@@ -106,6 +107,19 @@ margin:10px;
 			operForm.submit();
 		});
 	})
+=======
+$(document).ready(function() {  
+    var operForm = $("#operForm");
+  /*   $('button[data-oper="modify"]').on("click",function(e) {
+     operForm.attr("action", "/board/modify").submit();
+      }); */
+    $('button[data-oper="list"]').on("click", function(e) {
+        operForm.find("#rid").remove();
+        operForm.attr("action", "/project/recipe/list");
+        operForm.submit();
+     });
+})
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 </script>
 
 </head>
@@ -265,10 +279,20 @@ margin:10px;
 		<input type='hidden' id='rid' name='rid' value='<c:out value="${recipe.rid }" />'> 
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
 		<input type='hidden' name='amount'	value='<c:out value="${cri.amount }"/>'> 
+<<<<<<< HEAD
 		<input type="hidden" name="type" value="${cri.type }"> 
 		<input type="hidden" name="keyword" value="${cri.keyword }">
 	</form> --%>
 	
 	<jsp:include page="../include/footer.jsp" />
+=======
+		<%-- <input type="hidden" name="type" value="${cri.type }"> 
+		<input type="hidden" name="keyword" value="${cri.keyword }"> --%>
+	</form>
+	<!-- 컨테이너 끝 -->
+	<br>
+
+		<jsp:include page="../include/footer.jsp" />
+>>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 </body>
 </html>

@@ -49,76 +49,20 @@ public class ProjectController {
 	private RecipeService service;
 
 	@GetMapping("/main")
-	public void main(HttpServletRequest request) {
+	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
+		Criteria cri1=new Criteria(1,7);
+		model.addAttribute("list", service.getList(cri));
+		/* model.addAttribute("board", service.b_getList(cri1)); */
 	}
 	@GetMapping("/chatbot")
 	public void chat(HttpServletRequest request) {
 		log.info("chat");
 	}
 	
-	  @GetMapping("/board/get")
-	    public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-	        log.info("/get or /modify"+cri);
-	        model.addAttribute("board", service.get(bno));
-	    }
-	  @GetMapping("/board/register")
-	    public void register2() {
-	        
-	    }
-	  
-	  
-	@GetMapping("/board/list") 
-	public void b_list(Criteria cri, Model model) {
-		log.info("list : "+cri);
-		model.addAttribute("list", service.b_getList(cri));
-		int total=service.getTotal(cri);
-		log.info("total : "+ total);	
-		model.addAttribute("pageMaker", new pageDTO(cri, total));
 
-	}
+	  
 	
-	  @PostMapping("/board/register")
-	    public String register(BoardVO board, RedirectAttributes rttr) {
-	        log.info("register : "+ board);    
-	        
-	        service.register(board);
-	        rttr.addFlashAttribute("result", board.getBno());
-	        return "redirect:/project/board/list";
-	        
-	    }
-	  
-	  @PostMapping("/board/modify")
-	    public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-	        log.info("modify : "+board);
-	        if(service.modify(board)) {
-	            rttr.addFlashAttribute("result","success");
-	        }
-	        /*
-	         * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-	         * cri.getAmount()); rttr.addAttribute("keyword", cri.getKeyword());
-	         * rttr.addAttribute("type", cri.getType());
-	         */
-	        return "redirect:/project/board/list"+cri.getListLink();
-	    }
-	    @PostMapping("/board/remove")
-	    public String remove(@RequestParam("bno") Long bno,
-	             @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-	        
-	        log.info("remove......."+bno);
-	        
-	        
-	    
-	        /*
-	         * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-	         * cri.getAmount()); rttr.addAttribute("keyword", cri.getKeyword());
-	         * rttr.addAttribute("type", cri.getType());
-	         */
-	        return "redirect:/project/board/list"+cri.getListLink();
-	        
-	    }
-
-
 	@GetMapping("/index")
 	public void test(HttpServletRequest request) {
 		log.info("겟으로 인덱스");
@@ -176,7 +120,7 @@ public class ProjectController {
 		service.register2(prolist);
 
 		rttr.addFlashAttribute("result", recipe.getRid());
-		return "redirect: /recipe/list";
+		return "redirect: /project/recipe/list";
 	}
 	@GetMapping("/recipe/get")
 	public void get(@RequestParam("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
