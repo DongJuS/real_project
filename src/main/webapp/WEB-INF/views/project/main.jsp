@@ -329,13 +329,13 @@ text-decoration:none;
 			<div class="main_board">
 				<div class="best_text">
 					<img src="/resources/proimg/star.png" class="main_icon">
-					<a href='board/list'><span class="icon_text">자유게시판</span></a>
+					<a href='/board/list'><span class="icon_text">자유게시판</span></a>
 				</div>
 				<div class="free_board">
 					<ul>
 						<c:forEach var='board' items='${board }'>
 							<li>
-							<a href='board/get?bno=<c:out value="${board.bno }"/>'>
+							<a href='/board/get?bno=<c:out value="${board.bno }"/>'>
 							<c:out value='${board.title }'/></a></li>
 							
 						</c:forEach>

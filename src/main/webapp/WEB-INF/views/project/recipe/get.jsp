@@ -49,10 +49,6 @@ $(document).ready(function() {
 			<img src='<c:out value="${recipe.img }"/>' width='600px'>
 		</div>
 		<div id='view1'>
-			<img src='/resources/img/장미.jpg' class="rounded-circle" width='100px'
-				height='100px'><br> <span>유저 닉네임(유저 아이디)</span>
-		</div>
-		<div id='view1'>
 			<h3>
 				<c:out value="${recipe.name }" />
 			</h3>
