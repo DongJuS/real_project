@@ -72,7 +72,7 @@ public class LoginController {
 
 		session.setAttribute("member", lvo);             // 占쎌뵬燁살꼹釉�占쎈뮉 占쎈툡占쎌뵠占쎈탵, �뜮袁⑨옙甕곕뜇�깈 野껋럩�뒭 (嚥≪뮄�젃占쎌뵥 占쎄쉐�⑨옙)
 
-		return "redirect:/main";
+		return "redirect:/project/main";
 
 	}
 	@PostMapping("/logout")
