@@ -65,7 +65,7 @@ header {
 			</tr>
 			<tr>
 				<td>대표사진</td>
-				<td> <input type='file' name='img' ></td>
+				<td> <input type='file'></td>
 			</tr>
 		</table>
 			
@@ -92,8 +92,8 @@ header {
 			</tr>
 			<tr>
 				<td><div class='proce'>
-				<input type='text' placeholder='요래요래 하시라' name='txt'> 
-				<input type='file'  name='pimg'><br>
+			<!-- 	<input type='text' placeholder='요래요래 하시라' name='txt'> 
+				<input type='file'  name='pimg'><br> -->
 				</div></td>
 			</tr>
 			<tr>

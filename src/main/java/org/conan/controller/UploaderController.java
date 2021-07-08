@@ -80,7 +80,7 @@ public class UploaderController {
 		for(MultipartFile multipartFile: uploadFile) {
 			UploadFile upload=new UploadFile();
 			String uploadFileName=multipartFile.getOriginalFilename();
-			upload.setFileName(uploadFileName);
+			upload.setFilename(uploadFileName);
 			UUID uuid=UUID.randomUUID();
 			uploadFileName=uuid.toString()+"_"+uploadFileName;			
 			/* log.info(uploadFileName); */
