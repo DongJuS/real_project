@@ -380,40 +380,7 @@ opacity: 0.9;
                 
                   
                   var bno = '<c:out value="${board.bno}"/>'
-                      $.getJSON("/board/getAttachList",{bno:bno}, function(arr){
-                         console.log(arr)
-                         var str=''
-                         $(arr).each(function(i,obj){
-                            if (!obj.fileType) {
-                              var fileCallPath = encodeURIComponent(obj.uploadPath+ "/"+ obj.uuid+ "_"+ obj.fileName);
-                              /* str += "<li><div><a href='/download?fileName="+ fileCallPath+ "'><img src='/resources/images/attach.png'>"+ obj.fileName
-                                 + "</a><span data-file=\""+fileCallPath+"\" data-type='file'>X</span></div></li>" */
-                                 str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'><div>"
-                                 str +="<img src='/resources/images/attach.png'>"
-                                 str +="</div></li>"
-                              } else {
-                                 //str +="<li>" + obj.fileName + '</li>'
-                                 var fileCallPath = encodeURIComponent(obj.uploadPath+ "/S_"+ obj.uuid+ "_"+ obj.fileName);
-                                 var originPath = obj.uploadPath   + "/"+ obj.uuid+ "_"+ obj.fileName
-                                 originPath = originPath.replace(new RegExp(/\\/g),"/")
-                                 /* str += "<li><a href=\"javascript:showImage(\'"+ originPath+ "\')\"><img src='/display?fileName="+ fileCallPath
-                                       + "'></a><span data-file=\""+fileCallPath+"\" data-type='image'>X</span></li>" */
-                                 str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'><div>"             
-                                 str +="<img src='/display?fileName="+fileCallPath+"'>"
-                                 str +="</div></li>"
-                              }
-                         })
-                         $(".uploadResult ul").html(str);
-                      })
-                  
-                     $(".uploadResult").on("click", "li", function(e){
-                        console.log("view image")
-                        var liObj=$(this)
-                        var path=encodeURIComponent(liObj.data("path")+"/"+liObj.data("uuid")+"_"+liObj.data("filename"))
-                        if(!liObj.data("type")){
-                           self.location="/download?fileName="+path
-                        }else{ showImage(path)}
-                     })
+                     
                      
                      $(".bigPictureWrapper").on("click", function(e){
                         $(".bigPicture").animate({width:'0%', height:'0%'},1000)

@@ -122,7 +122,6 @@ border:1px solid black;
 							self.location = "/board/register"
 						})
 
-						//내꺼 오타천국 
 						var actionForm = $("#actionForm");
 						$(".paginate_button a").on(
 								"click",
@@ -154,7 +153,7 @@ border:1px solid black;
 																	"href")
 															+ "'/>")
 											actionForm.attr("action",
-													"/project/board/get")
+													"/board/get")
 											actionForm.submit()
 										})
 
@@ -202,7 +201,7 @@ border:1px solid black;
 
 
 				<div class="col-6 search">
-					<form id='searchForm' action='/project/board/list' method='get'>
+					<form id='searchForm' action='/board/list' method='get'>
 						<select name='type'>
 							<option value=""
 								<c:out value="${pageMaker.cri.type==null?'selected': ''}"/>>----</option>

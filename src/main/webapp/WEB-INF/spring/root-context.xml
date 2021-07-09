@@ -16,27 +16,30 @@
  	    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="scott"></property>
 		<property name="password" value="tiger"></property>    
+	 	 
+	   <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@c-project.c4wtytcwvokt.ap-northeast-2.rds.amazonaws.com:1521:FinalDB"></property>
+		<property name="username" value="admin"></property>
+		<property name="password" value="Finalproject1"></property>    
+	   -->
     <!-- 
   	 	  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@//adb.ap-seoul-1.oraclecloud.com:1522/ge205dfee8a5326_db202106291126_medium.adb.oraclecloud.com"></property>
 		<property name="username" value="admin"></property>
 		<property name="password" value="Finalprojectfinal1"></property> 
       -->
- <!-- 
-      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=C:\Users\didsu\Wallet_DB202106291126"></property>
+ 
+       <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/Programs/oracle/product/18.0.0/dbhomeXE/network/wallet"></property>
 		<property name="username" value="admin"></property>
 		<property name="password" value="Finalprojectfinal1"></property>
 		 -->
 		 
-		<!-- 
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@tcps://adb.ap-seoul-1.oraclecloud.com:1522/db202106291126_medium?wallet_location=/users/didsu/Wallet_DB202106291126"></property>
+		 
+		<!-- <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@tcps://adb.ap-seoul-1.oraclecloud.com:1522/db202106291126_medium?wallet_location=/users/didsu/Wallet_DB202106291126"></property>
 		<property name="username" value="admin"></property>
-		<property name="password" value="Finalprojectfinal1"></property>
-		 -->
-    <!-- 
-        <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/users/didsu/Wallet_DB202106291126"></property>
+		<property name="password" value="Finalprojectfinal1"></property> -->
+		 
+       <!--   <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/users/didsu/Wallet_DB202106291126"></property>
 		<property name="username" value="admin"></property>
-		<property name="password" value="Finalprojectfinal1"></property>  
-      -->
+		<property name="password" value="Finalprojectfinal1"></property>  -->  
 	<!-- 	
 	 <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/Programs/sqldeveloper/Wallet_DB202106291126"></property>
       <property name="username" value="admin"></property>
