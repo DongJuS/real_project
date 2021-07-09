@@ -53,6 +53,7 @@ border:1px solid black;
 
 .head {
 	margin-top: 25px;
+	margin-right:160px;
 }
 
 .table_title {
