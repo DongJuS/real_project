@@ -4,11 +4,12 @@ import lombok.Data;
 
 @Data
 public class UploadFile {
-	private String fileName;
+	private String filename;
 	private String uploadPath;
 	private String uuid;
 	private boolean filetype;
-	private int rid;
+	private int urrid;
+	private int num;
 
 	
 	 

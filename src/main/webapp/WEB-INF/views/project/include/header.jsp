@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>header</title>
+<title>요들넷 - 요리 알려주는 네 남자들</title>
 <style>
 .logo_image {
 	width: 100px;
