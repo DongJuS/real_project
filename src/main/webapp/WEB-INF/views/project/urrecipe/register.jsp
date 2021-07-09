@@ -36,13 +36,14 @@ header {
 			
 			$(".ingre").append(str)
 		})
+	
 		$('#proceplus').on('click', function(e) {
 			e.preventDefault()
 			var str = ''
 			
 			str += "<input type='text' placeholder='요래요래하시라' name='urtxt'>"
-			str += " <input type='file'  id='uploadFile1' ><br>"
-		
+			str += " <input type='file'  id='uploadFile1'  accept='image/*'><br>"
+			
 			$('.proce').append(str)
 		})
 		
@@ -175,7 +176,7 @@ header {
 			</tr>
 			<tr>
 				<td>대표사진</td>
-				 <td> <input type='file'  id='uploadFile' ></td> 
+				 <td> <input type='file'  id='uploadFile' accept="image/*"></td> 
 			</tr>
 		</table>
 			

@@ -111,9 +111,9 @@ public class UploaderController {
 	
 	@GetMapping("/display")
 	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String fileName){
-		//log.info("fileName : "+fileName);
-		File file=new File("c:/upload/"+fileName);
+	public ResponseEntity<byte[]> getFile(String filename){
+		//log.info("fileName : "+filename);
+		File file=new File("c:/upload/"+filename);
 		//log.info("file : "+ file);
 		ResponseEntity<byte[]> result=null;
 		try {

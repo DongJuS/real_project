@@ -3,6 +3,10 @@
 <mapper namespace="org.conan.mapper.UserRecipeMapper">
 	<select id="read" resultType="org.conan.domain.UserRecipeVO">
 		select * from t_urrecipe where urrid=#{urrid}
+		<!-- select t.urrid, t.urname, t.ursummary, uuid, uploadpath, filename, num
+		 from t_urrecipe t join t_img
+		 on t.urrid = t_img.urrid
+		  where t.urrid=#{urrid} -->
 	</select>
 
 	<select id="readingre" resultType="org.conan.domain.UserIngreVO">
@@ -51,6 +55,8 @@
 		values((select max(urrid) from t_urrecipe),#{urtxt})
 	</insert>
 
+	<select resultType="int" id="urrecipeCount">select count(urrid) from t_urrecipe
+	</select>
 	
 
 </mapper>

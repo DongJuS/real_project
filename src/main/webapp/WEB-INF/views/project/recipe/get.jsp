@@ -200,10 +200,10 @@ $(document).ready(function() {
 			<p id="recipe_name">${recipe.name}</p>
 			<hr class="line1">
 			<div class="cont">
-				<p class="user_text">
+			<!-- 	<p class="user_text">
 					<img class="user_icon_img img"
 						src="/resources/proimg/user_icon.png"> 유저 닉네임
-				</p>
+				</p> -->
 				<img class="main_image img proceImg" src="${recipe.img}" /><br>
 				<br>
 				<p class="summary_text">${recipe.summary}<br>
@@ -213,7 +213,7 @@ $(document).ready(function() {
 			<hr class="line1">
 			<div class="cont">
 				<p class="content_menutext">
-					<strong style="font-size: 30px;">재료</strong>(4 / 5)
+					<strong style="font-size: 30px;">재료</strong><!--(4 / 5) -->
 				</p>
 				<div class="ings">
 					<c:forEach var='ingre' items='${ingre}'>
@@ -241,12 +241,13 @@ $(document).ready(function() {
 						<img class="main_image img proceImg" src="${proce.pimg}">
 					</c:forEach>
 				</div>
+				<button>좋아요</button>
+			<button data-oper='list'>List</button>
 			</div>
 
 
 
 
-			<button data-oper='list'>List</button>
 			<!-- 컨테이너 끝 -->
 			<br>
 

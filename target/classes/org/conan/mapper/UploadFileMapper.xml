@@ -13,4 +13,8 @@
 	<select id='findbyrid' resultType='org.conan.domain.UploadFile'>
 		select * from t_img where urrid=#{urrid}
 	</select>
+	
+	<select id='allimg' resultType='org.conan.domain.UploadFile'>
+		select * from t_img 
+	</select>
 </mapper>
