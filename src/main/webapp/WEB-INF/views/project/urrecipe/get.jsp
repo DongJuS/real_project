@@ -196,9 +196,9 @@ $(document).ready(function() {
     	
     	var atr=[]
     	 console.log(atr[0])
+    	
     	 for(var i =0; i<arr.length; i++){
-		    //console.log(arr[i].num)
-    		 
+		    //console.log(arr[i].num)   		 
     		 if(arr[i].num==0){
     	 		var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
     	 		var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
@@ -213,15 +213,16 @@ $(document).ready(function() {
     	    	 originPath = originPath.replace(new RegExp(/\\/g),"/")
     			 str2 ="<img class='main_image' src='/display?filename="+originPath+"'>"
     			atr.push(str2)
-    			
 		    	 //console.log(atr[i-1])
 		    	 var txt='.proce_img'+i
 		    	 //console.log(txt)
     			$(txt).html(atr[i-1])  
+    			
     		
     		 }
-    	 }
+    	 
     	 //console.log(atr[0])
+    	 }
     	 
     	
      })

@@ -35,44 +35,32 @@ header {
 		$("#regBtn").on("click", function() {
 			self.location = "/project/urrecipe/register"
 		})
-		  
-		
-			
-			  
-				     $.getJSON("/project/urrecipe/allImg",function(arr){
-				    	 console.log(arr)
-				    	
-				    	 var str=''
-				    	 var str2='' 
-				    	
-				    	var atr=[]
-				    	 //console.log(atr[0])
-				    	 for(var i =0; i<arr.length; i++){
-						    //console.log(arr[i].num)
-				    		 //console.log(arr[i].urrid)
-				    		 //var iurrid=arr[i].urrid
-				    		// if(urrid==iurrid){
-				    		 if(arr[i].num==0){
-				    	 		var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
-				    	 		var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
-				    	 		originPath = originPath.replace(new RegExp(/\\/g),"/")
-				    			str ="<img class='main_image' src='/display?filename="+originPath+"'>"
-				    			atr.push(str)
-				    		 }
-				    		 
-				    			var txt='.list_img'+i
-				    			//console.log(txt)
-				    			//console.log(atr[4])
-				    			$(txt).html(atr[i])
-				    			
-				    		
-				    	 
-				    	 }
-				    	 //console.log(atr[1])
-				     })
 		 
+
+
+	$.getJSON("/project/urrecipe/allImg",function(arr){
+		//console.log(arr) 
+		var str='' 
+		var j =0
+		var atr=[]
+		for(var i =0; i<arr.length; i++){
+			//console.log(arr[i].urrid)
+			if(arr[i].num==0){
+				console.log(arr[i].urrid)
+				var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
+				var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
+				originPath = originPath.replace(new RegExp(/\\/g),"/")
+				str ="<img class='main_image' src='/display?filename="+originPath+"' width='360px' height=='300px'>"
+				atr.push(str)
+				var txt='.list_img'+arr[i].urrid
+				$(txt).html(atr[j])
+	   			j++	
+				}
 		
-		
+			 
+			}
+	  })
+	
 		
 		
 		
@@ -92,10 +80,9 @@ header {
 	<table>
 		<c:forEach var='list' items='${list }' varStatus="i">
 				<tr>
-				
 					<td>
 					<a class='move' href="<c:out value='${list.urrid }'/>" >
-					<div class='list_img<c:out value='${i.count }'/>'>dd</div>
+					<div class='list_img<c:out value='${list.urrid}'/>'>dd</div>
 					</a>
 					</td> 
 					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>
