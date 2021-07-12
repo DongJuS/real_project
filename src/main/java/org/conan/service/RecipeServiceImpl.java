@@ -76,13 +76,11 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void register(RecipeVO recipe) {
 		mapper.recipeinsert(recipe);
-		if(recipe.getFileupload()==null||recipe.getFileupload().size()<=0) {
-			return;
-		}
-		recipe.getFileupload().forEach(upload->{
-			upload.setRid(recipe.getRid());
-			uploadmapper.insert(upload);
-		});
+		/*
+		 * if(recipe.getFileupload()==null||recipe.getFileupload().size()<=0) { return;
+		 * } recipe.getFileupload().forEach(upload->{ upload.setRid(recipe.getRid());
+		 * uploadmapper.insert(upload); });
+		 */
 		
 	}
 	@Override

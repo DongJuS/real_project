@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.conan.mapper.UserRecipeMapper">
+	<select id="read" resultType="org.conan.domain.UserRecipeVO">
+		select * from t_urrecipe where urrid=#{urrid}
+		<!-- select t.urrid, t.urname, t.ursummary, uuid, uploadpath, filename, num
+		 from t_urrecipe t join t_img
+		 on t.urrid = t_img.urrid
+		  where t.urrid=#{urrid} -->
+	</select>
+
+	<select id="readingre" resultType="org.conan.domain.UserIngreVO">
+		select * from t_uringre where	urrid=#{urrid}
+	</select>
+
+	<select id='readproce' resultType='org.conan.domain.UserProceVO'>
+		select * from t_urproce where urrid=#{urrid}
+	</select>
+
+	<select id='getList' resultType='org.conan.domain.UserRecipeVO'>
+		select * from t_urrecipe
+	</select>
+
+	<select id="getListWithPaging"
+		resultType="org.conan.domain.UserRecipeVO">
+	<![CDATA[select * from(
+	select /*+INDEX_DESC(t_urrecipe pk_urrecipe)*/
+	rownum rn,urrid,urname,ursummary
+	from t_urrecipe
+	where]]>
+		<!-- <include refid='criteria'></include> -->
+	<![CDATA[ rownum <=#{pageNum}*#{amount})where rn>(#{pageNum}-1)*#{amount}]]>
+	</select>
+
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from t_urrecipe
+		<!-- <include refid='criteria'></include> -->
+	</select>
+
+	<insert id='insert'>
+		<selectKey keyProperty="urrid" order="BEFORE" resultType="int">select
+			r_seq.nextval from dual</selectKey>
+		insert into t_urrecipe(urrid, urname,ursummary)
+		values
+		(#{urrid}, #{urname},
+		 #{ursummary})
+	</insert>
+	<insert id='ingreinsert'>
+		insert into t_uringre
+		values((select max(urrid) from t_urrecipe),#{urIngre_name},#{urIngre_count},#{urIngre_unit})
+	</insert>
+	<insert id='proceinsert'>
+		insert into t_urproce
+		values((select max(urrid) from t_urrecipe),#{urtxt})
+	</insert>
+
+	<select resultType="int" id="urrecipeCount">select count(urrid) from t_urrecipe
+	</select>
+	
+
+</mapper>
+
+
+
+
+

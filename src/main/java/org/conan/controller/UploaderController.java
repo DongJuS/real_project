@@ -80,7 +80,7 @@ public class UploaderController {
 		for(MultipartFile multipartFile: uploadFile) {
 			UploadFile upload=new UploadFile();
 			String uploadFileName=multipartFile.getOriginalFilename();
-			upload.setFileName(uploadFileName);
+			upload.setFilename(uploadFileName);
 			UUID uuid=UUID.randomUUID();
 			uploadFileName=uuid.toString()+"_"+uploadFileName;			
 			/* log.info(uploadFileName); */
@@ -111,9 +111,9 @@ public class UploaderController {
 	
 	@GetMapping("/display")
 	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String fileName){
-		//log.info("fileName : "+fileName);
-		File file=new File("c:/upload/"+fileName);
+	public ResponseEntity<byte[]> getFile(String filename){
+		//log.info("fileName : "+filename);
+		File file=new File("c:/upload/"+filename);
 		//log.info("file : "+ file);
 		ResponseEntity<byte[]> result=null;
 		try {

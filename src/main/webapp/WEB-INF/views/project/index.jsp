@@ -16,7 +16,7 @@
 <title>요들넷-검색결과</title>
 <style>
 .foodImg {
-   width: 40%;
+   width: 300px;
    margin: 10px;
    height: 200px;
 }

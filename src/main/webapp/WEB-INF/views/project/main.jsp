@@ -98,10 +98,7 @@ text-decoration:none;
 
 .post-slider .post-wrapper2 {
 	width: 90%;
-<<<<<<< HEAD
-=======
-	height: 250px;
->>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
+
 	margin: 0px auto;
 }
 
@@ -179,17 +176,12 @@ text-decoration:none;
 .free_board {
 	margin-left: 50px;
 }
-<<<<<<< HEAD
+
 .page-wrapper{
 min-width: 800px;
 position: relative;
     margin-top: 15px;
-=======
 
-.page-wrapper {
-	min-width: 800px;
-	position: relative;
->>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
 }
 
 .kakao_icon {
@@ -197,14 +189,14 @@ position: relative;
 	bottom: 6px;
 	right: 10px;
 }
-<<<<<<< HEAD
+
+ul{
+	list-style: none;
+}
 h4 a:link{
 text-decoration:none;
 color:black;
-=======
-ul{
-	list-style: none;
->>>>>>> origin/병석
+
 }
 </style>
 </head>
@@ -325,7 +317,7 @@ ul{
 								<div class="post">
 									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
 										src="<c:out value='${list.img }'/>" width='250px'
-										height='175px'></a>
+										></a>
 									<div class='post-info'>
 										<h4>
 											<a href='recipe/get?rid=<c:out value='${list.rid }'/>'>${list.name }</a>
