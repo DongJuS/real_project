@@ -150,12 +150,13 @@ public class ProjectController {
 		//log.info(recipeListNames.size());	
 
 
-		for(int i=0;i<service.recipeCount();i++) { 
+		for(int i=0;i<service.recipeCount()+3;i++) { 
+			if (service.readIngreNames(i).size()==0) continue;
+			
 			Collection<String> rIngs= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
 			int rIngsCount = rIngs.size(); 		//레시피에 총 필요한 갯수
 			rIngs.removeAll(sl); 						//요리필요재료 - 가지고있는재료교집합 = 필요한데 없는재료
 			int needIngsCount = rIngs.size();			//나머지 필요한 갯수
-//			String[] needIngs = recipeListNames.toArray(new String[recipeListNames.size()]);		//컬렉션이었던 재료목록을 String리스트로 바꿔준다 
 			List<String> needIngs = new ArrayList(rIngs);
 			Collection<String> rIngList2= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
 			rIngList2.removeAll(rIngs);

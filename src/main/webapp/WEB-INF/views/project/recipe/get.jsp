@@ -91,11 +91,28 @@ margin:10px;
     width: 90%;
     margin: 0 auto;
 }
+.back_container{
+width: 80%;
+    margin: -10px auto;
+     background-color: white;
+}
+.recipe_name_wrapper{
+
+}
+.bottom_grayCont{
+ background-color: #f1f1f2;
+}
+hr{
+width: 95%;
+}
+.result_container{
+    border: 1px solid #e2dede;
+}
 </style>
 <meta charset="UTF-8">
 <title>요들넷</title>
 <script>
-<<<<<<< HEAD
+
 	$(document).ready(function() {
 		var operForm = $("#operForm");
 		/*   $('button[data-oper="modify"]').on("click",function(e) {
@@ -107,7 +124,7 @@ margin:10px;
 			operForm.submit();
 		});
 	})
-=======
+
 $(document).ready(function() {  
     var operForm = $("#operForm");
   /*   $('button[data-oper="modify"]').on("click",function(e) {
@@ -119,15 +136,17 @@ $(document).ready(function() {
         operForm.submit();
      });
 })
->>>>>>> dd11fdb156ac572c586e425654cd028653fc4376
+
 </script>
 
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" flush="false" />
+	<div class="bottom_grayCont">
 	<div class="back_container">
 		<div class="result_container">
-			<p id="recipe_name">${recipe.name}</p>
+		<div class="recipe_name_wrapper">
+			<p id="recipe_name">${recipe.name}</p></div>
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
@@ -146,7 +165,7 @@ $(document).ready(function() {
 				<c:forEach var='ingre' items='${ingre}'>
 				<div class="ing">
 						<div class="ing_text">
-							<strong>${ingre.ingre_name}</strong><span class="ing_unitCount">/${ingre.ingre_count} ${ingre.ingre_unit}</span>
+							<strong>${ingre.ingre_name}</strong><span class="ing_unitCount"> / ${ingre.ingre_count} ${ingre.ingre_unit}</span>
 						</div>
 					</div>
 				</c:forEach>
@@ -216,6 +235,7 @@ $(document).ready(function() {
 	
 
 		</div>
+	</div>
 	</div>
 	<%-- <div class='main_container'>
 		<div id='view1'>

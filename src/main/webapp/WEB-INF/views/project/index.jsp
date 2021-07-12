@@ -42,6 +42,7 @@
 
 .recipe_text {
    margin: 10px;
+       color: black;
 }
 
 .needIngs_list {
@@ -64,6 +65,9 @@
 #guide_text1 {
    color: gray;
    font-size: 11px;
+}
+a:link{
+text-decoration:none;
 }
 </style>
 </head>
@@ -88,7 +92,7 @@
 
             <c:if test="${i eq recip.needIngs.size()}">
 
-               <div class="result_div">
+               <a href="recipe/get?rid=${recip.rid}"><div class="result_div">
                   <img class="foodImg" src="${recip.img}">
                   <div class="recipe_text">
                      <span class="recip_name">${recip.name}</span> <br>
@@ -128,7 +132,7 @@
 
 
                   </div>
-               </div>
+               </div></a>
             </c:if>
          </c:forEach>
       </c:forEach>
