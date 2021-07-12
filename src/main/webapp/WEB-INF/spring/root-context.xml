@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-<<<<<<< HEAD
+
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
@@ -14,82 +14,11 @@
 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> 
 		
-<<<<<<< HEAD
- 	     <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="scott"></property>
-		<property name="password" value="tiger"></property>  -->
-		
-		  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@c-project.c4wtytcwvokt.ap-northeast-2.rds.amazonaws.com:1521:FinalDB"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalproject1"></property>  
-		    
- 	<!--    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=C:\Programs\oracle\Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>     -->
-=======
+
  	    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="scott"></property>
 		<property name="password" value="tiger"></property>    
->>>>>>> origin/master
-    <!-- 
-  	 	  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@//adb.ap-seoul-1.oraclecloud.com:1522/ge205dfee8a5326_db202106291126_medium.adb.oraclecloud.com"></property>
-=======
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:context="http://www.springframework.org/schema/context"
-   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-   xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-   
-   <!-- Root Context: defines shared resources visible to all other web components -->
-      <context:component-scan base-package="org.conan.*"/>
-      <context:component-scan base-package="org.conan.controller"></context:component-scan>
-      <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> 
-      
-        <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
-      <property name="username" value="scott"></property>
-      <property name="password" value="tiger"></property>
-       <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@c-project.c4wtytcwvokt.ap-northeast-2.rds.amazonaws.com:1521:FinalDB"></property>
->>>>>>> 56b5664ddcc4def2f4818a0e2dad77c4d80d3085
-		<property name="username" value="admin"></property>
-		<property name="password" value="Finalproject1"></property>    
-	   -->    
-    <!-- 
-           <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@//adb.ap-seoul-1.oraclecloud.com:1522/ge205dfee8a5326_db202106291126_medium.adb.oraclecloud.com"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property> 
-      -->
- <!-- 
-      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=C:\Users\didsu\Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>
-       -->
-       
-      <!-- 
-      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@tcps://adb.ap-seoul-1.oraclecloud.com:1522/db202106291126_medium?wallet_location=/users/didsu/Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>
-       -->
-    <!-- 
-        <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/users/didsu/Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>  
-      -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-	<!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/Programs/sqldeveloper/Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property> -->
-      
-=======
-	<!-- 	
-	 <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/Programs/sqldeveloper/Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>
-       -->
->>>>>>> origin/master
+
 		</bean>
 		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig"></constructor-arg>
@@ -101,21 +30,4 @@
 		
 		
 </beans>
-=======
-   <!--    
-    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@db202106291126_medium?TNS_ADMIN=/Programs/sqldeveloper/Wallet_DB202106291126"></property>
-      <property name="username" value="admin"></property>
-      <property name="password" value="Finalprojectfinal1"></property>
-       -->
-      </bean>
-      <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-      <constructor-arg ref="hikariConfig"></constructor-arg>
-      </bean>
-      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-      <property name="dataSource" ref="dataSource"></property>
-      </bean>
-      <mybatis-spring:scan base-package="org.conan.mapper"/>
-      
-      
-</beans>
->>>>>>> 56b5664ddcc4def2f4818a0e2dad77c4d80d3085
+
