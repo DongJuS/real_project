@@ -6,6 +6,7 @@ import lombok.Data;
 public class UserProceVO {
 	private int urrid;
 	private String urtxt;
+	//private String seq;
 
 	public UserProceVO(String urtxt) {
 		

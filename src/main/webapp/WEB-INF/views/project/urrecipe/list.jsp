@@ -20,8 +20,8 @@ header {
 		var actionForm = $("#actionForm");
 		$(".move").on("click",function(e) {
 			e.preventDefault()
-			actionForm.append("<input type='hidden' name='rid' value='"	+ $(this).attr("href")+ "'/>")
-			actionForm.attr("action","/project/recipe/get")
+			actionForm.append("<input type='hidden' name='urrid' value='"	+ $(this).attr("href")+ "'/>")
+			actionForm.attr("action","/project/urrecipe/get")
 			actionForm.submit() 
 		})
 		
@@ -35,6 +35,45 @@ header {
 		$("#regBtn").on("click", function() {
 			self.location = "/project/urrecipe/register"
 		})
+		  
+		
+			
+			  
+				     $.getJSON("/project/urrecipe/allImg",function(arr){
+				    	 console.log(arr)
+				    	
+				    	 var str=''
+				    	 var str2='' 
+				    	
+				    	var atr=[]
+				    	 //console.log(atr[0])
+				    	 for(var i =0; i<arr.length; i++){
+						    //console.log(arr[i].num)
+				    		 //console.log(arr[i].urrid)
+				    		 //var iurrid=arr[i].urrid
+				    		// if(urrid==iurrid){
+				    		 if(arr[i].num==0){
+				    	 		var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
+				    	 		var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
+				    	 		originPath = originPath.replace(new RegExp(/\\/g),"/")
+				    			str ="<img class='main_image' src='/display?filename="+originPath+"'>"
+				    			atr.push(str)
+				    		 }
+				    		 
+				    			var txt='.list_img'+i
+				    			//console.log(txt)
+				    			//console.log(atr[4])
+				    			$(txt).html(atr[i])
+				    			
+				    		
+				    	 
+				    	 }
+				    	 //console.log(atr[1])
+				     })
+		 
+		
+		
+		
 		
 		
 	})//document 끝
@@ -46,24 +85,25 @@ header {
 		<p></p>
 	</div>
 	<div class='container'>
-			<div class='row'>
+			<div >
 			<p><c:out value='${pageMaker.total }'/>개의 결과가 검색됨</p>
 			<button id='regBtn' type='button' >글쓰기</button>
+			<div >
 	<table>
-		<c:forEach var='list' items='${list }'>
+		<c:forEach var='list' items='${list }' varStatus="i">
 				<tr>
 				
-					<td><a class='move' href="<c:out value='${list.urrid }'/>" >
-					<c:if test="${list.uploadFile.num eq '1' }">
-					<img src="<c:out value='${list.uploadFile.filename }'/>" width='300px'>
-					
-					</c:if></a>
+					<td>
+					<a class='move' href="<c:out value='${list.urrid }'/>" >
+					<div class='list_img<c:out value='${i.count }'/>'>dd</div>
+					</a>
 					</td> 
 					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>
 					<td><c:out value='${list.ursummary }' /></td>
 				</tr>
 		</c:forEach>
-</table>				
+</table>	
+</div>			
 			</div>
 	</div>
 

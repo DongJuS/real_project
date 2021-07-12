@@ -4,17 +4,24 @@ package org.conan.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.conan.domain.Criteria;
+import org.conan.domain.UploadFile;
 import org.conan.domain.UserIngreVO;
 import org.conan.domain.UserProceVO;
 import org.conan.domain.UserRecipeVO;
+import org.conan.domain.pageDTO;
 import org.conan.service.UserRecipeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
@@ -29,12 +36,16 @@ public class UserRecipeController {
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri) {
 		model.addAttribute("list", service.getList(cri));
+		int total = service.urrecipeCount(cri);
+		model.addAttribute("pageMaker", new pageDTO(cri, total));
 		
 	}
 	
 	@GetMapping("/get")
 	public void get(@RequestParam("urrid") int urrid, Model model) {
-		model.addAttribute("recipie", service.get(urrid));
+		model.addAttribute("recipe", service.get(urrid));
+		model.addAttribute("ingre", service.getingre(urrid));
+		model.addAttribute("proce", service.getproce(urrid));
 	}
 	
 	@PostMapping("/register")
@@ -57,6 +68,7 @@ public class UserRecipeController {
 		String[] ing2 = uringre.getUrIngre_count().split(",");
 		String[] ing3 = uringre.getUrIngre_unit().split(",");
 		String[] pro1 = urproce.getUrtxt().split(",");
+		//String[] pro2 = urproce.getSeq().split(",");
 		for (int i = 0; i < ing1.length; i++) {
 			list.add(new UserIngreVO(ing1[i], ing2[i], ing3[i]));
 			log.info(i + "¹øÂ° " + ing1[i]);
@@ -71,11 +83,25 @@ public class UserRecipeController {
 		service.register2(prolist);
 
 		rttr.addFlashAttribute("result", urrecipe.getUrrid());
-		return "redirect: urrecipe/list";
+		return "redirect: /project/urrecipe/list";
 	}
 	
 	@GetMapping("/register")
 	public void register() {
 		
+	}
+	
+	@GetMapping(value="/uploadFile", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<UploadFile>> uploadList(int urrid){
+		log.info("uploadList " + urrid);
+		return new ResponseEntity<>(service.uploadlist(urrid), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/allImg", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<UploadFile>> allImg(){
+		log.info("allImg ");
+		return new ResponseEntity<>(service.allimg(), HttpStatus.OK);
 	}
 }

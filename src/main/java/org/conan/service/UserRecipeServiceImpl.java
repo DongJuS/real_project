@@ -3,6 +3,7 @@ package org.conan.service;
 import java.util.List;
 
 import org.conan.domain.Criteria;
+import org.conan.domain.UploadFile;
 import org.conan.domain.UserIngreVO;
 import org.conan.domain.UserProceVO;
 import org.conan.domain.UserRecipeVO;
@@ -35,7 +36,7 @@ public class UserRecipeServiceImpl implements UserRecipeService {
 
 	@Override
 	public UserRecipeVO get(int urrid) {
-		// TODO Auto-generated method stub
+		uploadmapper.findbyrid(urrid);
 		return mapper.read(urrid);
 	}
 
@@ -86,8 +87,26 @@ public class UserRecipeServiceImpl implements UserRecipeService {
 
 	@Override
 	public List<UserRecipeVO> getList(Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public List<UploadFile> uploadlist(int urrid) {
+		// TODO Auto-generated method stub
+		return uploadmapper.findbyrid(urrid);
+	}
+
+	@Override
+	public int urrecipeCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.urrecipeCount(cri);
+	}
+
+	@Override
+	public List<UploadFile> allimg() {
+		// TODO Auto-generated method stub
+		return uploadmapper.allimg();
 	}
 
 }

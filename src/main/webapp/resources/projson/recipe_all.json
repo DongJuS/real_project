@@ -6883,32 +6883,7 @@
 			}
 		]
 	},
-	{
-		"name": "냉동실에 남아있는 떡국떡 에어프라이어로 떡뻥 만들기 ",
-		"img": "https://recipe1.ezmember.co.kr/cache/recipe/2020/12/23/f67310b055ca8747d1bc45124d5cb34a1.png",
-		"summary": "우는 아이 눈물 뚝! 그치는 떡뻥! 간식으로 항상 사 놓았는데 똑! 떨어졌을 때 에어프라이어로 굽기만 하면 바삭바삭, 쫀쫀한 떡뻥을 집에서도 만들수 있어요! 우는 아이 눈물 뚝! 그치는 떡뻥은 에어프라이어로 만들어보세요:) 세상의모든레시피 만개의레시피",
-		"ingre": [
-			{
-				"ingre_name": "떡국떡",
-				"ingre_count": "2",
-				"ingre_unit": "종이컵"
-			}
-		],
-		"recipe": [
-			{
-				"txt": "떡국떡을 미지근한 물에 불린다.",
-				"img": "https://recipe1.ezmember.co.kr/cache/recipe/2020/12/23/efe8c685361ab3389cfa06898e241dbe1.jpg"
-			},
-			{
-				"txt": "불린 떡국떡의 물기를 제거한다.",
-				"img": "https://recipe1.ezmember.co.kr/cache/recipe/2020/12/23/9be42b7e111564c1c80a2cdba3ae4f781.jpg"
-			},
-			{
-				"txt": "에어프라이어에 180도 / 11~12분간 굽는다.에어프라이어중간중간 뒤집어 가며 굽는다. ",
-				"img": "https://recipe1.ezmember.co.kr/cache/recipe/2020/12/23/ee3cdbe703a1faf5178c73eecadb1e591.jpg"
-			}
-		]
-	},
+	
 	{
 		"name": "촉촉한 사과조림과 바삭한 소보로가 올라간 애플시나몬머핀 ♥",
 		"img": "https://recipe1.ezmember.co.kr/cache/recipe/2020/12/21/ead0cc6cbfffd2e29d3facc8c8186fd81.jpg",

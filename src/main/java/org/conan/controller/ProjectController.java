@@ -135,7 +135,7 @@ public class ProjectController {
 	
 	
 	@PostMapping("/index") 
-	public void toIndex(HttpServletRequest request) {
+	public void toIndex(HttpServletRequest request, Criteria cri, Model model) {
 		log.info("포스트로 인덱스페이지 이동");
 		int maxIngsCount=0;		//모자른 재료갯수의 최댓값
 //		List<HashMap<Integer, SearchResultVO>> haveAll = new ArrayList<HashMap<Integer, SearchResultVO>>();
@@ -152,26 +152,28 @@ public class ProjectController {
 		//log.info(recipeListNames.size());	
 
 
-		for(int i=0;i<service.recipeCount();i++) { 
-			Collection<String> rIngs= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
-			int rIngsCount = rIngs.size(); 		//레시피에 총 필요한 갯수
-			rIngs.removeAll(sl); 						//요리필요재료 - 가지고있는재료교집합 = 필요한데 없는재료
-			int needIngsCount = rIngs.size();			//나머지 필요한 갯수
-//			String[] needIngs = recipeListNames.toArray(new String[recipeListNames.size()]);		//컬렉션이었던 재료목록을 String리스트로 바꿔준다 
-			List<String> needIngs = new ArrayList(rIngs);
-			Collection<String> rIngList2= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
-			rIngList2.removeAll(rIngs);
-			List<String> haveIngs = new ArrayList(rIngList2);
-			maxIngsCount = needIngsCount>maxIngsCount?needIngsCount:maxIngsCount;	//최대로 필요한 재료갯수
-			RecipeVO aaa = service.readRecipe(i);		//i번 레시피의VO
-			srvo.add(new SearchResultVO(i,service.readIngreNames(i),needIngs,haveIngs,aaa.getName(),aaa.getImg(),aaa.getSummary()));
-			
-		}
+		for(int i=0;i<service.recipeCount()+3;i++) { 
+	         if (service.readIngreNames(i).size()==0) continue;
+	         
+	         Collection<String> rIngs= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
+	         int rIngsCount = rIngs.size();       //레시피에 총 필요한 갯수
+	         rIngs.removeAll(sl);                   //요리필요재료 - 가지고있는재료교집합 = 필요한데 없는재료
+	         int needIngsCount = rIngs.size();         //나머지 필요한 갯수
+	         List<String> needIngs = new ArrayList(rIngs);
+	         Collection<String> rIngList2= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
+	         rIngList2.removeAll(rIngs);
+	         List<String> haveIngs = new ArrayList(rIngList2);
+	         maxIngsCount = needIngsCount>maxIngsCount?needIngsCount:maxIngsCount;   //최대로 필요한 재료갯수
+	         RecipeVO aaa = service.readRecipe(i);      //i번 레시피의VO
+	         srvo.add(new SearchResultVO(i,service.readIngreNames(i),needIngs,haveIngs,aaa.getName(),aaa.getImg(),aaa.getSummary()));
+	         
+	      }
 		/* System.out.print(mmm); */
 		List<String> yourIngs = new ArrayList<>(Arrays.asList(searchList));
 		request.setAttribute("max", maxIngsCount);
 		request.setAttribute("srvo", srvo);
 		request.setAttribute("yourIngs", yourIngs);
+		
 
 		//Collection<String> searchli = new ArrayList(Arrays.asList(searchList));
 		//Collection<String> listB = new ArrayList(Arrays.asList("간장","계란","들기름","밥","김가루"));

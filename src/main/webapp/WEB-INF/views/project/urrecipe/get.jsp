@@ -8,8 +8,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="/resources/procss/ind_get.css" rel="stylesheet"
-	type="text/css">
+<link href="/resources/procss/ind_get.css" rel="stylesheet" type="text/css">
 
 <style>
 header {
@@ -116,7 +115,7 @@ li {
 }
 
 .main_image {
-	width: 70%;
+	width: 50%;
 }
 
 .cont {
@@ -183,11 +182,52 @@ $(document).ready(function() {
      operForm.attr("action", "/board/modify").submit();
       }); */
     $('button[data-oper="list"]').on("click", function(e) {
-        operForm.find("#rid").remove();
-        operForm.attr("action", "/project/recipe/list");
+        operForm.find("#urrid").remove();
+        operForm.attr("action", "/project/urrecipe/list");
         operForm.submit();
      });
-})
+      
+     var urrid='<c:out value="${recipe.urrid}"/>'
+     $.getJSON("/project/urrecipe/uploadFile",{urrid:urrid},function(arr){
+    	 console.log(arr)
+    	 
+    	 var str=''
+    	 var str2='' 
+    	
+    	var atr=[]
+    	 console.log(atr[0])
+    	 for(var i =0; i<arr.length; i++){
+		    //console.log(arr[i].num)
+    		 
+    		 if(arr[i].num==0){
+    	 		var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
+    	 		var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
+    	 		originPath = originPath.replace(new RegExp(/\\/g),"/")
+    			str ="<img class='main_image' src='/display?filename="+originPath+"'>"
+    			//debugger;
+    			$('.uploadFile').html(str)
+    		 }else if(arr[i].num==i){
+				 //debugger;
+    			 var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
+    	    	 var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
+    	    	 originPath = originPath.replace(new RegExp(/\\/g),"/")
+    			 str2 ="<img class='main_image' src='/display?filename="+originPath+"'>"
+    			atr.push(str2)
+    			
+		    	 //console.log(atr[i-1])
+		    	 var txt='.proce_img'+i
+		    	 //console.log(txt)
+    			$(txt).html(atr[i-1])  
+    		
+    		 }
+    	 }
+    	 //console.log(atr[0])
+    	 
+    	
+     })
+     
+     
+     })//document
 
 </script>
 
@@ -197,16 +237,18 @@ $(document).ready(function() {
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="back_container">
 		<div class="result_container">
-			<p id="recipe_name">${recipe.name}</p>
+			<p id="recipe_name">${recipe.urname}</p>
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
-					<img class="user_icon_img img"
-						src="/resources/proimg/user_icon.png"> 유저 닉네임
+					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> 유저 닉네임
 				</p>
-				<img class="main_image img proceImg" src="${recipe.img}" /><br>
+				<div class='uploadFile'>
+				
+				</div>
+				 
 				<br>
-				<p class="summary_text">${recipe.summary}<br>
+				<p class="summary_text">${recipe.ursummary}<br>
 					<br>
 				</p>
 			</div>
@@ -219,8 +261,8 @@ $(document).ready(function() {
 					<c:forEach var='ingre' items='${ingre}'>
 						<div class="ing">
 							<div class="ing_text">
-								<strong>${ingre.ingre_name}</strong><span class="ing_unitCount">/${ingre.ingre_count}
-									${ingre.ingre_unit}</span>
+								<strong>${ingre.urIngre_name}</strong><span class="ing_unitCount">/${ingre.urIngre_count}
+									${ingre.urIngre_unit}</span>
 							</div>
 						</div>
 					</c:forEach>
@@ -236,9 +278,13 @@ $(document).ready(function() {
 					<c:forEach var='proce' items='${proce}' varStatus="i">
 						<div class="proce_numtxt">
 							<div class="proce_num">${i.count}</div>
-							<span> ${proce.txt}</span>
+							
+					
+							<span> ${proce.urtxt}</span>
+							<div class='proce_img<c:out value='${i.count }'/>'>
+							</div>
 						</div>
-						<img class="main_image img proceImg" src="${proce.pimg}">
+						<%-- <img class="main_image img proceImg" src="${proce.pimg}"> --%>
 					</c:forEach>
 				</div>
 			</div>
@@ -257,11 +303,9 @@ $(document).ready(function() {
 
 
 	<form id='operForm' action='/recipe/modify' method='get'>
-		<input type='hidden' id='rid' name='rid'
-			value='<c:out value="${recipe.rid }" />'> <input
-			type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
-		<input type='hidden' name='amount'
-			value='<c:out value="${cri.amount }"/>'>
+		<input type='hidden' id='urrid' name='urrid' value='<c:out value="${recipe.urrid }" />'> 
+		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
 		<%-- <input type="hidden" name="type" value="${cri.type }"> 
       <input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 	</form>
