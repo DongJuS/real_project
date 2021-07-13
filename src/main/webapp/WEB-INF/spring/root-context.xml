@@ -15,11 +15,15 @@
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> 
 		
 
+<<<<<<< HEAD
  	   <!--  <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="scott"></property>
 		<property name="password" value="tiger"></property> -->    
 		
   <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@c-project.c4wtytcwvokt.ap-northeast-2.rds.amazonaws.com:1521:FinalDB"></property>
+=======
+ 	   <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@c-project.c4wtytcwvokt.ap-northeast-2.rds.amazonaws.com:1521:FinalDB"></property>
+>>>>>>> 73854ab9f4c3b128ac2581ec97380dc8eb4aa025
       <property name="username" value="admin"></property>
       <property name="password" value="Finalproject1"></property>  
       
