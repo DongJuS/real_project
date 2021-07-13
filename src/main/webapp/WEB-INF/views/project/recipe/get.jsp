@@ -188,6 +188,13 @@ width: 95%;
 .result_container{
     border: 1px solid #e2dede;
 }
+#like_button{
+	border: 1px solid black;
+	width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 20px;
+}
 </style>
 <meta charset="UTF-8">
 <title>요들넷</title>
@@ -231,7 +238,12 @@ $(document).ready(function() {
          operForm.submit();
       });
    })
+   
+var like_button = document.getElementById("like_button");
+	like_button.onclick= function(){changeHeart();}
+	
 
+   
 </script>
 
 </head>
@@ -242,7 +254,10 @@ $(document).ready(function() {
 	<div class="back_container">
 		<div class="result_container">
 		<div class="recipe_name_wrapper">
-			<p id="recipe_name">${recipe.name}</p></div>
+			<p id="recipe_name"><span style="
+    color: lightgray;
+        font-size: 15px;
+			">No.${recipe.rid}</span> ${recipe.name}</p></div>
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
@@ -283,7 +298,11 @@ $(document).ready(function() {
 				<img class="main_image img proceImg" src="${proce.pimg}">
 				</c:forEach>
 				</div>
+				
+				<div id="like_button">${countLike}</div>
 			</div>
+			</div>
+			</div></div>
 			
 			
 			

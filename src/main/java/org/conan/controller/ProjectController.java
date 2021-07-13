@@ -13,14 +13,20 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.conan.domain.IngreVO;
+import org.conan.domain.LikeVO;
+import org.conan.domain.MemberVO;
 import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
 import org.conan.mapper.RecipeMapper;
 import org.conan.service.BoardService;
+import org.conan.service.LikeService;
+import org.conan.service.MemberService;
 import org.conan.service.RecipeService;
+import org.apache.ibatis.annotations.Param;
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
 import org.conan.domain.pageDTO;
@@ -49,6 +55,8 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	private RecipeService service;
 	private BoardService board;
+	private LikeService likes;
+	private MemberService mservice;
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
@@ -125,11 +133,28 @@ public class ProjectController {
 		return "redirect: /project/recipe/list";
 	}
 	@GetMapping("/recipe/get")
-	public void get(@RequestParam("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void get(HttpServletRequest request, HttpSession session,@Param("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get");
+		 session = request.getSession();
+		  MemberVO mvo = (MemberVO)session.getAttribute("member");
 		model.addAttribute("recipe", service.readRecipe(rid));
 		model.addAttribute("ingre", service.readIngre(rid));
 		model.addAttribute("proce", service.readProce(rid));
+		model.addAttribute("countLike", likes.countLike(rid));
+		
+		/* model.addAttribute("like", likes.readLike(rid)); */
+		System.out.println("rid는 : !!"+rid);
+		/* System.out.println("rid는 : !!"+mvo.getId()); */
+		
+		 System.out.println(likes.readLike(new LikeVO(rid, "1234"))); 
+		 //System.out.print(likes.readLike(rid,mvo.getId()).isEmpty()); 
+		  
+		//  if(likes.readLike(rid,mvo.getId()).isEmpty()) {	//
+			  
+		 // }
+			/* likes.insertLike(rid, mvo.getId()); */
+		  
+		 
 	}
 	
 	
