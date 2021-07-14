@@ -94,7 +94,7 @@ public class UserRecipeController {
 	@GetMapping(value="/uploadFile", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<UploadFile>> uploadList(int urrid){
-		log.info("uploadList " + urrid);
+		//log.info("uploadList " + urrid);
 		return new ResponseEntity<>(service.uploadlist(urrid), HttpStatus.OK);
 	}
 	
@@ -104,4 +104,21 @@ public class UserRecipeController {
 		log.info("allImg ");
 		return new ResponseEntity<>(service.allimg(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/remove")
+	public String remove(@RequestParam("urrid") int urrid, RedirectAttributes rttr) {
+		if(service.remove(urrid)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		if(service.removeingre(urrid)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		if(service.removeproce(urrid)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		
+		return "redirect: /project/urrecipe/list";
+	}
+	
+	
 }

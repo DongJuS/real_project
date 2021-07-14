@@ -12,6 +12,10 @@
 header {
 	background-color: #FF4500;
 }
+li{
+list-style: none;
+display: inline-block;
+}
 </style>
 <meta charset="UTF-8">
 <title>요들넷</title>
@@ -60,7 +64,23 @@ header {
 			 
 			}
 	  })
-	
+	  
+	   /*  $('.check').on('click', 'li', function() {
+         // $(".checked").append("<li id=\'"+$(this).attr('id')+"\'>" + $(this).attr('id') + "</li>") 
+         var tagid = $(this).attr('id')
+
+         var rmtag = $('.checked>#' + tagid).attr('id')
+         if (tagid===rmtag) {
+            $('.checked>#' + rmtag).remove()
+         }else{
+         $(".checked").append("<li id=\'"+tagid+"\'>" + tagid + "</li>")
+         }
+      }) */
+		$('.check').on('click',function(e){
+			e.preventDefault()
+			$('.checked').append("<button class='"+$(this).attr('class')+"'>"+$(this).attr('value')+"</button>")
+			
+		})
 		
 		
 		
@@ -69,6 +89,23 @@ header {
 </head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
+<!-- 태그해보자 -->
+	<div class=container>
+		<button class='check' value='이거'>이거</button>
+		<button class='check' value='이거'>이거</button>
+		<button class='check' value='이거'>이거</button>
+		<button class='check' value='이거'>이거</button>
+		<button class='check' value='이거'>이거</button>
+		<button class='check' value='이거'>이거</button>	
+	</div>
+	<div class='container'>
+		<div class='checked'>
+			
+		</div>
+	</div>
+
+
+<!-- 레시피 리스트 보여주는곳 -->
 	<div>
 		<p></p>
 	</div>
@@ -82,7 +119,7 @@ header {
 				<tr>
 					<td>
 					<a class='move' href="<c:out value='${list.urrid }'/>" >
-					<div class='list_img<c:out value='${list.urrid}'/>'>dd</div>
+					<div class='list_img<c:out value='${list.urrid}'/>'>대표사진이 없네요</div>
 					</a>
 					</td> 
 					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>

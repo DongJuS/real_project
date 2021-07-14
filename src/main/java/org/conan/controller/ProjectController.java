@@ -18,14 +18,19 @@ import org.conan.domain.IngreVO;
 import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
+import org.conan.domain.UploadFile;
 import org.conan.mapper.RecipeMapper;
 import org.conan.service.BoardService;
 import org.conan.service.RecipeService;
+import org.conan.service.UserRecipeService;
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
 import org.conan.domain.pageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +54,7 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	private RecipeService service;
 	private BoardService board;
+	
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
@@ -56,6 +62,7 @@ public class ProjectController {
 		Criteria cri1=new Criteria(1,7);
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("board", board.getList(cri1)); 
+		
 	}
 	@GetMapping("/chatbot")
 	public void chat(HttpServletRequest request) {
@@ -210,5 +217,6 @@ public class ProjectController {
 	 * 
 	 * }
 	 */
+
 
 }

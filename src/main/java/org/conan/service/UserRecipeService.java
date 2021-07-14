@@ -21,4 +21,7 @@ public interface UserRecipeService {
 	public List<UploadFile> uploadlist(int urrid);
 	public int urrecipeCount(Criteria cri);
 	public List<UploadFile> allimg();
+	public boolean remove(int urrid);
+	public boolean removeingre(int urrid);
+	public boolean removeproce(int urrid);
 }

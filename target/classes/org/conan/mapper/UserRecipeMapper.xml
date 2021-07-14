@@ -58,6 +58,16 @@
 	<select resultType="int" id="urrecipeCount">select count(urrid) from t_urrecipe
 	</select>
 	
+	<delete id="remove">
+		delete from t_urrecipe where urrid=#{urrid}
+	</delete>
+	<delete id='removeingre'>
+		delete from t_uringre where urrid=#{urrid}
+	</delete>
+	<delete id='removeproce'>
+		delete from t_urproce where urrid=#{urrid}
+	</delete>
+	
 
 </mapper>
 

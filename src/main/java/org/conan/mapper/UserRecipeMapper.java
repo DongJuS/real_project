@@ -18,4 +18,7 @@ public interface UserRecipeMapper {
 	public void ingreinsert(UserIngreVO uringre);
 	public void proceinsert(UserProceVO urproce);
 	public int urrecipeCount(Criteria cri);
+	public int remove(int urrid);
+	public int removeingre(int urrid);
+	public int removeproce(int urrid);
 }

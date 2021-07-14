@@ -115,7 +115,7 @@ header {
 				},
 				success:function(result){
 					showUploadedFile(result)
-					/* alert(json) */
+					 alert(json) 
 				}
 			})
  			/*   $("#insertform").submit()     */
@@ -132,10 +132,7 @@ header {
 				str += "<input type='hidden' name='uploadFile["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
 				str += "<input type='hidden' name='uploadFile["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
 				str += "<input type='hidden' name='uploadFile["+i+"].filetype' value='"+jobj.data('type')+"'>" 
-				str += "<input type='hidden' name='uploadFile["+i+"].num' value='"+i+"'>"
-				
-				
-				
+				str += "<input type='hidden' name='uploadFile["+i+"].num' value='"+i+"'>"	
 			}) 
 			  formObj.append(str).submit() 
 		}) 
@@ -145,20 +142,25 @@ header {
 			var uploadUL=$(".uploadResult ul")
 			var str = ''
 			$(uploadResultArr).each(function(i, obj) {
-			
-				if (obj.filetype) {
+				
 				var fileCallPath = encodeURIComponent(obj.uploadPath+ "/"+ obj.uuid+ "_"+ obj.filename);
 					str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.filename+"' data-type='"+obj.filetype+"'><div>"
 					str +="<span>" + obj.filename + "</span>"
 					str +="<button type='button' data-file=\""+fileCallPath+"\" data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>"
-					str +="<img src='/display?fileName="+fileCallPath+"'>"
+					str +="<img src='/display?filename="+fileCallPath+"'>"
 					str +="</div></li>"
-				} 
+			
 			})
 			uploadUL.append(str)
 		}   
    
-	})
+		$('.uploadResult').on('click','button',function(e){
+			e.preventDefault()
+			var targetli=$(this).closest('li')
+			targetli.remove()
+		})
+		
+	})//document
 </script>
 </head>
 <body>
