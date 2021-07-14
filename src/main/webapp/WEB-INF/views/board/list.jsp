@@ -53,6 +53,7 @@ border:1px solid black;
 
 .head {
 	margin-top: 25px;
+	margin-right: 160px;
 }
 
 .table_title {
@@ -65,17 +66,21 @@ border:1px solid black;
 </style>
 
 <!-- Bootstrap Core CSS -->
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
- 
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
 <!-- MetisMenu CSS -->
-<link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="/resources/vendor/metisMenu/metisMenu.min.css"
+	rel="stylesheet">
 
 <!-- DataTables CSS -->
-<link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"
+<link
+	href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"
 	rel="stylesheet">
 
 <!-- DataTables Responsive CSS -->
-<link href="/resources/vendor/datatables-responsive/dataTables.responsive.css"
+<link
+	href="/resources/vendor/datatables-responsive/dataTables.responsive.css"
 	rel="stylesheet">
 
 <!-- Custom CSS -->
@@ -85,19 +90,13 @@ border:1px solid black;
 <link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-     <!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- jQuery -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 
-	<jsp:include page="../project/include/header.jsp"></jsp:include>
+<jsp:include page="../project/include/header.jsp"></jsp:include>
 
 <script type="text/javascript">
 	$(document)
@@ -122,7 +121,6 @@ border:1px solid black;
 							self.location = "/board/register"
 						})
 
-						//내꺼 오타천국 
 						var actionForm = $("#actionForm");
 						$(".paginate_button a").on(
 								"click",
@@ -134,14 +132,7 @@ border:1px solid black;
 									actionForm.submit()
 								})
 
-						//지아꺼
-						/*    var actionForm = $("#actionForm");
-						   $(".paginate_button a").on("click",function(e){
-						      e.preventDefault();
-						      console.log("click");
-						      actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-						      //actionForm.submit();
-						   }); */
+						
 
 						$(".move")
 								.on(
@@ -154,7 +145,7 @@ border:1px solid black;
 																	"href")
 															+ "'/>")
 											actionForm.attr("action",
-													"/project/board/get")
+													"/board/get")
 											actionForm.submit()
 										})
 
@@ -202,7 +193,7 @@ border:1px solid black;
 
 
 				<div class="col-6 search">
-					<form id='searchForm' action='/project/board/list' method='get'>
+					<form id='searchForm' action='/board/list' method='get'>
 						<select name='type'>
 							<option value=""
 								<c:out value="${pageMaker.cri.type==null?'selected': ''}"/>>----</option>
@@ -262,9 +253,6 @@ border:1px solid black;
 									pattern="yyyy/MM/dd" value="${board.regdate }" /></td>
 						</tr>
 					</c:forEach>
-
-
-
 				</tbody>
 
 			</table>
@@ -347,7 +335,6 @@ border:1px solid black;
 							self.location = "/board/register"
 						})
 
-						//내꺼 오타천국 
 						var actionForm = $("#actionForm");
 						$(".paginate_button a").on(
 								"click",
@@ -358,15 +345,6 @@ border:1px solid black;
 											.val($(this).attr("href"))
 									actionForm.submit()
 								})
-
-						//지아꺼
-						/*    var actionForm = $("#actionForm");
-						   $(".paginate_button a").on("click",function(e){
-						      e.preventDefault();
-						      console.log("click");
-						      actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-						      //actionForm.submit();
-						   }); */
 
 						$(".move")
 								.on(
@@ -408,6 +386,4 @@ border:1px solid black;
 
 
 <!-- 	footer 시작		-------------------------------------------------------------- -->
-<%-- <jsp:include page="../include/footer.jsp"></jsp:include>
- --%>
 <jsp:include page="../project/include/footer.jsp"></jsp:include>

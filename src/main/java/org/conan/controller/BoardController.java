@@ -38,12 +38,6 @@ public class BoardController {
 //		model.addAttribute("list2",service2.getList(cri));
 		model.addAttribute("pageMaker", new pageDTO(cri, 123));
 	}
-
-	 
-	
-	
-	
-	
     
     @GetMapping("/register")
     public void register() {
@@ -64,7 +58,7 @@ public class BoardController {
         log.info("/get11 or /modify");
         model.addAttribute("board", service.get(bno));
     }
-    
+   
     @GetMapping("/modify")
     public void modify(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
         log.info("/get or /modify");

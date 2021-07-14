@@ -13,16 +13,25 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.conan.domain.IngreVO;
+import org.conan.domain.LikeVO;
+import org.conan.domain.MemberVO;
 import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
 import org.conan.domain.UploadFile;
 import org.conan.mapper.RecipeMapper;
 import org.conan.service.BoardService;
+import org.conan.service.LikeService;
+import org.conan.service.MemberService;
 import org.conan.service.RecipeService;
+<<<<<<< HEAD
 import org.conan.service.UserRecipeService;
+=======
+import org.apache.ibatis.annotations.Param;
+>>>>>>> 08c17e7d5424b44dd7b5638308cdb48cae62dfc7
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
 import org.conan.domain.pageDTO;
@@ -54,7 +63,12 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	private RecipeService service;
 	private BoardService board;
+<<<<<<< HEAD
 	
+=======
+	private LikeService likes;
+	private MemberService mservice;
+>>>>>>> 08c17e7d5424b44dd7b5638308cdb48cae62dfc7
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
@@ -132,11 +146,28 @@ public class ProjectController {
 		return "redirect: /project/recipe/list";
 	}
 	@GetMapping("/recipe/get")
-	public void get(@RequestParam("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void get(HttpServletRequest request, HttpSession session,@Param("rid") int rid, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get");
+		 session = request.getSession();
+		  MemberVO mvo = (MemberVO)session.getAttribute("member");
 		model.addAttribute("recipe", service.readRecipe(rid));
 		model.addAttribute("ingre", service.readIngre(rid));
 		model.addAttribute("proce", service.readProce(rid));
+		model.addAttribute("countLike", likes.countLike(rid));
+		
+		/* model.addAttribute("like", likes.readLike(rid)); */
+		System.out.println("rid는 : !!"+rid);
+		/* System.out.println("rid는 : !!"+mvo.getId()); */
+		
+		 System.out.println(likes.readLike(new LikeVO(rid, "1234"))); 
+		 //System.out.print(likes.readLike(rid,mvo.getId()).isEmpty()); 
+		  
+		//  if(likes.readLike(rid,mvo.getId()).isEmpty()) {	//
+			  
+		 // }
+			/* likes.insertLike(rid, mvo.getId()); */
+		  
+		 
 	}
 	
 	
@@ -160,21 +191,25 @@ public class ProjectController {
 
 
 		for(int i=0;i<service.recipeCount()+3;i++) { 
-	         if (service.readIngreNames(i).size()==0) continue;
+
+			if (service.readIngreNames(i).size()==0) continue;
+			
+			Collection<String> rIngs= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
+			int rIngsCount = rIngs.size(); 		//레시피에 총 필요한 갯수
+			rIngs.removeAll(sl); 						//요리필요재료 - 가지고있는재료교집합 = 필요한데 없는재료
+			int needIngsCount = rIngs.size();			//나머지 필요한 갯수
+			List<String> needIngs = new ArrayList(rIngs);
+			Collection<String> rIngList2= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
+			rIngList2.removeAll(rIngs);
+			List<String> haveIngs = new ArrayList(rIngList2);
+			maxIngsCount = needIngsCount>maxIngsCount?needIngsCount:maxIngsCount;	//최대로 필요한 재료갯수
+			RecipeVO aaa = service.readRecipe(i);		//i번 레시피의VO
+			srvo.add(new SearchResultVO(i,service.readIngreNames(i),needIngs,haveIngs,aaa.getName(),aaa.getImg(),aaa.getSummary()));
+			
+		}
+
 	         
-	         Collection<String> rIngs= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
-	         int rIngsCount = rIngs.size();       //레시피에 총 필요한 갯수
-	         rIngs.removeAll(sl);                   //요리필요재료 - 가지고있는재료교집합 = 필요한데 없는재료
-	         int needIngsCount = rIngs.size();         //나머지 필요한 갯수
-	         List<String> needIngs = new ArrayList(rIngs);
-	         Collection<String> rIngList2= new ArrayList(service.readIngreNames(i)); //요리에 필요한 재료
-	         rIngList2.removeAll(rIngs);
-	         List<String> haveIngs = new ArrayList(rIngList2);
-	         maxIngsCount = needIngsCount>maxIngsCount?needIngsCount:maxIngsCount;   //최대로 필요한 재료갯수
-	         RecipeVO aaa = service.readRecipe(i);      //i번 레시피의VO
-	         srvo.add(new SearchResultVO(i,service.readIngreNames(i),needIngs,haveIngs,aaa.getName(),aaa.getImg(),aaa.getSummary()));
-	         
-	      }
+
 		/* System.out.print(mmm); */
 		List<String> yourIngs = new ArrayList<>(Arrays.asList(searchList));
 		request.setAttribute("max", maxIngsCount);

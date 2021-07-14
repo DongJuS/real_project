@@ -30,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 public class LoginController {
 	@Autowired
 	MemberService service;
+	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public void Update() {
 		log.info("정보수정");

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.conan.mapper.LikeMapper">
+<select resultType="org.conan.domain.LikeVO"  parameterType="org.conan.domain.LikeVO" id="readLike">
+select * from Like_Recipe where rid=#{rid} and userid=#{userId}
+	</select>
+	
+	<select resultType="int" id="countLike">
+	select sum(checklike) from
+		like_recipe where rid=#{rid}
+	</select>
+	<insert id="insertLike">
+	insert into like_recipe values (#{rid},#{userId},1)
+	</insert>
+</mapper>

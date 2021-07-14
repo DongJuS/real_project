@@ -313,7 +313,6 @@ color:black;
 					<div class="post-slider">
 
 						<div class="post-wrapper2">
-
 							<c:forEach var='list' items='${list }'>
 								<div class="post">
 									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
@@ -345,7 +344,6 @@ color:black;
 					<a href='/board/list'><span class="icon_text">자유게시판</span></a>
 				</div>
 				<div class="free_board">
-
 					<ul>
 						<c:forEach var='board' items='${board }'>
 							<li>
@@ -354,7 +352,6 @@ color:black;
 							
 						</c:forEach>
 					</ul>
-
 				</div>
 
 			</div>

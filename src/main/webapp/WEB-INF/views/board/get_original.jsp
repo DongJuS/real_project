@@ -134,51 +134,47 @@ opacity: 0.9;
        console.log(replyService);
 
                   /* 리플라이 */
-			/*  원래 주석한 부분들 시작 */
+
         var bnoValue = '<c:out value="${board.bno}"/>'
-                        /*  replyService.add({
+              /*          replyService.add({
                           reply : "JS TEST",
                           replyer : "js tester",
                           bno : bnoValue
                        }, function(result) {
                           alert("RESULT : " + result);
-                       });   */ 
+                       });  */
 
-                      /*    replyService.getList(
+                  /*       replyService.getList(
                            {bno:bnoValue,page:1}
                         ,function(list){
                            for(var i =0, len=list.length||0; i<len; i++){
                               console.log(list[i]);
                            }
-                        });  */
+                        }); */
 
-                 /*   replyService.remove(32
+                  /* replyService.remove(32
                    ,function(count){
                    console.log(count);
                    if(count==="success"){
                    alert("REMOVED");}
                    },function(err){
                    alert('error occurred...');
-                   });  */
+                   }); */
 
-                  /*   replyService.update({
+                  /*  replyService.update({
                        rno:22,
                        bno:bnoValue,
                        reply:"modify reply...."
                     }, function(result){
                        alert("수정완료")
-                    });  */
+                    }); */
 
-                /*    replyService.get(23, function(data) {
+                  /*  replyService.get(23, function(data) {
                      console.log(data);
                   });  */
 
-                  
-                 /*  원래 주석한 부분들 끝 */
-                  
            var replyUL = $(".chat");
            showList(1);
-           
            function showList(page) {
               replyService.getList({bno : bnoValue,page : page || 1 },
                                  function(replyCnt,list) {
@@ -191,7 +187,7 @@ opacity: 0.9;
                                     }
                                     var str = "";
                                     if (list == null|| list.length == 0) {
-                                    	
+                                       
                                        return;
                                     }
                                     for (var i = 0, len = list.length || 0; i < len; i++) {
@@ -208,7 +204,7 @@ opacity: 0.9;
                                              + "</p><div></li>";
                                     }
                                     replyUL.html(str);
-                                   /*  showReplyPage(replyCnt); */
+                                    showReplyPage(replyCnt);
                                  });
                   } //end  showList
                   
@@ -222,19 +218,25 @@ opacity: 0.9;
                   var modalModBtn = $("#modalModBtn");
                   var modalRemoveBtn = $("#modalRemoveBtn");
                   var modalRegisterBtn = $("#modalRegisterBtn");
+                  
                
-             	   
+             	      var replyer = null;
+					  var csrfHeaderName="${_csrf.headerName}";
+				      var csrfTokenValue="${_csrf.token}";
                   $("#addReplyBtn").on("click",function(e){
                      modal.find("input").val("");
-                   /*   modal.find("input[name='replyer']").val(replyer); */
+                     modal.find("input[name='replyer']").val(replyer);
                      modalInputReplyDate.closest("div").hide();
                      modal.find("button[id !='modalCloseBtn']").hide();
                      
                      modalRegisterBtn.show();
                      $(".modal").modal("show");
-                     /* showList(1); */
+                     showList(1);
                   });
-                
+                  //ajax spring security header CSRF 토큰을 기본적으로 전송하도록 설정
+                  $(document).ajaxSend(function(e, xhr, options){
+                	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+                  });
                   
                   modalRegisterBtn.on("click",function(e){
                            var reply ={
@@ -250,7 +252,7 @@ opacity: 0.9;
                               showList(-1);
                            });
                         });
-                  /* modalRegisterBtn  End*/
+                  
                   $(".chat").on("click","li",function(e){
                      var rno = $(this).data("rno");
                      replyService.get(rno,function(reply){
@@ -266,79 +268,61 @@ opacity: 0.9;
                      })
                      console.log(rno);
                   });
-                  /* chat End*/
                   
-                  /* 업데이트부분 */
                   modalModBtn.on("click",function(e){
-                	  
-                	    var originalReplyer = modalInputReplyer.val();  
-                	   var original_id = '<c:out value="${member.id}"/>' 
-                	   
-                	  console.log("Original Replyer:"+ originalReplyer); 
-                	/*	 
-                	  if(modalInputReplyer != original_id){
+                	
+                	  var originalReplyer = modalInputReplyer.val();
+                
+                	 if(replyer !=originalReplyer){
                 		 alert("자신이 작성한 댓글만 수정 가능");
                 		 modla.modal("hide");
                 		 return;
-                	 }  */ 
-                	
-                	   var reply={rno:modal.data("rno"), 
-                      		 reply:modalInputReply.val(),
-                      		 replyer:originalReplyer}; 
-                	 
-                	    replyService.update(reply, function(result){
-                            alert(result)
-                            modal.modal("hide")
-                            showList(pageNum)
-                         });
-                      });
-                  /* modalModBtn  End*/
-                	 
-                 	
-                 	  /*     
+                	 }
+                     var reply={rno:modal.data("rno"), 
+                    		 reply:modalInputReply.val(),
+                    		 replyer: originalReplyer};
+                     
                	  if(!replyer){
             		  alert("로그인후 수정이 가능합니다.");
             		  modal.modal("hide");
             		  return;
             	  }
-            	 console.log("Original Replyer:"+ originalReplyer);  */
+            	 console.log("Original Replyer:"+ originalReplyer);
             	 
                      
-                 
-                  
-                  /* 삭제부분 */
-                  modalRemoveBtn.on("click", function(e){
-                     var rno=modal.data("rno");
-                       var original_id = '<c:out value="${member.id}"/>' 
-                      
-                        replyService.remove(rno,original_id, function(result){
-                        alert(result)
-                        modal.modal("hide");
-                        showList(pageNum);
-                     });
-                   
-                       
-                 /*   replyService.remove(rno, originalReplyer, function(result){
+                     replyService.update(reply,function(result){
                         alert(result)
                         modal.modal("hide")
                         showList(pageNum)
-                     }) */ 
+                     });
+                  });
+                  
+                  
+                  
+                  modalRemoveBtn.on("click", function(e){
+                     var rno=modal.data("rno")
                      
                      
-                   /*   console.log("REPLYER:" +replyer); */
-                /*      if(!replyer){
+                     replyService.remove(rno, originalReplyer, function(result){
+                        alert(result)
+                        modal.modal("hide")
+                        showList(pageNum)
+                     })
+                     
+                     console.log("REPLYER:" +replyer);
+                     if(!replyer){
                     	 alert("로그인한 후 삭제가 가능");
                     	 modal.modal("hide"); return;
-                     } */
-                  /*     var originalReplyer = modalInputReplyer.val();
-                     console.log("Original Replyer:" + originalReplyer);  */// 원 댓글 작성자 
-              /*        if(modalInputReplyer != originalReplyer){
+                     }
+                     var originalReplyer = modalInputReplyer.val();
+                     console.log("Original Replyer:" + originalReplyer); // 원 댓글 작성자
+                     if(replyer != originalReplyer){
                     	 alert("자신이 작성한 댓글만 삭제 가능");
                     	 modal.modal("hide"); return;
-                     } */
+                     }
                      
                   });
-                  /* modalRemoveBtn  End*/
+                  
                   
              
                    
@@ -351,7 +335,7 @@ opacity: 0.9;
                      var startNum=endNum-9
                      var prev=startNum!=1
                      var next=false
-                     if(endNum*10>=replyCnt){endNum=Math.ceil(replyCnt/10.0)}
+                     if(endNum*10>replyCnt){endNum=Math.ceil(replyCnt/10.0)}
                      if(endNum*10<replyCnt){next=true}
                      var str="<ul class='pagination pull-right'>"
                      if(prev) {
@@ -380,7 +364,40 @@ opacity: 0.9;
                 
                   
                   var bno = '<c:out value="${board.bno}"/>'
-                     
+                      $.getJSON("/board/getAttachList",{bno:bno}, function(arr){
+                         console.log(arr)
+                         var str=''
+                         $(arr).each(function(i,obj){
+                            if (!obj.fileType) {
+                              var fileCallPath = encodeURIComponent(obj.uploadPath+ "/"+ obj.uuid+ "_"+ obj.fileName);
+                              /* str += "<li><div><a href='/download?fileName="+ fileCallPath+ "'><img src='/resources/images/attach.png'>"+ obj.fileName
+                                 + "</a><span data-file=\""+fileCallPath+"\" data-type='file'>X</span></div></li>" */
+                                 str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'><div>"
+                                 str +="<img src='/resources/images/attach.png'>"
+                                 str +="</div></li>"
+                              } else {
+                                 //str +="<li>" + obj.fileName + '</li>'
+                                 var fileCallPath = encodeURIComponent(obj.uploadPath+ "/S_"+ obj.uuid+ "_"+ obj.fileName);
+                                 var originPath = obj.uploadPath   + "/"+ obj.uuid+ "_"+ obj.fileName
+                                 originPath = originPath.replace(new RegExp(/\\/g),"/")
+                                 /* str += "<li><a href=\"javascript:showImage(\'"+ originPath+ "\')\"><img src='/display?fileName="+ fileCallPath
+                                       + "'></a><span data-file=\""+fileCallPath+"\" data-type='image'>X</span></li>" */
+                                 str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'><div>"             
+                                 str +="<img src='/display?fileName="+fileCallPath+"'>"
+                                 str +="</div></li>"
+                              }
+                         })
+                         $(".uploadResult ul").html(str);
+                      })
+                  
+                     $(".uploadResult").on("click", "li", function(e){
+                        console.log("view image")
+                        var liObj=$(this)
+                        var path=encodeURIComponent(liObj.data("path")+"/"+liObj.data("uuid")+"_"+liObj.data("filename"))
+                        if(!liObj.data("type")){
+                           self.location="/download?fileName="+path
+                        }else{ showImage(path)}
+                     })
                      
                      $(".bigPictureWrapper").on("click", function(e){
                         $(".bigPicture").animate({width:'0%', height:'0%'},1000)
@@ -405,7 +422,7 @@ opacity: 0.9;
 <div class="container">
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">상세페이지</h1>
+      <h1 class="page-header">Board Register</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -447,7 +464,7 @@ opacity: 0.9;
       </sec:authorize> 
       --%>
             <button class='btn btn-primary' data-oper='list'>List</button>
-            <form id='operForm' action='/board/modify' method='get'>
+            <form id='operForm' action='/project/board/modify' method='get'>
                <input type='hidden' id='bno' name='bno'
                   value='<c:out value="${board.bno }" />'> <input
                   type='hidden' name='pageNum'
@@ -492,7 +509,7 @@ opacity: 0.9;
       <!-- 모달영역 -->
       <div class='modal fade' id='myModal' tabindex='-1' role='dialog'
          aria-labelledby='myModallabel' aria-hidden='true'>
-         <div class='modal-dialog'>
+         <div class='modal-dialog' role="document">
             <div class='modal-content' >
                <div class='modal-header'>
                   <button type='button' class='close' data-dismiss='modal'
@@ -505,19 +522,13 @@ opacity: 0.9;
                         value='New Reply'>
                   </div>
                   <div class='form-group'>
-                     <label>Replyer</label>  <input class='form-control' name='replyer'
+                     <label>Replyer</label> <input class='form-control' name='replyer'
                         value='New Replyer'>
                   </div>
                   <div class='form-group'>
                      <label>ReplyDate</label> <input class='form-control'
                         name='replyDate' value=''>
                   </div>
-                  <c:set var="name" value="홍길동" />
-
-<%-- <c:if test="${name eq '홍길동'}">
-    <c:out value="${str}" />
-</c:if> --%>
-                  
                </div>
                <div class='modal-footer'>
                   <button id='modalModBtn' type='button' class='btn btn-info'>Modify</button>
@@ -544,4 +555,4 @@ opacity: 0.9;
 
 <!-- /.row -->
 <!--    footer 시작      -------------------------------------------------------------- -->
-<jsp:include page="../board/footer1.jsp"></jsp:include>
+<jsp:include page="../project/include/footer.jsp"></jsp:include>
