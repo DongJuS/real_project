@@ -42,6 +42,13 @@
 		auth.userid where mem.userid=#{userid}
 
 	</select>
+	
+<insert id="insertMember"> <!-- 멤버 생성 -->
+ insert into tbl_member values(#{userid},#{userpwd},#{username},sysdate,sysdate,1)
+</insert>
+ <insert id="a_insertMember"> <!-- 멤버 권한 부여 -->
+ insert into tbl_member_auth (userid, auth) values(#{userid}, 'ROLE_USER')
+</insert>
 
 
 <insert id="register">

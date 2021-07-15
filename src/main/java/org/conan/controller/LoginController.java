@@ -2,26 +2,21 @@ package org.conan.controller;
 
 
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.conan.domain.AuthVO;
 import org.conan.domain.MemberVO;
-import org.conan.service.MemberService;
+import org.conan.domain.pageDTO;
+import org.conan.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 
@@ -30,7 +25,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/*")
 public class LoginController {
 	
-	
+	@Autowired
+	MemberServiceImpl MemberService;
 
 	@GetMapping("/accessError") 
 	public void accessDenied(Authentication auth, Model model) {
@@ -41,7 +37,7 @@ public class LoginController {
 	}
 	
 	@GetMapping("/customLogin") 
-	public void loginInput(String error, String logout, Model model) {
+	public void loginInput(Authentication auth,String error,String username, String logout, Model model) {
 		log.info("error : "+error);
 		log.info("logout : "+logout);
 		if(error != null) {
@@ -50,13 +46,29 @@ public class LoginController {
 		if(logout != null) {
 			model.addAttribute("logout", "Logout!!");
 		}
-
+		
+		log.info("아이디 권한: "+ auth+"유저 네임"+ username);
+		
 	}
 	
 	@GetMapping("/customLogout")
 	public void logoutGET() {
 		
 		log.info("custom logout get");
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String goJoin() {
+		return "join";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String login(MemberVO mem, AuthVO au) {
+		mem.setUserpwd(new BCryptPasswordEncoder().encode(mem.getUserpwd()));
+		MemberService.join(mem);
+		MemberService.a_join(au);
+
+		return "customLogin";
 	}
 
 //	@Autowired
