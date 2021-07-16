@@ -1,128 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<meta charset="UTF-8">
+<title>요들넷</title>
 <style>
-header {
-	background-color: #FF4500;
+.foodImg {
+   width: 300px;
+   margin: 10px;
+   height: 200px;
 }
+
+.result_container {
+   width: 80%;
+   margin: 0 auto;
+   min-width: 600px;
+}
+
+.result_div {
+   display: flex;
+}
+
+.recip_name {
+   font-size: 17px;
+   font-weight: 550;
+}
+
+.recip_ingsCountText {
+   font-size: 12px;
+}
+
+.recipe_text {
+   margin: 10px;
+       color: black;
+}
+
+.needIngs_list {
+   font-size: 14px;
+   color: #bfbfbf;
+}
+
+.haveIngs_list {
+   font-size: 14px;
+}
+
+.summary {
+   font-size: 15px;
+}
+
+.your_ings {
+   
+}
+
+#guide_text1 {
+   color: gray;
+   font-size: 11px;
+}
+a:link{
+text-decoration:none;
+}
+
 li{
 list-style: none;
 display: inline-block;
 }
 </style>
-<meta charset="UTF-8">
-<title>요들넷</title>
-<script>
-	$(document).ready(function() {
-		var actionForm = $("#actionForm");
-		$(".move").on("click",function(e) {
-			e.preventDefault()
-			actionForm.append("<input type='hidden' name='urrid' value='"	+ $(this).attr("href")+ "'/>")
-			actionForm.attr("action","/project/urrecipe/get")
-			actionForm.submit() 
-		})
-		
-		$(".paginate_button a").on("click",	function(e) {
-			e.preventDefault()
-			console.log('click')
-			actionForm.find('input[name="pageNum"]').val($(this).attr("href"))
-			actionForm.submit()
-		})
-		
-		$("#regBtn").on("click", function() {
-			self.location = "/project/urrecipe/register"
-		})
-		 
-
-
-	$.getJSON("/project/urrecipe/allImg",function(arr){
-		//console.log(arr) 
-		var str='' 
-		var j =0
-		var atr=[]
-		for(var i =0; i<arr.length; i++){
-			//console.log(arr[i].urrid)
-			if(arr[i].num==0){
-				console.log(arr[i].urrid)
-				var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
-				var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
-				originPath = originPath.replace(new RegExp(/\\/g),"/")
-				str ="<img class='main_image' src='/display?filename="+originPath+"' width='360px' height=='300px'>"
-				atr.push(str)
-				var txt='.list_img'+arr[i].urrid
-				$(txt).html(atr[j])
-	   			j++	
-				}
-		
-			 
-			}
-	  })
-	  
-
-	
-		
-		$('.check').on('click', 'li', function() {
-			/* $(".checked").append("<li id=\'"+$(this).attr('id')+"\'>" + $(this).attr('id') + "</li>") */
-			var tagid = $(this).attr('id')
-
-			var rmtag = $('.checked>#' + tagid).attr('id')
-			if (tagid===rmtag) {
-				$('.checked>#' + rmtag).remove()
-				$('#search>#'+rmtag).remove()
-			}else{
-			$(".checked").append("<li id=\'"+tagid+"\'>" + tagid + "</li>")
-			$('#search').append("<input type='hidden' value='"+tagid+"' name='data1' id='"+tagid+"'>")
-			}
-		})
-
-		$('.remove').on('click', function() {
-			$('.checked>li').remove()
-		})
-
-		$('.checked').on('click', 'li', function() {
-			$(this).remove()
-		})
-	
-		
-		var searchform=$('#search')
-		$('.searchingre').on('click',function(e){
-			if($('.checked>li').length>0){
-				searchform.submit()
-			}else{
-				alert('재료를 선택해주세요')
-			}
-		})
-		
-		$('.down').hide()
-		$('.up').on('click',function(){
-			$('#panel').slideUp()
-			$('.up').hide()
-			$('.down').show()
-		})
-		$('.down').on('click',function(){
-			$('#panel').slideDown()
-			$('.up').show()	
-			$('.down').hide()
-		})
-		
-	
-		
-		
-		
-		
-	})//document 끝
-</script>
 </head>
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
-	<!-- 태그해보자 -->
+	<jsp:include page='../include/header.jsp'/>
 	<div class='container'>
 		<div>
 			<div id='panel'>
@@ -235,34 +182,49 @@ display: inline-block;
 		</div>
 	</div>
 
-
-
-	<!-- 레시피 리스트 보여주는곳 -->
-	<div>
-		<p></p>
-	</div>
-	<div class='container'>
-			<div >
-			<p><c:out value='${pageMaker.total }'/>개의 결과가 검색됨</p>
-			<button id='regBtn' type='button' >글쓰기</button>
-			<div >
-	<table>
-		<c:forEach var='list' items='${list }' varStatus="i">
-				<tr>
-					<td>
-					<a class='move' href="<c:out value='${list.urrid }'/>" >
-					<div class='list_img<c:out value='${list.urrid}'/>'>대표사진이 없네요</div>
-					</a>
-					</td> 
-					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>
-					<td><c:out value='${list.ursummary }' /></td>
-				</tr>
+	<!-- 검색 결과 -->
+	<div class='result_container'>
+		<div style="margin: 10px;">
+			총 <strong style='font-size: 19px;'>${usrv.size() }</strong>개의 레시피가 검색
+			되었습니다.
+			<span class="your_ings">입력하신 재료 목록 : ${yourIngs}</span>
+			<span id="guide_text1">&nbsp;&nbsp; *부족한 재료는 회색으로 표시됩니다!</span>
+		</div>
+	
+	
+	<hr>
+	<c:forEach var ='i' begin='0' end='${max }'>
+		<c:forEach var ='recipe' items='${usrv }' begin='0' end='${usrv.size() }'>
+			<c:if test='${i eq recipe.needIngs.size() }'>
+				<a href='/project/urrecipe/get?urrid=${recipe.urrid }'> 
+				<%-- <a class='move' href="'${recipe.urrid }'" > --%>
+				<div class='result_div'>
+					<div class='list_img<c:out value='${recipe.urrid}'/>'>대표사진이 없네요</div>
+					<div class='recipe_txt'>
+						<span class='recip_name'>${recipe.urname }</span>
+						<span class='haveIngs_list'>필요한 재료 : <c:if test='${not empty recipe.haveIngs }'>${recipe.needIngs }</c:if></span>
+						<span class="needIngs_list"> <c:if test="${not empty recipe.needIngs}">${recipe.needIngs}</c:if></span>
+						<c:choose>
+							<c:when test='${recipe.needIngs.size() eq 0 }'>
+								<br>
+								<span class="recip_ingsCountText">*보유중인 재료들로 요리가 가능한 레시피 입니다 ! (${recipe.haveIngs.size()} / ${recipe.ingsList.size()})</span>
+							</c:when>
+							<c:otherwise>
+                          	 	<br>
+                           		<span class="recip_ingsCountText">*${recipe.needIngs.size()} 개의 재료가 부족해요 !
+                              (${recipe.haveIngs.size()} / ${recipe.ingsList.size()})</span>
+                        </c:otherwise>
+						</c:choose>
+						 <br>
+                     <span class="summary">${recipe.ursummary}</span>			
+					</div>
+				</div>
+				</a>
+			</c:if>
 		</c:forEach>
-</table>	
-</div>			
-			</div>
+	</c:forEach>
 	</div>
-
+	
 	<div class='pull-right'>
 		<ul class='pagination'>
 			<c:if test="${pageMaker.prev }">
@@ -281,12 +243,99 @@ display: inline-block;
 			</c:if>
 		</ul>
 	</div>
-	<form id='actionForm' action='/recipe/list' method='get'>
+	<form id='actionForm' action='/urrecipe/list' method='get'>
 		<input type='hidden' name='pageNum'	value='${pageMaker.cri.pageNum }'> 
 		<input type='hidden' name='amount' value='${pageMaker.cri.amount }'> 
-		<%-- <input type='hidden' name='type' value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword"	value="${pageMaker.cri.keyword }"> --%>
 	</form>
-		<jsp:include page="../include/footer.jsp" />
+	
+	
+	
+	
+	<jsp:include page="../include/footer.jsp"/>
+	
+
 </body>
+<script>
+$(document).ready(function() {
+   var searchList = localStorage.getItem('search');
+   console.log(searchList);
+
+   $(".move").on("click",function(e) {
+			e.preventDefault()
+			actionForm.append("<input type='hidden' name='urrid' value='"	+ $(this).attr("href")+ "'/>")
+			actionForm.attr("action","/project/urrecipe/get")
+			actionForm.submit() 
+		})
+   
+		//사진 가져오기
+			$.getJSON("/project/urrecipe/allImg",function(arr){
+		//console.log(arr) 
+		var str='' 
+		var j =0
+		var atr=[]
+		for(var i =0; i<arr.length; i++){
+			//console.log(arr[i].urrid)
+			if(arr[i].num==0){
+				console.log(arr[i].urrid)
+				var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
+				var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
+				originPath = originPath.replace(new RegExp(/\\/g),"/")
+				str ="<img class='main_image' src='/display?filename="+originPath+"' width='360px' height=='300px'>"
+				atr.push(str)
+				var txt='.list_img'+arr[i].urrid
+				$(txt).html(atr[j])
+	   			j++	
+				}
+		
+			 
+			}
+	  })
+	  
+		$('.check').on('click', 'li', function() {
+			/* $(".checked").append("<li id=\'"+$(this).attr('id')+"\'>" + $(this).attr('id') + "</li>") */
+			var tagid = $(this).attr('id')
+
+			var rmtag = $('.checked>#' + tagid).attr('id')
+			if (tagid===rmtag) {
+				$('.checked>#' + rmtag).remove()
+				$('#search>#'+rmtag).remove()
+			}else{
+			$(".checked").append("<li id=\'"+tagid+"\'>" + tagid + "</li>")
+			$('#search').append("<input type='hidden' value='"+tagid+"' name='data1' id='"+tagid+"'>")
+			}
+		})
+
+		$('.remove').on('click', function() {
+			$('.checked>li').remove()
+		})
+
+		$('.checked').on('click', 'li', function() {
+			$(this).remove()
+		})
+		
+		
+		//재료 선택 안하면 응 안돼~
+		var searchform=$('#search')
+		$('.searchingre').on('click',function(e){
+			if($('.checked>li').length>0){
+				searchform.submit()
+			}else{
+				alert('재료를 선택해주세요')
+			}
+		})
+		
+		$('.down').hide()
+		$('.up').on('click',function(){
+			$('#panel').slideUp()
+			$('.up').hide()
+			$('.down').show()
+		})
+		$('.down').on('click',function(){
+			$('#panel').slideDown()
+			$('.up').show()	
+			$('.down').hide()
+		})
+		
+   });
+</script>
 </html>

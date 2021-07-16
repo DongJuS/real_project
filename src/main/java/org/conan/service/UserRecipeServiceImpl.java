@@ -127,4 +127,28 @@ public class UserRecipeServiceImpl implements UserRecipeService {
 		return mapper.removeproce(urrid)==1;
 	}
 
+	@Override
+	public List<UserIngreVO> getAll() {
+		// TODO Auto-generated method stub
+		return mapper.getAll();
+	}
+
+	@Override
+	public List<String> readIngreNames(int urrid) {
+		// TODO Auto-generated method stub
+		return mapper.readIngreNames(urrid);
+	}
+
+	@Override
+	public List<String> readAllIngreNames() {
+		// TODO Auto-generated method stub
+		return mapper.readAllIngreNames();
+	}
+
+	@Override
+	public int urrecipeCount() {
+		// TODO Auto-generated method stub
+		return mapper.urrecipeCount();
+	}
+
 }

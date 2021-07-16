@@ -27,11 +27,9 @@ import org.conan.service.BoardService;
 import org.conan.service.LikeService;
 import org.conan.service.MemberService;
 import org.conan.service.RecipeService;
-<<<<<<< HEAD
-import org.conan.service.UserRecipeService;
-=======
+
 import org.apache.ibatis.annotations.Param;
->>>>>>> 08c17e7d5424b44dd7b5638308cdb48cae62dfc7
+
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
 import org.conan.domain.pageDTO;
@@ -63,12 +61,9 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	private RecipeService service;
 	private BoardService board;
-<<<<<<< HEAD
-	
-=======
 	private LikeService likes;
 	private MemberService mservice;
->>>>>>> 08c17e7d5424b44dd7b5638308cdb48cae62dfc7
+
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {

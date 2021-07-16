@@ -200,20 +200,6 @@ width: 95%;
 <title>요들넷</title>
 <script>
 
-
-	$(document).ready(function() {
-		var operForm = $("#operForm");
-		/*   $('button[data-oper="modify"]').on("click",function(e) {
-		   operForm.attr("action", "/board/modify").submit();
-		    }); */
-		$('button[data-oper="list"]').on("click", function(e) {
-			operForm.find("#rid").remove();
-			operForm.attr("action", "/recipe/list");
-			operForm.submit();
-		});
-	})
-
-
 $(document).ready(function() {  
     var operForm = $("#operForm");
   /*   $('button[data-oper="modify"]').on("click",function(e) {
@@ -300,6 +286,7 @@ var like_button = document.getElementById("like_button");
 				</div>
 				
 				<div id="like_button">${countLike}</div>
+				<button data-oper='list'>List</button>
 			</div>
 			</div>
 			</div></div>
