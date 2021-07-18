@@ -72,8 +72,8 @@ display: none;
 </head>
 <body>
 <form action="/join" method="post" accept-charset="UTF-8">
-<%-- 	<sec:csrfInput/>
- --%>	<input type="text" name="userid" placeholder="아이디" />
+	<sec:csrfInput/>
+	<input type="text" name="userid" placeholder="아이디" />
 	<input type="password" name="userpwd" placeholder="비밀번호" />
 <!-- 	<input type="password" name="confirmPassword" placeholder="비밀번호 확인" /> -->
 	<input type="text" name="username" placeholder="이름" />
