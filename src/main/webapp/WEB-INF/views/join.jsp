@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@page import="java.util.*"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <style type="text/css">
 .register{
 padding: 15px;
@@ -64,7 +71,16 @@ display: none;
 <title>Insert title here</title>
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<form action="/join" method="post" accept-charset="UTF-8">
+	<sec:csrfInput/>
+	<input type="text" name="userid" placeholder="아이디" />
+	<input type="password" name="userpwd" placeholder="비밀번호" />
+<!-- 	<input type="password" name="confirmPassword" placeholder="비밀번호 확인" /> -->
+	<input type="text" name="username" placeholder="이름" />
+	
+	<button>회원가입</button>
+</form>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <div id=msg></div>
 <div>
@@ -81,25 +97,25 @@ display: none;
 </div>
 </td>
 </tr>
-<!-- 아이디 입력 -->
+아이디 입력
 <br/>
 <tr>
 <td><input class ="pwd_input" type="password" name="pwd" placeholder="비밀번호를 입력해주세요">
 <span class="final_pwdc">비밀번호를 입력해주세요</span>
-<!-- 비밀번호 입력 -->
+비밀번호 입력
 <br/><input class="pwd_equal" type="password" placeholder="비밀번호를 확인해주세요">
 <span class="final_pwdec">비밀번호를 입력해주세요</span>
 <span class="input_pwdec_1">비밀번호가 일치합니다</span>
 <span class="input_pwdec_2">비밀번호가 일치하지 않습니다</span>
 </td>
 </tr>
-<!-- 비밀번호 확인 -->
+비밀번호 확인
 <tr>
 <td><input class = "email_input" type="email" name="email" placeholder="이메일을 입력해주세요">
 <span class="final_emailc">이메일을 입력해주세요</span>
 </td>
 </tr>
-<!-- 이메일  -->
+이메일 
 <tr>
 <td>
 <input  class ="join_btn"type="button" value="가입하기">
@@ -203,6 +219,6 @@ $('.pwd_equal').on("propertychange change keyup paste", function() {
 	}
 	
 })
-</script>
+</script> -->
 </body>
 </html>

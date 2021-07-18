@@ -9,6 +9,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>
+	Hello world!  
+	Hello <span>${member.userid}</span>
+		Hello <span>${member.username}</span>
+<c:out value="${userid}"/>
+<c:out value="${username}"/>
+<c:out value="${login}"/>
+
+
+</h1>
+
+
+
 
 <h1>Custom Login Page</h1>
 <h2><c:out value="${error}"/></h2>
