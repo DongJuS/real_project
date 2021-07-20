@@ -307,8 +307,8 @@ $(document).ready(function() {
 
 	<form id='operForm' action='/urrecipe/remove' method='get'>
 		<input type='hidden' id='urrid' name='urrid' value='<c:out value="${recipe.urrid }" />'> 
-	<%-- 	<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
-		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'> --%>
+	 	<%-- <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'> --%>  
 		<%-- <input type="hidden" name="type" value="${cri.type }"> 
       <input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 	</form>

@@ -37,7 +37,7 @@ import lombok.extern.log4j.Log4j;
 public class UserRecipeController {
 	private UserRecipeService service;
 
-	@GetMapping("/list")
+	 @RequestMapping(value = "/list")
 	public void list(Model model, Criteria cri) {
 		model.addAttribute("list", service.getList(cri));
 		int total = service.urrecipeCount(cri);
@@ -110,7 +110,7 @@ public class UserRecipeController {
 	}
 
 	@GetMapping("/remove")
-	public String remove(@RequestParam("urrid") int urrid, RedirectAttributes rttr) {
+	public String remove(@RequestParam("urrid") int urrid, RedirectAttributes rttr,Criteria cri) {
 		if (service.remove(urrid)) {
 			rttr.addFlashAttribute("result", "success");
 		}
