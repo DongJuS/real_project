@@ -178,7 +178,10 @@ li {
 
 $(document).ready(function() {  
     var operForm = $("#operForm");
-    	
+    $('button[data-oper="modify"]').on('click',function(e){
+	 operForm.attr('action',"/project/urrecipe/modify").submit()
+	 
+   }) 
     $('button[data-oper="delete"]').on("click",function(e) {
      operForm.attr("action", "/project/urrecipe/remove").submit();
       }); 
@@ -291,6 +294,7 @@ $(document).ready(function() {
 
 
 			<button data-oper='list'>List</button>
+			<button data-oper='modify'>수정</button>
 			<button data-oper='delete'>삭제</button>
 			<!-- 컨테이너 끝 -->
 			<br>
@@ -308,6 +312,7 @@ $(document).ready(function() {
 		<%-- <input type="hidden" name="type" value="${cri.type }"> 
       <input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 	</form>
+
 
 	<jsp:include page="../include/footer.jsp" />
 

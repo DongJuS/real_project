@@ -42,8 +42,8 @@ public class UserRecipeController {
 		model.addAttribute("list", service.getList(cri));
 		int total = service.urrecipeCount(cri);
 		model.addAttribute("pageMaker", new pageDTO(cri, total));
-
 	}
+	
 
 	@GetMapping("/get")
 	public void get(@RequestParam("urrid") int urrid, Model model) {
@@ -159,6 +159,15 @@ public class UserRecipeController {
 		int total = service.urrecipeCount(cri);
 		model.addAttribute("pageMaker", new pageDTO(cri, total));
 	}
+	
+	@GetMapping("/modify")
+	public void modify(@RequestParam("urrid") int urrid, Model model) {
+		model.addAttribute("recipe", service.get(urrid));
+		model.addAttribute("ingre", service.getingre(urrid));
+		model.addAttribute("proce", service.getproce(urrid));
+		
+	}
+	
 	
 
 }
