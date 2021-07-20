@@ -257,10 +257,9 @@ var urrid='<c:out value="${recipe.urrid}"/>'
 				</p>
 				<div class='uploadFile'>
 				</div>
-				대표 사진<input type='file' />
+				대표 사진<input type='file' id='uploadFile' accept='image/*'/>
 				<br>
-				 
-			요리 제목 <input type='text' id="recipe_name" placeholder='${recipe.urname}'>
+				요리 제목 <input type='text' id="recipe_name" placeholder='${recipe.urname}'>
 				<br>
 				소개 <input type='text' id="summary_text" placeholder='${recipe.ursummary}'><br>
 					<br>

@@ -1,5 +1,8 @@
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.Authentication"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +60,8 @@ header {
 		
 		
 		//파일업로드
+		 var csrfHeaderName="${_csrf.headerName}";
+      var csrfTokenValue="${_csrf.token}";
 		$('input[id="uploadFile"]').change(function(e){
 			e.preventDefault()
 			var formData = new FormData()
@@ -77,6 +82,9 @@ header {
 				url:'/uploadAjaxAction',
 				processData: false,
 				contentType: false,
+				 beforeSend:function(xhr){
+		            	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		            },
 				data:formData,
 				dataType:'json',
 				error:function(xhr,status,error){
@@ -111,6 +119,9 @@ header {
 				processData: false,
 				contentType: false,
 				data:formData,
+				 beforeSend:function(xhr){
+		            	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		            },
 				dataType: 'json',
 				error:function(xhr,status,error){
 					/* alert(error) */
@@ -179,6 +190,15 @@ header {
 </script>
 </head>
 <body>
+<%
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    Object principal = auth.getPrincipal();
+ 
+    String name = "";
+    if(principal != null) {
+        name = auth.getName();
+    }
+%>
 <jsp:include page="../include/header.jsp" flush="false" />
 	<div class='container'>
 		<form role='form' action='/project/urrecipe/register' method='post'  id='insertform' >
@@ -232,6 +252,11 @@ header {
 				<td><input type='button' value='뒤로' id='back'></td>
 			</tr>
 		</table>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<sec:authorize access="isAuthenticated()">
+			<input type='hidden' name='userid' value='<%=name %>'>
+		</sec:authorize>
+		<input type='hidden' >
 		</form>
 	</div>
 	<div class='uploadResult'>

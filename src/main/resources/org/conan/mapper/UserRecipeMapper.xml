@@ -41,10 +41,10 @@
 	<insert id='insert'>
 		<selectKey keyProperty="urrid" order="BEFORE" resultType="int">select
 			r_seq.nextval from dual</selectKey>
-		insert into t_urrecipe(urrid, urname,ursummary)
+		insert into t_urrecipe(urrid, urname,ursummary,userid)
 		values
 		(#{urrid}, #{urname},
-		 #{ursummary})
+		 #{ursummary},#{userid})
 	</insert>
 	<insert id='ingreinsert'>
 		insert into t_uringre

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +227,9 @@ $(document).ready(function() {
     		}
     	 }  	
      })
-     
+     $(document).ajaxSend(function(e, xhr, options){
+     	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+       });
      
      })//document
 
@@ -291,11 +294,17 @@ $(document).ready(function() {
 			</div>
 
 
-
-
+			
+			
 			<button data-oper='list'>List</button>
+			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authorize access="isAuthenticated()">
+      		<c:if test="${pinfo.username eq recipe.userid}">
 			<button data-oper='modify'>수정</button>
 			<button data-oper='delete'>삭제</button>
+			</c:if>
+      		</sec:authorize>
+			 
 			<!-- 컨테이너 끝 -->
 			<br>
 
@@ -307,8 +316,8 @@ $(document).ready(function() {
 
 	<form id='operForm' action='/urrecipe/remove' method='get'>
 		<input type='hidden' id='urrid' name='urrid' value='<c:out value="${recipe.urrid }" />'> 
-	<%-- 	<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
-		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'> --%>
+	 	<%-- <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'> --%>  
 		<%-- <input type="hidden" name="type" value="${cri.type }"> 
       <input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 	</form>

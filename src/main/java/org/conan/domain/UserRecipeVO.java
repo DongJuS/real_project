@@ -11,6 +11,8 @@ public class UserRecipeVO {
 	private int urrid;
 	private String urname;
 	private String ursummary;
+	private String userid;
+	
 	
 	private List<UploadFile> uploadFile;
 
