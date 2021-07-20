@@ -25,6 +25,7 @@
 
 <security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
 
+
 <security:access-denied-handler error-page="/customAccessDenied"/>
 
 <security:form-login login-page="/customLogin"/>

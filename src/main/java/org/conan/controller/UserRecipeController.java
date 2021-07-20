@@ -18,6 +18,7 @@ import org.conan.service.UserRecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +52,8 @@ public class UserRecipeController {
 		model.addAttribute("ingre", service.getingre(urrid));
 		model.addAttribute("proce", service.getproce(urrid));
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(UserRecipeVO urrecipe, UserIngreVO uringre, UserProceVO urproce, RedirectAttributes rttr) {
 		log.info("register: " + urrecipe);
@@ -89,7 +91,8 @@ public class UserRecipeController {
 		rttr.addFlashAttribute("result", urrecipe.getUrrid());
 		return "redirect: /project/urrecipe/list";
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 
@@ -108,7 +111,7 @@ public class UserRecipeController {
 		log.info("allImg ");
 		return new ResponseEntity<>(service.allimg(), HttpStatus.OK);
 	}
-
+	@PreAuthorize("principal.username == #writer")
 	@GetMapping("/remove")
 	public String remove(@RequestParam("urrid") int urrid, RedirectAttributes rttr,Criteria cri) {
 		if (service.remove(urrid)) {
@@ -159,7 +162,7 @@ public class UserRecipeController {
 		int total = service.urrecipeCount(cri);
 		model.addAttribute("pageMaker", new pageDTO(cri, total));
 	}
-	
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/modify")
 	public void modify(@RequestParam("urrid") int urrid, Model model) {
 		model.addAttribute("recipe", service.get(urrid));
