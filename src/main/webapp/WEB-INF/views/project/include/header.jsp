@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,14 +127,14 @@
 			</div>
 
 			<div class="nav_bar">
-				<c:if test="${member == null }">
 
-					<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+					  <sec:authorize access="isAuthenticated()"><a href="../customLogout">
+					  로그아웃
+					  </a></sec:authorize>  <sec:authorize access="isAnonymous()">
+					  <a href="../customLogin">로그인</a></sec:authorize> | <a href="#">마이페이지</a>
+					   | <a href="join">회원가입</a>
 
-				</c:if>
-				<c:if test="${member !=null}">
-					${member.id}님  | <a href="/update">마이페이지</a> |<a href="/logout">로그아웃</a>
-				</c:if>
+				
 			</div>
 			<div class="logo_text">
 				<a href="/project/main"><img class="logotext"
