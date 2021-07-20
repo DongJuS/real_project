@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags"  %>
 
  <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -224,9 +225,15 @@ opacity: 0.9;
                   var modalRegisterBtn = $("#modalRegisterBtn");
                
              	   
+                  var replyer = null;
+                  <sec:authorize access="isAuthenticated()">
+					replyer='<sec:authentication property="principal.username"/>';
+					</sec:authorize>
+					  var csrfHeaderName="${_csrf.headerName}";
+				      var csrfTokenValue="${_csrf.token}";
                   $("#addReplyBtn").on("click",function(e){
                      modal.find("input").val("");
-                   /*   modal.find("input[name='replyer']").val(replyer); */
+                    modal.find("input[name='replyer']").val(replyer); 
                      modalInputReplyDate.closest("div").hide();
                      modal.find("button[id !='modalCloseBtn']").hide();
                      
@@ -234,7 +241,10 @@ opacity: 0.9;
                      $(".modal").modal("show");
                      /* showList(1); */
                   });
-                
+                  //ajax spring security header CSRF 토큰을 기본적으로 전송하도록 설정
+                  $(document).ajaxSend(function(e, xhr, options){
+                	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+                  });
                   
                   modalRegisterBtn.on("click",function(e){
                            var reply ={
@@ -269,76 +279,62 @@ opacity: 0.9;
                   /* chat End*/
                   
                   /* 업데이트부분 */
+                  	   
                   modalModBtn.on("click",function(e){
-                	  
-                	    var originalReplyer = modalInputReplyer.val();  
-                	   var original_id = '<c:out value="${member.id}"/>' 
-                	   
-                	  console.log("Original Replyer:"+ originalReplyer); 
-                	/*	 
-                	  if(modalInputReplyer != original_id){
+                	
+                	  var originalReplyer = modalInputReplyer.val();
+                
+                	 if(replyer !=originalReplyer){
                 		 alert("자신이 작성한 댓글만 수정 가능");
                 		 modla.modal("hide");
                 		 return;
-                	 }  */ 
-                	
-                	   var reply={rno:modal.data("rno"), 
-                      		 reply:modalInputReply.val(),
-                      		 replyer:originalReplyer}; 
-                	 
-                	    replyService.update(reply, function(result){
-                            alert(result)
-                            modal.modal("hide")
-                            showList(pageNum)
-                         });
-                      });
-                  /* modalModBtn  End*/
-                	 
-                 	
-                 	  /*     
+                	 }
+                     var reply={rno:modal.data("rno"), 
+                    		 reply:modalInputReply.val(),
+                    		 replyer: originalReplyer};
+                     
                	  if(!replyer){
             		  alert("로그인후 수정이 가능합니다.");
             		  modal.modal("hide");
             		  return;
             	  }
-            	 console.log("Original Replyer:"+ originalReplyer);  */
+            	 console.log("Original Replyer:"+ originalReplyer);
             	 
+                     
+                     replyService.update(reply,function(result){
+                        alert(result)
+                        modal.modal("hide")
+                        showList(pageNum)
+                     });
+                  });
+                  
                      
                  
                   
                   /* 삭제부분 */
-                  modalRemoveBtn.on("click", function(e){
-                     var rno=modal.data("rno");
-                       var original_id = '<c:out value="${member.id}"/>' 
-                      
-                        replyService.remove(rno,original_id, function(result){
-                        alert(result)
-                        modal.modal("hide");
-                        showList(pageNum);
-                     });
-                   
-                       
-                 /*   replyService.remove(rno, originalReplyer, function(result){
+                  	 modalRemoveBtn.on("click", function(e){
+                     var rno=modal.data("rno")
+                     
+                     
+                     replyService.remove(rno, originalReplyer, function(result){
                         alert(result)
                         modal.modal("hide")
                         showList(pageNum)
-                     }) */ 
+                     })
                      
-                     
-                   /*   console.log("REPLYER:" +replyer); */
-                /*      if(!replyer){
+                     console.log("REPLYER:" +replyer);
+                     if(!replyer){
                     	 alert("로그인한 후 삭제가 가능");
                     	 modal.modal("hide"); return;
-                     } */
-                  /*     var originalReplyer = modalInputReplyer.val();
-                     console.log("Original Replyer:" + originalReplyer);  */// 원 댓글 작성자 
-              /*        if(modalInputReplyer != originalReplyer){
+                     }
+                     var originalReplyer = modalInputReplyer.val();
+                     console.log("Original Replyer:" + originalReplyer); // 원 댓글 작성자
+                     if(replyer != originalReplyer){
                     	 alert("자신이 작성한 댓글만 삭제 가능");
                     	 modal.modal("hide"); return;
-                     } */
+                     }
                      
                   });
-                  /* modalRemoveBtn  End*/
                   
              
                    
@@ -437,15 +433,15 @@ opacity: 0.9;
      
      
       
-      <%--
-		시큐리티 부분      
+      
+		
        <sec:authentication property="principal" var="pinfo"/>
       <sec:authorize access="isAuthenticated()">
       <c:if test="${pinfo.username eq board.writer }">
       <button data-oper='modify' class="btn btn-warning">Modify</button>
       </c:if>
       </sec:authorize> 
-      --%>
+      
             <button class='btn btn-primary' data-oper='list'>List</button>
             <form id='operForm' action='/board/modify' method='get'>
                <input type='hidden' id='bno' name='bno'
@@ -469,7 +465,9 @@ opacity: 0.9;
       <div class="panel panel-default">
          <div class="panel-heading">
             <i class="fa fa-comments fa-fw"></i>Reply
+            <sec:authorize access="isAuthenticated()">
       <button id='addReplyBtn' class="btn btn-primary btn-xs pull-right">New Reply</button>
+        </sec:authorize>
          </div>
          <div class="panel-body">
             <ul class="chat">

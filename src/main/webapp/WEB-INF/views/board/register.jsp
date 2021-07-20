@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags"  %>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -244,7 +245,8 @@
 						</div>
 						<div class='form-group'>
 							<label>Writer</label>
-							<input class='form-control' name='writer' value='${member.id}'	readonly="readonly">
+							<input class='form-control' name='writer'  value='<sec:authentication
+                   property="principal.username"/>'readonly="readonly">
 						</div>
 						<button type='submit' class='btn btn-default'>Submit</button>
 						<button type='reset' class='btn btn-default'>Reset</button>

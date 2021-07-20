@@ -1,6 +1,7 @@
 package org.conan.service;
 
 
+import org.conan.domain.AuthVO;
 import org.conan.domain.MemberVO;
 import org.conan.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,18 @@ private MemberMapper mapper;
 		// TODO Auto-generated method stub
 	 	mapper.update(vo);
 	}
+	@Override
+	public void join(MemberVO mem) {
+		mapper.insertMember(mem);
+		
+	}
+	@Override
+	public void a_join(AuthVO au) {
+		mapper.a_insertMember(au);
+		
+	}
+	
+
 	
 	
 
