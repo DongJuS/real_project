@@ -55,7 +55,9 @@ border:1px solid black;
 	margin-top: 25px;
 	margin-right: 160px;
 }
-
+.line{
+border-bottom: 0.5px solid;
+}
 .table_title {
 	width: 100px;
 }
@@ -175,14 +177,14 @@ border:1px solid black;
 <!-- 		------------------------------------------------------------------------------- -->
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 ">
+		<div class="col-lg-12">
 			<h1 class="page-header">게시판</h1>
 		</div>
 		<!-- col 12 -->
 	</div>
 	<!-- row -->
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-12 line">
 			<div class="row justify-content-between">
 				<div class="col-4 head">
 					Total
@@ -209,7 +211,7 @@ border:1px solid black;
 							type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }' />
 						<input type='hidden' name='amount'
 							value='${pageMaker.cri.amount }' />
-						<button class='btn btn-info'>Search</button>
+						<button class='btn btn-info'>검색</button>
 					</form>
 
 
@@ -228,7 +230,7 @@ border:1px solid black;
 
 			<table class="table">
 
-				<thead>
+				<thead class="line">
 					<tr>
 						<th scope="col">번호</th>
 						<th scope="col" id="center">제목</th>

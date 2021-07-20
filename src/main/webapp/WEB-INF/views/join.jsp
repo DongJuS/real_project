@@ -10,6 +10,29 @@
 <html>
 <head>
 
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/resources/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/css/util_join.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/main_join.css">
+<!--===============================================================================================-->
+
 <style type="text/css">
 .register{
 padding: 15px;
@@ -68,157 +91,125 @@ display: none;
 }
 </style>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/join" method="post" accept-charset="UTF-8">
+<%-- <form name="form"  action="/join" id="myform" method="POST" accept-charset="UTF-8">
 	<sec:csrfInput/>
-	<input type="text" name="userid" placeholder="아이디" />
-	<input type="password" name="userpwd" placeholder="비밀번호" />
+	<input type="text" id="id" onchange='check_id()' name="userid" placeholder="아이디" /><!--  4~12자의 영문 대소문자와 숫자로만 입력 -->
+	<input type="password" id="pwd" name="userpwd" placeholder="비밀번호" /><!--  똑같은지 확인 -->
+	<!-- <input type="password" name="userpwd2" placeholder="비밀번호 확인" /> -->
 <!-- 	<input type="password" name="confirmPassword" placeholder="비밀번호 확인" /> -->
-	<input type="text" name="username" placeholder="이름" />
+	<input type="text" id="name" name="username" placeholder="이름" />
 	
-	<button>회원가입</button>
+	<button id="sendbtn">회원가입</button>
+	<!--   <input type="submit" value="전송" /> -->
+	<a href="/customLogin">customLogin</a>
 </form>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<section id="result" style="color:red;"></section><!-- 유효성 검사 결과 -->
+<script>
+function check_id(){
+	   var id=document.getElementById('id').value;
+	    var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+	      
+	      if(!RegExp.test(id)){
+	         alert("ID는 4~12자의 영문 대소문자와 숫자로만 입력하여 주세요.");
+	         document.getElementById('id').value='';         
+	         return false;
+	      }
+	   
+	} 
+</script>
+ --%>
+<script>
+function check_id(){
+	   var id=document.getElementById('id').value;
+	    var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+	      
+	      if(!RegExp.test(id)){
+	         alert("ID는 4~12자의 영문 대소문자와 숫자로만 입력하여 주세요.");
+	         document.getElementById('id').value='';         
+	         return false;
+	      }
+	   
+	} 
+</script>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form action="/join" id="myform" method="POST" class="login100-form validate-form">
+				<sec:csrfInput/>
+					<span class="login100-form-title p-b-34">
+						Account Login
+					</span>
+					
+					<div  class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+						<input onchange='check_id()' id="id" id="first-name" class="input100" type="text" name="userid" placeholder="아이디">
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+						<input class="input100" id="pwd" type="password"  name="userpwd" placeholder="비밀번호">
+						<span class="focus-input100"></span>
+					</div>
+					<div style="margin-left:22%" class="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
+					<input class="input100"  type="text" name="username" placeholder="이름" />
+					</div>
+					<div class="container-login100-form-btn">
+						<button id="sendbtn" class="login100-form-btn">
+							회원가입
+						</button>
+					</div>
 
-<div id=msg></div>
-<div>
-<form action="/joinProc" method="post" id="join_form">
-<table style="border: 1px  solid black; margin-left: auto; margin-right: auto; border-radius: 1em; width: 500px; height: 300px; ">
-<tr><th>회원가입</th>
-</tr>
-<tr>
-<td><input class=id_input type=text name=id placeholder="아이디를 입력해주세요">
-<div>
-<span class="id_input_C1">사용가능한 아이디입니다</span>
-<span class="id_input_C2">이미 사용중인 아이디입니다</span>
-<span class="final_idc">아이디를 입력해주세요</span>
-</div>
-</td>
-</tr>
-아이디 입력
-<br/>
-<tr>
-<td><input class ="pwd_input" type="password" name="pwd" placeholder="비밀번호를 입력해주세요">
-<span class="final_pwdc">비밀번호를 입력해주세요</span>
-비밀번호 입력
-<br/><input class="pwd_equal" type="password" placeholder="비밀번호를 확인해주세요">
-<span class="final_pwdec">비밀번호를 입력해주세요</span>
-<span class="input_pwdec_1">비밀번호가 일치합니다</span>
-<span class="input_pwdec_2">비밀번호가 일치하지 않습니다</span>
-</td>
-</tr>
-비밀번호 확인
-<tr>
-<td><input class = "email_input" type="email" name="email" placeholder="이메일을 입력해주세요">
-<span class="final_emailc">이메일을 입력해주세요</span>
-</td>
-</tr>
-이메일 
-<tr>
-<td>
-<input  class ="join_btn"type="button" value="가입하기">
-</td>
-</tr>
-</table>
-</form>
-</div>
-<script type="text/javascript">
-var idc = false;	//id
-var idcc = false; //id중복검사
-var pwdc = false; //pwd
-var pwdcc = false;// pwd체크
-var pwdcorrect = false; //pwd일치
-var emailc =  false; //email
+					<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+							Forgot
+						</span>
 
-$(document).ready(function(){
+						<a href="#" class="txt2">
+							User name / password?
+						</a>
+					</div>
 
- 	$('.join_btn').click(function(){
-		var id = $('.id_input').val()
- 		var pwd  = $('.pwd_input').val()
- 		var pwde = $('.pwd_equal').val()
- 		var email = $('.email_input').val()
- 		/* 아이디 유효성검사 */		
-        if(id == ""){
-            $('.final_idc').css('display','block')
-            idc = false
-        }else{
-            $('.final_idc').css('display', 'none')
-            idc= true
-        }
- 		/* 비밀번호 유효성검사 */
- 		if(pwd== ""){
- 			$('.final_pwdc').css('display','block')
- 			pwdc= false
- 		}else{
- 			$('.final_pwdc').css('display','none')
- 			pwdc=true
- 		}
- 		/* 비밀번호 확인 유효성 검사 */
- 		if(pwde==""){
- 			$('.final_pwdec').css('display','block')
- 			pwdcorrect = false
- 		}else{
- 			$('.final_pwdec').css('display','none')
- 			pwdcorrect = true
- 		}
- 		if(email==""){
- 			$('.final_emailc').css('display','block')
- 			emailc = false
- 		}else{
- 			$('.final_emailc').css('display','none')
- 			emailc=true
- 		}
- 		if(idc&&pwdc&&pwdcorrect&&emailc == true){ 
- 		$('#join_form').attr("action",'/joinProc')
-		$('#join_form').submit() 
-		}
- 		return false; 
-	}) 
+					<div class="w-full text-center">
+						<a href="#"  class="txt3">
+							Sign Up
+						</a>
+					</div>
+				</form>
+
+				<div class="login100-more" style="background-image: url('/resources/images/bg-01.jpg');"></div>
+			</div>
+		</div>
+	</div>
 	
-})
-/* id중복확인 */
-  $('.id_input').on("propertychange change keyup paste", function() {
-	  var id = $('.id_input').val()
-	  var data = {id : id}
-	  
-	  $.ajax({
-		  type: "post",
-		  url : "/Idcheck",
-		  data : data,
-		  success : function(result){
-		/* 		 console.log("성공 여부 " + result) */
-		if(result !="fail"){
-			$('.id_input_C1').css("display","inline-block")
-			$('.id_input_C2').css("display","none")
-			idcc=true //id중복이없을때
-		}
-		else{
-			$('.id_input_C2').css("display","inline-block")
-			$('.id_input_C1').css("display","none")
-			idcc=false //id중복일때
-		}
-	  }
-	  })
-/*     console.log("keyup 테스트") */
-  })
-  /* 비밀번호 일치하는지 */
-$('.pwd_equal').on("propertychange change keyup paste", function() {
-	var pwd = $('.pwd_input').val()
-	var pwdc = $('.pwd_equal').val()
-	if(pwd== pwdc){
-	$('.input_pwdec_1').css('display','block')
-	$('.input_pwdec_2').css('display','none')
-	pwdcorrect = true
-	}else{
-		$('.input_pwdec_1').css('display','none')
-		$('.input_pwdec_2').css('display','block')
-		pwdcorrect = false
-		
-	}
 	
-})
-</script> -->
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="/resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/resources/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/js/main.js"></script>
+
+
 </body>
 </html>
