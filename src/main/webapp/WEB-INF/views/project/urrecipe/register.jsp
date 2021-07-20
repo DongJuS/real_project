@@ -13,6 +13,8 @@
 header {
 	background-color: #FF4500;
 }
+
+
 </style>
 <script>
 	$(document).ready(function() {
@@ -115,15 +117,28 @@ header {
 				},
 				success:function(result){
 					showUploadedFile(result)
-					/* alert(json) */
+					// alert(json) 
+		    var formObj=$('form[role="form"]')
+			
+				var str=''
+				$(".uploadResult ul li").each(function(i, obj){
+					var jobj=$(obj)
+					str += "<input type='hidden' name='uploadFile["+i+"].filename' value='"+jobj.data('filename')+"'>"
+					str += "<input type='hidden' name='uploadFile["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
+					str += "<input type='hidden' name='uploadFile["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
+					str += "<input type='hidden' name='uploadFile["+i+"].filetype' value='"+jobj.data('type')+"'>" 
+					str += "<input type='hidden' name='uploadFile["+i+"].num' value='"+i+"'>"	
+				}) 
+				  formObj.append(str).submit() 
 				}
 			})
- 			/*   $("#insertform").submit()     */
+						
+		 
 			}) 
 		
 		
-	    var formObj=$('form[role="form"]')
-		$('input[type="submit"]').on('click', function(e){
+	  /*   var formObj=$('form[role="form"]')
+		 $('input[type="submit"]').on('click', function(e){
 			e.preventDefault()
 			var str=''
 			$(".uploadResult ul li").each(function(i, obj){
@@ -132,33 +147,35 @@ header {
 				str += "<input type='hidden' name='uploadFile["+i+"].uuid' value='"+jobj.data('uuid')+"'>"
 				str += "<input type='hidden' name='uploadFile["+i+"].uploadPath' value='"+jobj.data('path')+"'>"
 				str += "<input type='hidden' name='uploadFile["+i+"].filetype' value='"+jobj.data('type')+"'>" 
-				str += "<input type='hidden' name='uploadFile["+i+"].num' value='"+i+"'>"
-				
-				
-				
+				str += "<input type='hidden' name='uploadFile["+i+"].num' value='"+i+"'>"	
 			}) 
 			  formObj.append(str).submit() 
-		}) 
+		})   */
 		
 		 	function showUploadedFile(uploadResultArr) {
 			if(!uploadResultArr||uploadResultArr.length==0){return}
 			var uploadUL=$(".uploadResult ul")
 			var str = ''
 			$(uploadResultArr).each(function(i, obj) {
-			
-				if (obj.filetype) {
+				
 				var fileCallPath = encodeURIComponent(obj.uploadPath+ "/"+ obj.uuid+ "_"+ obj.filename);
 					str +="<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.filename+"' data-type='"+obj.filetype+"'><div>"
 					str +="<span>" + obj.filename + "</span>"
 					str +="<button type='button' data-file=\""+fileCallPath+"\" data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>"
-					str +="<img src='/display?fileName="+fileCallPath+"'>"
+					str +="<img src='/display?filename="+fileCallPath+"'>"
 					str +="</div></li>"
-				} 
 			})
 			uploadUL.append(str)
+			$('.uploadResult').hide()
 		}   
    
-	})
+		$('.uploadResult').on('click','button',function(e){
+			e.preventDefault()
+			var targetli=$(this).closest('li')
+			targetli.remove()
+		})
+		
+	})//document
 </script>
 </head>
 <body>
@@ -188,12 +205,12 @@ header {
 			<tr>
 				<td><div class='ingre'>
 				<input type='text' placeholder='예) 후추를 후춧후춧' name='urIngre_name'> 
-				<input type='text' placeholder='2' name='urIngre_count'> 
-				<input type='text' placeholder='티수푼' name='urIngre_unit'><br> 
+				<input type='text' placeholder='2' name='urIngre_count' class='ingrecount'> 
+				<input type='text' placeholder='티수푼' name='urIngre_unit' class='ingreunit'><br> 
 			</div></td>
 			</tr>
 			<tr>
-				<td><button value='추가하고싶으면 넣어' id='ingreplus'>추가하고싶으면 눌러</button></td>
+				<td><button value='추가하고싶으면 넣어' id='ingreplus'>추가</button></td>
 			</tr>
 		</table>
 		
@@ -208,11 +225,10 @@ header {
  -->				</div></td>
 			</tr>
 			<tr>
-				<td><button value='추가' id='proceplus'>추가하고싶으면 눌러</button></td>
+				<td><button value='추가' id='proceplus'>추가</button></td>
 			</tr>
 			<tr>
 				<td><input type='button' value='저장' id='store'></td>
-				<td><input type='submit' value='저장하고 리스트페이지로'></td>
 				<td><input type='button' value='뒤로' id='back'></td>
 			</tr>
 		</table>

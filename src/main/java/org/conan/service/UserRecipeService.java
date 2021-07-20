@@ -20,5 +20,12 @@ public interface UserRecipeService {
 	public void register2(List<UserProceVO> urproce);
 	public List<UploadFile> uploadlist(int urrid);
 	public int urrecipeCount(Criteria cri);
+	public int urrecipeCount();
 	public List<UploadFile> allimg();
+	public boolean remove(int urrid);
+	public boolean removeingre(int urrid);
+	public boolean removeproce(int urrid);
+	public List<UserIngreVO> getAll();
+	public List<String> readIngreNames(int urrid);
+	public List<String> readAllIngreNames();
 }

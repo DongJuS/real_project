@@ -326,6 +326,8 @@ color:black;
 							</c:forEach>
 						</div>
 					</div>
+					
+					
 
 					<!--post slider-->
 				</div>

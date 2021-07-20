@@ -109,4 +109,46 @@ public class UserRecipeServiceImpl implements UserRecipeService {
 		return uploadmapper.allimg();
 	}
 
+	@Override
+	public boolean remove(int urrid) {
+		uploadmapper.delete(urrid);
+		return mapper.remove(urrid)==1;
+	}
+
+	@Override
+	public boolean removeingre(int urrid) {
+		// TODO Auto-generated method stub
+		return mapper.removeingre(urrid)==1;
+	}
+
+	@Override
+	public boolean removeproce(int urrid) {
+		// TODO Auto-generated method stub
+		return mapper.removeproce(urrid)==1;
+	}
+
+	@Override
+	public List<UserIngreVO> getAll() {
+		// TODO Auto-generated method stub
+		return mapper.getAll();
+	}
+
+	@Override
+	public List<String> readIngreNames(int urrid) {
+		// TODO Auto-generated method stub
+		return mapper.readIngreNames(urrid);
+	}
+
+	@Override
+	public List<String> readAllIngreNames() {
+		// TODO Auto-generated method stub
+		return mapper.readAllIngreNames();
+	}
+
+	@Override
+	public int urrecipeCount() {
+		// TODO Auto-generated method stub
+		return mapper.urrecipeCount();
+	}
+
 }

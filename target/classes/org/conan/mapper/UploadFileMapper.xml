@@ -7,7 +7,7 @@
 	</insert>
 	
 	<delete id='delete'>
-	delete from t_img where uuid=#{uuid}
+	delete from t_img where urrid=#{urrid}
 	</delete>
 	
 	<select id='findbyrid' resultType='org.conan.domain.UploadFile'>
@@ -16,5 +16,9 @@
 	
 	<select id='allimg' resultType='org.conan.domain.UploadFile'>
 		select * from t_img 
+	</select>
+	
+	<select id='getold' resultType="org.conan.domain.UploadFile">
+		select * from t_img where uploadpath=to_char(sysdate-1,'yyyy\MM\dd')
 	</select>
 </mapper>

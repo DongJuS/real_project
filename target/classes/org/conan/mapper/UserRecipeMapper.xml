@@ -58,7 +58,24 @@
 	<select resultType="int" id="urrecipeCount">select count(urrid) from t_urrecipe
 	</select>
 	
-
+	<delete id="remove">
+		delete from t_urrecipe where urrid=#{urrid}
+	</delete>
+	<delete id='removeingre'>
+		delete from t_uringre where urrid=#{urrid}
+	</delete>
+	<delete id='removeproce'>
+		delete from t_urproce where urrid=#{urrid}
+	</delete>
+	<select id='getAll' resultType="org.conan.domain.UserIngreVO">
+		select * from t_uringre
+	</select>
+	<select id='readIngreNames' resultType='String'>
+		select uringre_name from t_uringre where urrid=#{urrid}
+	</select>
+	<select id='readAllIngreNames' resultType='String'>
+		select uringre_name from t_uringre
+	</select>
 </mapper>
 
 
