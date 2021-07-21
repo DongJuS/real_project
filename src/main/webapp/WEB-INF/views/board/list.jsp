@@ -65,37 +65,17 @@ border-bottom: 0.5px solid;
 #center {
 	text-align: center;
 }
-.bot_container{
-width:100%;
-background:black;
+.container{
+width: 80% !important;
+    background: white;
+    border: 1px solid #e2dede;
 }
-.board_container{
-width:80%;
-background:white;
-margin:0 auto;
-border: 1px solid #e2dede;
+.justify-content-between{
+    display: inline-flex;
+    width: 100%;
 }
-.big_text{
-padding: 40px;
-}
-#board_icon{
-height:41px;
-}
-.total_and_search{
-display:inline-flex;
-width:100%;
-}
-.hr_line{
-margin:0 auto;
-width:95%;
-}
-#total{
-margin: auto 0 0 15px;
-    padding: 10px;
-}
-#search{
-margin-left: auto;
-    padding: 25px;
+.total_text{
+margin-right: auto;
 }
 </style>
 
@@ -197,6 +177,14 @@ margin-left: auto;
 
 
 <div class="container">
+ <div class="big_text"></div>
+</div>
+
+
+
+
+
+<div>
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">게시판</h1>
@@ -207,15 +195,13 @@ margin-left: auto;
 	<div class="row">
 		<div class="col-lg-12 line">
 			<div class="row justify-content-between">
-				<div class="col-4 head">
-					Total
-					<c:out value='${pageMaker.total }' />
-					건
+				<div class="total_text">
+					총 ${pageMaker.total}건
 
 				</div>
 
 
-				<div class="col-6 search">
+				<div class="search">
 					<form id='searchForm' action='/board/list' method='get'>
 						<select name='type'>
 							<option value=""

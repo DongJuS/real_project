@@ -29,7 +29,26 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/*")
 public class LoginController {
 	@Autowired
-	MemberService service;
+	MemberServiceImpl MemberService;
+
+	   @RequestMapping(value = "/update", method = RequestMethod.GET)
+	   public void Update() {
+	      log.info("정보수정");
+	   }
+	   @RequestMapping(value = "/UpdateProc" , method = RequestMethod.POST)
+	   public String UpdateProc(MemberVO vo,HttpServletRequest request) {
+	      log.info("vo"+vo);
+	      MemberService.Update(vo);
+	      return null;
+	   }
+	
+	@GetMapping("/accessError") 
+	public void accessDenied(Authentication auth, Model model) {
+		log.info("access Denied : "+auth);
+		model.addAttribute("msg","Access Denied");
+		model.addAttribute("hi","hello");
+		
+	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public void Update() {
