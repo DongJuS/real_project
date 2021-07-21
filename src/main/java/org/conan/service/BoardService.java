@@ -14,5 +14,6 @@ public interface BoardService {
 	public List<BoardVO> getList(Criteria cri);
 	public int getTotal(Criteria cri);
 	public boolean deleteAll(Long bno);
+	public int updateHits(Long bno);
 
 }

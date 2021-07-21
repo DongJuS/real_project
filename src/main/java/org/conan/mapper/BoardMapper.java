@@ -17,4 +17,6 @@ public interface BoardMapper {
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);
 	public void updateReplyCnt(@Param("bno")Long no, @Param("amount")int amount);
+	public int updateHits(Long bno);
+
 }
