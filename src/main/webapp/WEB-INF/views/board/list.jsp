@@ -280,11 +280,72 @@ margin: 15px auto 15px 25px;
 </div>
 <!--   -->
 
-<div class="reg_paging">
-<div class="regBtnZone">
-<button id='regBtn' type='button'>글쓰기</button>
+
+
+
 </div>
-<div class='board_paging'>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+   <div class="row">
+      <div class="col-lg-12">
+         <h1 class="page-header">게시판</h1>
+      </div>
+      <!-- col 12 -->
+   </div>
+   <!-- row -->
+   <div class="row">
+      <div class="col-lg-12 line">
+         <div class="row justify-content-between">
+            <div class="col-4 head">
+               Total
+               <c:out value='}' />
+               건
+
+            </div>
+
+
+            <div class="col-6 search">
+               
+
+
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- row -->
+
+
+
+
+
+   <div class="row">
+      <div class="col-lg-12">
+
+         
+      </div>
+      <!-- col 12 -->
+   </div>
+   <!-- row -->
+   <button id='regBtn' type='button'>글쓰기</button>
+
+
+   <div class='pull-right'>
       <ul class='pagination'>
          <c:if test="${pageMaker.prev }">
             <li class='paginate_button previous'><a

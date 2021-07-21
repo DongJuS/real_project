@@ -12,10 +12,6 @@
 header {
 	background-color: #FF4500;
 }
-li{
-list-style: none;
-display: inline-block;
-}
 </style>
 <meta charset="UTF-8">
 <title>요들넷</title>
@@ -39,7 +35,7 @@ display: inline-block;
 		$("#regBtn").on("click", function() {
 			self.location = "/project/urrecipe/register"
 		})
-		 
+	
 
 
 	$.getJSON("/project/urrecipe/allImg",function(arr){
@@ -112,9 +108,9 @@ display: inline-block;
 			$('.down').hide()
 		})
 		
-	
-		
-		
+		 $(document).ajaxSend(function(e, xhr, options){
+		     	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+		       });
 		
 		
 	})//document 끝
@@ -214,7 +210,9 @@ display: inline-block;
 						<button class='searchingre'>검색</button>
 					</div>
 					<form id='search' action='/project/urrecipe/searching'
-						method='post'></form>
+						method='post'>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
 				</div>
 			</div>
 			<div>
@@ -239,7 +237,7 @@ display: inline-block;
 				<tr>
 					<td>
 					<a class='move' href="<c:out value='${list.urrid }'/>" >
-					<div class='list_img<c:out value='${list.urrid}'/>'>대표사진이 없네요</div>
+					<div class='list_img<c:out value='${list.urrid}'/>'>dd</div>
 					</a>
 					</td> 
 					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>
@@ -269,7 +267,7 @@ display: inline-block;
 			</c:if>
 		</ul>
 	</div>
-	<form id='actionForm' action='/recipe/list' method='get'>
+		<form id='actionForm' action='/recipe/list' method='get'>
 		<input type='hidden' name='pageNum'	value='${pageMaker.cri.pageNum }'> 
 		<input type='hidden' name='amount' value='${pageMaker.cri.amount }'> 
 		<%-- <input type='hidden' name='type' value="${pageMaker.cri.type }">

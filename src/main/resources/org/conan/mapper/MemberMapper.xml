@@ -6,43 +6,43 @@
 <!-- 추가 -->
 <resultMap type="org.conan.domain.MemberVO" id="memberMap">
 
-		<id property="userid" column="userid" />
+      <id property="userid" column="userid" />
 
-		<result property="userid" column="userid" />
+      <result property="userid" column="userid" />
 
-		<result property="userpwd" column="userpwd" />
+      <result property="userpwd" column="userpwd" />
 
-		<result property="username" column="username" />
+      <result property="username" column="username" />
 
-		<result property="regDate" column="regdate" />
+      <result property="regDate" column="regdate" />
 
-		<result property="updateDate" column="updatedate" />
+      <result property="updateDate" column="updatedate" />
 
-		<collection property="authList" resultMap="authMap">
-		</collection>
+      <collection property="authList" resultMap="authMap">
+      </collection>
 
-	</resultMap>
+   </resultMap>
 
-	<resultMap type="org.conan.domain.AuthVO" id="authMap">
+   <resultMap type="org.conan.domain.AuthVO" id="authMap">
 
-		<result property="userid" column="userid" />
+      <result property="userid" column="userid" />
 
-		<result property="auth" column="auth" />
+      <result property="auth" column="auth" />
 
-	</resultMap>
+   </resultMap>
 
-	<select id="read" resultMap="memberMap">
+   <select id="read" resultMap="memberMap">
 
-		select
+      select
 
-		mem.userid,userpwd,username,enabled,regdate,updatedate,auth from
+      mem.userid,userpwd,username,enabled,regdate,updatedate,auth from
 
-		tbl_member mem left outer join tbl_member_auth auth on mem.userid =
+      tbl_member mem left outer join tbl_member_auth auth on mem.userid =
 
-		auth.userid where mem.userid=#{userid}
+      auth.userid where mem.userid=#{userid}
 
-	</select>
-	
+   </select>
+   
 <insert id="insertMember"> <!-- 멤버 생성 -->
  insert into tbl_member values(#{userid},#{userpwd},#{username},sysdate,sysdate,1)
 </insert>
@@ -52,16 +52,16 @@
 
 
 <insert id="register">
-insert into member values(#{id},#{pwd},#{email})
+insert into tbl_member values(#{userid},#{userpwd})
 </insert>
 <select id="login" resultType="org.conan.domain.MemberVO">
-select  id,pwd,email from member where  id = #{id} and pwd= #{pwd}
+select  userid,userpwd from tbl_member where  userid = #{userid} and userpwd= #{userpwd}
 </select>
 <select id="Idcheck" resultType="int">
-select count(*) from member where id = #{id}
+select count(*) from tbl_member where userid = #{userid}
 </select>
 <update id="update">
-update member set pwd = #{pwd} , email=#{email} where id=#{id}
+update tbl_member set userpwd = #{userpwd} where userid=#{userid}
 </update>
 
 

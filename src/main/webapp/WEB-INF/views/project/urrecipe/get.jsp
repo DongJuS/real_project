@@ -179,13 +179,9 @@ li {
 
 $(document).ready(function() {  
     var operForm = $("#operForm");
-    $('button[data-oper="modify"]').on('click',function(e){
-	 operForm.attr('action',"/project/urrecipe/modify").submit()
-	 
-   }) 
-    $('button[data-oper="delete"]').on("click",function(e) {
-     operForm.attr("action", "/project/urrecipe/remove").submit();
-      }); 
+  /*   $('button[data-oper="modify"]').on("click",function(e) {
+     operForm.attr("action", "/board/modify").submit();
+      }); */
     $('button[data-oper="list"]').on("click", function(e) {
         operForm.find("#urrid").remove();
         operForm.attr("action", "/project/urrecipe/list");
@@ -200,11 +196,10 @@ $(document).ready(function() {
     	 var str2='' 
     	
     	var atr=[]
-    	 //console.log(atr[0])
-    		var k =0
+    	 console.log(atr[0])
+    	
     	 for(var i =0; i<arr.length; i++){
-    		 //debugger;
-		   for(var j =1; j<arr.length; j++){   		 
+		    //console.log(arr[i].num)   		 
     		 if(arr[i].num==0){
     	 		var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
     	 		var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
@@ -212,20 +207,25 @@ $(document).ready(function() {
     			str ="<img class='main_image' src='/display?filename="+originPath+"'>"
     			//debugger;
     			$('.uploadFile').html(str)
-    		 }else if(arr[i].num==j){
-				// debugger;
+    		 }else if(arr[i].num==i){
+				 //debugger;
     			 var fileCallPath = encodeURIComponent(arr[i].uploadPath+ arr[i].uuid+ "_"+ arr[i].filename);
     	    	 var originPath = arr[i].uploadPath+ "/"+ arr[i].uuid+ "_"+ arr[i].filename
     	    	 originPath = originPath.replace(new RegExp(/\\/g),"/")
     			 str2 ="<img class='main_image' src='/display?filename="+originPath+"'>"
-    			 atr.push(str2)
-		    	 var txt='.proce_img'+j
-		    	 //console.log(atr[i])
-    			 $(txt).html(atr[k])
-    			 k++
+    			atr.push(str2)
+		    	 //console.log(atr[i-1])
+		    	 var txt='.proce_img'+i
+		    	 //console.log(txt)
+    			$(txt).html(atr[i-1])  
+    			
+    		
     		 }
-    		}
-    	 }  	
+    	 
+    	 //console.log(atr[0])
+    	 }
+    	 
+    	
      })
      $(document).ajaxSend(function(e, xhr, options){
      	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
@@ -245,7 +245,7 @@ $(document).ready(function() {
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
-					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> 유저 닉네임
+					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> ${recipe.userid }
 				</p>
 				<div class='uploadFile'>
 				
@@ -314,14 +314,13 @@ $(document).ready(function() {
 
 
 
-	<form id='operForm' action='/urrecipe/remove' method='get'>
+	<form id='operForm' action='/recipe/modify' method='get'>
 		<input type='hidden' id='urrid' name='urrid' value='<c:out value="${recipe.urrid }" />'> 
-	 	<%-- <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
-		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'> --%>  
+		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
 		<%-- <input type="hidden" name="type" value="${cri.type }"> 
       <input type="hidden" name="keyword" value="${cri.keyword }"> --%>
 	</form>
-
 
 	<jsp:include page="../include/footer.jsp" />
 

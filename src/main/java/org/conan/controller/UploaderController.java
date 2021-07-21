@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.text.SimpleDateFormat;
@@ -92,15 +93,15 @@ public class UploaderController {
 				upload.setUuid(uuid.toString());
 				upload.setUploadPath(getFolder());
 
-
-				if(checkImageType(saveFile)) { upload.setFiletype(true); }
-
+				
+				  if(checkImageType(saveFile)) { upload.setFiletype(true); }
+				 
 				list.add(upload);
 
-			} 
-			catch (IllegalStateException e) { // TODO Auto-generated catch block
-				e.printStackTrace(); }
-			catch (IOException e) {
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -149,7 +150,7 @@ public class UploaderController {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
-
+	
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String filename){
@@ -181,12 +182,12 @@ public class UploaderController {
 		try { 
 			String contentType=Files.probeContentType(file.toPath()); 
 			return 	contentType.startsWith("image"); 
-		}catch (IOException e) { 
-			// TODO	Auto-generated catch block 
-			e.printStackTrace(); 
-		}
+			}catch (IOException e) { 
+					// TODO	Auto-generated catch block 
+				e.printStackTrace(); 
+				}
 		return false; 
-	}
+		}
 
 
 

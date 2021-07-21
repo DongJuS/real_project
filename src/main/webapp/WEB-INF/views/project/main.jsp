@@ -2,8 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,43 +17,27 @@
 
 
 <style>
-.hidden {
-	visibility: hidden;
+a {
+	text-decoration: none;
 }
-a{
-text-decoration:none;
-
-}
-
 
 .main_bottom_container {
 	width: 100%;
-	height: 800px;
+	display: inline-flex;
 }
 
 .main_bottom_content {
 	width: 80%;
-	height: 800px;
-	margin: 0 auto;
-}
-
-.best_menu {
-	margin: 0 auto;
-	
-}
-
-.situational_recommend {
-	margin: 0 auto;
 }
 
 .main_board {
-	/* background-color: yellow; */
+    width: 50%;
 	margin: 0 auto;
 	height: 250px;
 }
 
 .main_icon {
-	width: 25px;
+	width: 45px;
 }
 
 .icon_text {
@@ -73,115 +57,59 @@ text-decoration:none;
 	margin: 30px auto;
 }
 
-.post-slider .next {
-	position: absolute;
-	top: 50%;
-	right: 30px;
-	font-size: 2em;
-	color: gray;
-	cursor: pointer;
-}
-
-.post-slider .prev {
-	position: absolute;
-	top: 50%;
-	left: 30px;
-	font-size: 2em;
-	color: gray;
-	cursor: pointer;
-}
-
-.post-slider .post-wrapper {
+.p_wrapper{
 	width: 90%;
 	margin: 0px auto;
 }
 
-.post-slider .post-wrapper2 {
-	width: 90%;
-
-	margin: 0px auto;
+.p_wrapper a:link{
+text-decoration: none;
+	color: black;
 }
 
-.post-slider .post-wrapper .post {
-	width: 300px;
-	height: 300px;
+
+.post-slider .p_wrapper a .post {
+	height: 235px;
 	margin: 0px 10px;
-	display: inline-block;
-	background: white;
-	border-radius: 5px;
+	background: #f1f1f2;
+	border-radius: 10px;
+	border: 1px solid #e2dede;
 }
 
-.post-slider .post-wrapper2 .post {
-	width: 300px;
-	height: 350px;
-	margin: 0px 10px;
-	display: inline-block;
-	background: white;
-	border-radius: 5px;
-}
-
-.post-slider .post-wrapper .post .post-info {
+.post-slider .p_wrapper a .post .post-info {
 	font-size: 15px;
 	height: 30%;
-	padding-left: 10px;
+	padding:10px 10px;
 	text-align: center;
 }
-
-.post-slider .post-wrapper2 .post .post-info {
-	font-size: 15px;
-	height: 30%;
-	padding-left: 10px;
-	text-align: center;
-}
-
-.post-slider .post-wrapper .post .slider-image {
+.post-slider .p_wrapper a .post .slider-image {
 	width: 100%;
-	height: 175px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-}
-
-.post-slider .post-wrapper2 .post .slider-image {
-	width: 100%;
-	height: 175px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	height: 160px;
+	border-radius: 10px;
+	border: 1px solid #e2dede;
 }
 
 .best_text {
-	height: 30px !important;
+	display: inline-flex;
+	margin: 20px 0 0 6%;
+}
+.best_text2 {
+	display: inline-flex;
+	margin: 20px 0 0 12%;
 }
 
 .cttIcon {
 	width: 30px;
-	position: relative;
 }
-
-.icon_wrapper {
-	width: 0px;
-	height: 0px;
-}
-
-.b_l {
-	top: 70px;
-	left: -65px;
-}
-
-.b_r {
-	position: absolute;
-	right: 52px;
-}
-
 
 .free_board {
 	margin-left: 50px;
 }
 
-.page-wrapper{
-min-width: 800px;
-position: relative;
-    margin-top: 15px;
-
+.page-wrapper {
+	min-width: 800px;
+	position: relative;
+	margin-top: 15px;
 }
 
 .kakao_icon {
@@ -190,171 +118,224 @@ position: relative;
 	right: 10px;
 }
 
-ul{
+ul {
 	list-style: none;
 }
-h4 a:link{
-text-decoration:none;
-color:black;
 
+h4 {
+	margin-top: 5px;
+}
+
+.btn_wrapper {
+	width: 3%;
+	margin-left: 7%;
+}
+
+.btn_wrapper2 {
+	width: 3%;
+	margin-right: 7%;
+}
+
+.prev {
+	margin: 120px 40%;
+}
+
+.next {
+	margin: 120px 0%;
+}
+
+.goodIcon {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+}
+
+.good_text {
+	width: 50px;
+	display: inline-flex;
+	color: white;
+	background: orange;
+	border-radius: 10px;
+	height: 20px;
+	position: absolute;
+	margin: -0.18% 0 0 -0.2%;
+	border: 1px solid white;
+}
+
+.goodCount {
+	margin: 0 auto;
+	font-family: 'Jua';
+	align-self: flex-end;
+}
+.text_img{
+	height:27px;
+	margin-top: 9px;
+}
+#user_recipe_and_board{
+display: inline-flex;
+    width: 100%;
+}
+.user_recipe{
+width: 50%;
+}
+.text_guide{
+color: darkgray;
+    margin: 13px 0 0 7px;
+    font-size: 13px;
 }
 </style>
 </head>
 <body>
 
+
 	<jsp:include page="include/header.jsp" />
 
 	<div class="main_bottom_container">
+		<div class="btn_wrapper">
+
+			<img class="cttIcon prev" id="prev1"
+				src="/resources/proimg/previcon.png"> <img
+				class="cttIcon prev" id="prev2" src="/resources/proimg/previcon.png">
+				<img
+				class="cttIcon prev" id="prev3" src="/resources/proimg/previcon.png">
+
+		</div>
 
 		<div class="main_bottom_content">
 
 			<div class="best_menu">
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"><span
-						class="icon_text">베스트 추천메뉴</span>
+					<img src="/resources/proimg/recipe_book.png" class="main_icon"><div
+						class="icon_text"><img class="text_img" src="/resources/proimg/best_menu.png"></div>
+						<div class="text_guide">* 추천수가 높은 레시피 목록입니다.</div>
 				</div>
-				<div class="icon_wrapper">
-					<i class="prevButton"><img class="cttIcon b_l prev"
-						src="/resources/proimg/previcon.png"></i> <i class="nextButton"><img
-						class="cttIcon b_r next" style="top: 353px;"
-						src="/resources/proimg/nexticon.png"></i>
-				</div>
+
 				<div class="page-wrapper">
 					<!--page slider -->
 					<div class="post-slider">
+						<div class="post-wrapper p_wrapper">
 
-						<div class="post-wrapper">
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/29/34ace1011c503e33c17e852be9cbcab01.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#" class="post-subject">알싸한 생강향과 레몬아이싱으로 덮은 홈베이킹 진저케이크 ♥ </a>
-									</h4>
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/28/3ae1b00cdf1fc46005cd08c3fd3d0cb51.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#"> 간식으로 감기예방하기! 식빵과 찰떡! 유자생강잼 ♥ </a>
-									</h4>
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/f040772d9f85f1fc7503ac323aec20ac1.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">햄 대신 두부와 땡초를 넣은 두부땡초김밥 ♥ </a>
-									</h4>
+							<c:forEach var='bestR' items='${bestRecipe}'>
+								<a href='recipe/get?rid=${bestR.rid }'>
+									<div class="post">
+										<img class="slider-image" src="${bestR.img}">
+										<div class='post-info'>
+											<div class="good_text">
+												<img class="goodIcon" src="/resources/proimg/good_icon.png"><span
+													class="goodCount">${bestR.likecount}</span>
+											</div>
+											<h4>
+												<span class="list_name">${bestR.name }</span>
+											</h4>
+										</div>
+									</div>
+								</a>
+							</c:forEach>
 
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/26/a9aa4cc2557c77dae0cb15ca11713c441.jpg"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">고급 식재료, 일상에서 쉽게 만나자! 감태 레시피 모음집♥</a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/18/091a901de3cb6d0bf428f9dc0ef8ce061.png"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">추운날씨, 단호박솥밥 한그릇으로 따뜻함을 채워요! </a>
-									</h4>
-
-								</div>
-							</div>
-							<div class="post">
-								<img
-									src="https://recipe1.ezmember.co.kr/cache/recipe/2021/01/25/ff4314a4fd79cb845d6df84ad27655531.png"
-									class="slider-image">
-								<div class="post-info">
-									<h4>
-										<a style="color: black;" href="#">볶음밥을 와플팬에 구우면?! 맛있다! 라이스와플 </a>
-									</h4>
-								</div>
-							</div>
 						</div>
 					</div>
 					<!--post slider-->
 				</div>
-
-
-
-
 			</div>
+			
+			
 			<div class="situational_recommend">
 				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon"> <a
-						href='recipe/list'><span class="icon_text">전체 레시피</span></a>
+					<img src="/resources/proimg/recipe_book.png" class="main_icon"> <div class="icon_text"><img class="text_img" src="/resources/proimg/all_recipe.png"></div>
+				<div class="text_guide">* 등록 순서에 따른 레시피 목록입니다.</div>
 				</div>
-				<div class="icon_wrapper">
-					<i class="prevButton"><img class="cttIcon b_l prev2"
-						src="/resources/proimg/previcon.png"></i> <i class="nextButton"><img
-						class="cttIcon b_r next2" style="top: 700px;"
-						src="/resources/proimg/nexticon.png"></i>
-				</div>
-				<div class="page-wrapper" style="position: relative;">
+
+				<div class="page-wrapper">
 					<!--page slider -->
 					<div class="post-slider">
-
-						<div class="post-wrapper2">
-							<c:forEach var='list' items='${list }'>
+						<div class="post-wrapper2 p_wrapper">
+							<c:forEach var='list' items='${list}'>
+							<a href='recipe/get?rid=${list.rid }'>
 								<div class="post">
-									<a href='recipe/get?rid=<c:out value='${list.rid }'/>'><img
-										src="<c:out value='${list.img }'/>" width='250px'
-										></a>
+									 <img
+										class="slider-image" src="${list.img}">
 									<div class='post-info'>
 										<h4>
-											<a href='recipe/get?rid=<c:out value='${list.rid }'/>'>${list.name }</a>
+											${list.name }
 										</h4>
 									</div>
-								</div>
+								</div></a>
 							</c:forEach>
 						</div>
 					</div>
-					
-					
-
-					<!--post slider-->
 				</div>
-
 			</div>
-			<br>
-			<br>
-			<br>
+			
+			
+			<div class="min_ingre_recipes">
+				<div class="best_text">
+					<img src="/resources/proimg/recipe_book.png" class="main_icon">
+					<div class="icon_text"><img class="text_img" src="/resources/proimg/easy_recipe.png"></div>
+				<div class="text_guide">* 필요한 재료 수가 적은 레시피 목록입니다.</div>
+				</div>
+				<div class="page-wrapper">
+					<div class="post-slider">
+						<div class="post-wrapper3 p_wrapper">
+							<c:forEach var='minRecipe' items='${minR}'>
+							<a href='recipe/get?rid=${minRecipe.rid }'>
+									<div class="post">
+										<img class="slider-image" src="${minRecipe.img}">
+										<div class='post-info'>
+										<div class="good_text">
+												<span
+													class="goodCount">${minRecipe.ingcount}개</span>
+											</div>
+											<h4>
+												<span class="list_name">${minRecipe.name }</span>
+											</h4>
+										</div>
+									</div>
+								</a>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="user_recipe_and_board">
 			
 			<div class="main_board">
-				<div class="best_text">
-					<img src="/resources/proimg/star.png" class="main_icon">
-					<a href='/board/list'><span class="icon_text">자유게시판</span></a>
+				<div class="best_text2">
+					<img src="/resources/proimg/board_icon.png" class="main_icon"> <a
+						href='/board/list'><div class="icon_text"><img class="text_img" src="/resources/proimg/free_board.png"></div></a>
 				</div>
 				<div class="free_board">
 					<ul>
 						<c:forEach var='board' items='${board }'>
-							<li>
-							<a href='/board/get?bno=<c:out value="${board.bno }"/>'>
-							<c:out value='${board.title }'/></a></li>
-							
+							<li><a href='/board/get?bno=<c:out value="${board.bno }"/>'>
+									<c:out value='${board.title }' />
+							</a></li>
+
 						</c:forEach>
 					</ul>
 				</div>
 
 			</div>
+			<div class="user_recipe">
+			<div class="best_text2">
+					<img src="/resources/proimg/recipe_book.png" class="main_icon"> <a
+						href='urrecipe/list'><div class="icon_text"><img class="text_img" src="/resources/proimg/user_recipe.png"></div></a>
+				<div class="text_guide">* 유저가 직접 등록한 레시피 목록입니다.</div>
+				</div>
+			</div>
+			</div>
 		</div>
+
+		<div class="btn_wrapper2">
+			<img class="cttIcon next" id="next1"
+				src="/resources/proimg/nexticon.png"> <img
+				class="cttIcon next" id="next2" src="/resources/proimg/nexticon.png">
+				<img
+				class="cttIcon next" id="next3" src="/resources/proimg/nexticon.png">
+
+		</div>
+
+
 		<div class="kakao_icon">
 			<a id="channel-chat-button" href="#" onclick="void chatChannel();"><img
 				src="/resources/proimg/kakao_icon.png" style="width: 66px;"></a>
@@ -362,12 +343,12 @@ color:black;
 		<p id="token-result"></p>
 
 	</div>
-	
+
 
 
 	<jsp:include page="include/footer.jsp" />
-	<script src="/resources/projs/ex2.js"></script>
-	<script src="/resources/projs/slick.js"></script>
+	<!-- <script src="/resources/projs/ex2.js"></script>
+	<script src="/resources/projs/slick.js"></script> -->
 	<script>
 		$(document).ready(function() {
 			$('.post-wrapper').slick({
@@ -375,16 +356,24 @@ color:black;
 				slidesToScroll : 2,
 				autoplay : true,
 				autoplaySpeed : 10000,
-				nextArrow : $('.next'),
-				prevArrow : $('.prev')
+				nextArrow : $('#next1'),
+				prevArrow : $('#prev1')
 			});
 			$('.post-wrapper2').slick({
 				slidesToShow : 4,
 				slidesToScroll : 2,
 				autoplay : true,
 				autoplaySpeed : 10000,
-				nextArrow : $('.next2'),
-				prevArrow : $('.prev2')
+				nextArrow : $('#next2'),
+				prevArrow : $('#prev2')
+			});
+			$('.post-wrapper3').slick({
+				slidesToShow : 4,
+				slidesToScroll : 2,
+				autoplay : true,
+				autoplaySpeed : 10000,
+				nextArrow : $('#next3'),
+				prevArrow : $('#prev3')
 			});
 			
 			
