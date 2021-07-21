@@ -60,6 +60,7 @@ public class BoardController {
     public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
         log.info("/get11 or /modify");
         model.addAttribute("board", service.get(bno));
+        service.updateHits(bno);
     }
    
     @GetMapping("/modify")
