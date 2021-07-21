@@ -149,7 +149,7 @@ public class ProjectController {
 		System.out.println("rid는 : !!"+rid);
 		System.out.println();
 		if(mvo!=null) {
-			int yesOrNo = likes.likeOrNot(new LikeVO(rid,mvo.getId()))==null?0:1;
+			int yesOrNo = likes.likeOrNot(new LikeVO(rid,mvo.getUserid()))==null?0:1;
 			model.addAttribute("yesOrNo", yesOrNo);
 		}
 		

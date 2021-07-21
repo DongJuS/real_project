@@ -29,13 +29,38 @@ public class LikeServiceImpl implements LikeService {
 	}
 
 	@Override
-	public void insertLike(int rid, String userId) {
-		mapper.insertLike(rid, userId);
+	public void insertLike(LikeVO lVO) {
+		mapper.insertLike(lVO);
 	}
 
 	@Override
-	public int countLike(int rid) {
+	public Integer countLike(int rid) {
 		return mapper.countLike(rid);
+	}
+	
+	@Override
+	public Integer countLike2(int rid) {
+		return mapper.countLike2(rid);
+	}
+
+	@Override
+	public Integer likeOrNot(LikeVO lVO) {
+		return mapper.likeOrNot(lVO);
+	}
+
+	@Override
+	public void deleteLike(LikeVO lVO) {
+		mapper.deleteLike(lVO);
+	}
+
+	@Override
+	public int getMaxRid() {
+		return mapper.getMaxRid();
+	}
+
+	@Override
+	public void updateLikeCount(LikeVO lVO) {
+		mapper.updateLikeCount(lVO);
 	}
 
 }
