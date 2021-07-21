@@ -19,8 +19,6 @@ public interface RecipeService {
 	
 	public List<RecipeVO> getList();
 	public List<RecipeVO> getList(Criteria cri);
-	public List<RecipeVO> readBestRecipe();
-	public List<RecipeVO> readMinIngRecipe();
 	
 	public void register(RecipeVO recipe);
 	public void register1(List<IngreVO> ingre); 

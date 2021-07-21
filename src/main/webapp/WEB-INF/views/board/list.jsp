@@ -94,13 +94,12 @@ margin: auto 0 0 15px;
     padding: 10px;
 }
 #search{
-margin:0 25px 0 auto;
+margin-left: auto;
     
 }
 .board_table{
     margin: 0 auto;
     width: 95%;
-    text-align:center;
 }
 #board_thead{
     border-top: 1px solid #e2dede;
@@ -111,16 +110,6 @@ border-bottom:1px solid #e2dede;
 }
 td a:link{
 text-decoration:none;
-color:black;
-}
-.board_tr th{
-padding:10px;
-}
-.board_tr td{
-padding:10px;
-}
-.board_b{
-color:darkgray;
 }
 </style>
 
@@ -255,7 +244,7 @@ color:darkgray;
                      <td>${board.hits }</td>
                      <td><a
                         class='move' href='${board.bno }'>${board.title }
-                           <b class="board_b">(${board.replyCnt })
+                           <b>[<c:out value="${board.replyCnt }" /> ]
                         </b>
                      </a></td>
                      <td></td>
@@ -272,28 +261,8 @@ color:darkgray;
 
 
 
-<<<<<<< HEAD
-<!-- 		------------------------------------------------------------------------------- -->
-<div class="bot_container">
-<div class="board_container">
-<div class="big_text"><img id="board_icon" src="/resources/proimg/board_icon.png"><img src="/resources/proimg/free_board.png"></div>
-<div class="total_and_search">
-<div id="total">총 17건</div>
-<div id="search"><input type="text"></div>
-<hr class="hr_line">
 
 </div>
-</div>
-
-</div>
-
-
-<div class="container">
- <div class="big_text"></div>
-=======
-
-</div>
->>>>>>> origin/master
 </div>
 
 
@@ -363,7 +332,7 @@ color:darkgray;
          </c:if>
          <c:forEach var='num' begin='${pageMaker.startPage }'
             end='${pageMaker.endPage }'>
-            <li class="paginate_button ${pageMaker.cri.pageNum==num?'active":""}">
+            <li class="paginate_button ${pageMaker.cri.pageNum==num?"active":""}">
                <a href="${num }">${num }</a>
             </li>
          </c:forEach>
