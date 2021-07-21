@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.conan.domain.Criteria;
 import org.conan.domain.LikeVO;
+import org.conan.domain.MemberVO;
 import org.conan.domain.UploadFile;
 import org.conan.domain.UrSearchResultVO;
 import org.conan.domain.UserIngreVO;
@@ -50,11 +52,16 @@ public class UserRecipeController {
 	
 
 	@GetMapping("/get")
-	public void get(@RequestParam("urrid") int urrid, Model model) {
+	public void get(@RequestParam("urrid") int urrid,HttpSession session, Model model) {
 		model.addAttribute("recipe", service.get(urrid));
 		model.addAttribute("ingre", service.getingre(urrid));
 		model.addAttribute("proce", service.getproce(urrid));
 		model.addAttribute("countLike", likes.countLike2(urrid));
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		if(mvo!=null) {
+			int yesOrNo = likes.likeOrNot(new LikeVO(urrid,mvo.getUserid()))==null?0:1;
+			model.addAttribute("yesOrNo", yesOrNo);
+		}
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -178,6 +185,7 @@ public class UserRecipeController {
 		
 	}
 	
+	//@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@RequestMapping(value = "/getLike")
 	public LikeVO getLike(HttpServletRequest request,@RequestParam int urrid,@RequestParam String uid) {

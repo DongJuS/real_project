@@ -1,6 +1,8 @@
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -340,8 +342,10 @@ font-size: 12px;
 	
 	function likeClick(){		//좋아요 눌렀을 때 스크립트
 		/* alert("클릭됨") */
-		var mem = "${member.id}"
-		if(mem){
+	
+		 var mem='<sec:authorize access="isAuthenticated()"><sec:authentication property="principal.username"/></sec:authorize>'
+		
+		if(mem!=''){
 			console.log("ajax작동")
 			  $.ajax({
 					url:"getLike",
@@ -371,14 +375,19 @@ font-size: 12px;
 		
 		
 	}
+	
+	
 	function replyInsert(){		//댓글입력 눌렀을 때 스크립트
+		var mem='<sec:authorize access="isAuthenticated()"><sec:authentication property="principal.username"/></sec:authorize>'
+
 		
-		var mem = "${member.id}"
+		//var mem ='' 
+		
 		var formData = $("#replyForm").serialize();
 		/* console.log(formData)
 		console.log(typeof(formData)) */
 		
-		if(mem){
+		if(mem!=''){
 			 console.log("댓글작성ajax")
 			$.ajax({
 				cache: false,
@@ -497,7 +506,9 @@ font-size: 12px;
 </script>
 
 </head>
+
 <body>
+
 
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div class="bottom_grayCont">
@@ -506,14 +517,13 @@ font-size: 12px;
 				<div class="recipe_name_wrapper">
 					<p id="recipe_name">
 						<span style="color: lightgray; font-size: 15px;">No.${recipe.rid}</span>
-						${recipe.name}
-					</p>
+					${recipe.name }</p>
 				</div>
 				<hr class="line1">
 				<div class="cont">
 					<p class="user_text">
 						<img class="user_icon_img img"
-							src="/resources/proimg/user_icon.png"> 유저 닉네임
+							src="/resources/proimg/user_icon.png"> 
 					</p>
 					<img class="main_image img proceImg" src="${recipe.img}" /><br>
 					<br>

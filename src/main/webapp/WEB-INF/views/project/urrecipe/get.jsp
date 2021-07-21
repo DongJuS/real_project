@@ -354,47 +354,54 @@ $(document).ready(function() {
     		}
     	 }  	
      })
+     var csrfHeaderName="${_csrf.headerName}";
+     var csrfTokenValue="${_csrf.token}";
+
      $(document).ajaxSend(function(e, xhr, options){
      	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
        });
      
      
-     function likeClick(){		//좋아요 눌렀을 때 스크립트
- 		alert("클릭됨") 
- 		var mem = "${member.id}"
- 		if(mem){
- 			console.log("ajax작동")
- 			  $.ajax({
- 					url:"getLike",
- 					type:"get",
- 					data: {uid : mem , rid : ${recipe.urrid} },
- 					success:function(toggleLike){
- 						var yn = toggleLike.yesNo;
- 						console.log(toggleLike.likeSum)
- 						$('#likeCount').html(toggleLike.likeSum);
- 						let img1 = document.getElementById('heart_icon');
- 						if(yn==0){
- 							img1.src = "/resources/proimg/em_heart.png";
- 						}
- 						else{
- 							img1.src = "/resources/proimg/f_heart.png";
- 						}
- 						
- 					}
- 				})  
- 		}
- 		else{
- 			var moveToLogin = confirm('로그인 후 이용이 가능한 서비스입니다.\n[확인]을 누르시면 로그인 페이지로 이동합니다.')
- 			if(moveToLogin){
- 				location.href="/customLogin"
- 			}
- 		}
- 		
- 		
- 	}
-     
+   
      })//document
-
+     function likeClick(){		//좋아요 눌렀을 때 스크립트
+     var csrfHeaderName="${_csrf.headerName}";
+     var csrfTokenValue="${_csrf.token}";
+  		//alert("클릭됨") 
+  		var mem = '<sec:authentication property="principal.username"/>'
+  		if(mem){
+  			console.log("ajax작동")
+  			  $.ajax({
+  					url:"/project/urrecipe/getLike",
+  					type:"get",
+  					 beforeSend:function(xhr){
+ 		            	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+ 		            },
+  					data: {uid : mem , rid : ${recipe.urrid} },
+  					success:function(toggleLike){
+  						var yn = toggleLike.yesNo;
+  						console.log(toggleLike.likeSum)
+  						$('#likeCount').html(toggleLike.likeSum);
+  						let img1 = document.getElementById('heart_icon');
+  						if(yn==0){
+  							img1.src = "/resources/proimg/em_heart.png";
+  						}
+  						else{
+  							img1.src = "/resources/proimg/f_heart.png";
+  						}
+  						
+  					}
+  				})  
+  		}
+  		else{
+  			var moveToLogin = confirm('로그인 후 이용이 가능한 서비스입니다.\n[확인]을 누르시면 로그인 페이지로 이동합니다.')
+  			if(moveToLogin){
+  				location.href="/customLogin"
+  			}
+  		}
+  		
+  		
+  	}
 </script>
 
 </head>
@@ -469,16 +476,13 @@ $(document).ready(function() {
 							</div>
 							<c:choose>
 								<c:when test="${yesOrNo==null}">
-									<img id="heart_icon" src="/resources/proimg/em_heart.png"
-										onclick="likeClick()">
+									<img id="heart_icon" src="/resources/proimg/em_heart.png" onclick="likeClick()">
 								</c:when>
 								<c:when test="${yesOrNo==0}">
-									<img id="heart_icon" src="/resources/proimg/em_heart.png"
-										onclick="likeClick()">
+									<img id="heart_icon" src="/resources/proimg/em_heart.png" onclick="likeClick()">
 								</c:when>
 								<c:when test="${yesOrNo==1}">
-									<img id="heart_icon" src="/resources/proimg/f_heart.png"
-										onclick="likeClick()">
+									<img id="heart_icon" src="/resources/proimg/f_heart.png" onclick="likeClick()">
 								</c:when>
 							</c:choose>
 

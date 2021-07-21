@@ -379,10 +379,8 @@ display: inline-block;
 					<th>요리순서</th>
 
 					<td><div class='proce'>
-							<input type='text' class="input_long"
-								placeholder='프라이팬에 식용유를 두른 후, 볶아주세요.' name='txt'><br>
-							<input type='file' class="input_short" id='uploadFile1'
-								accept="image/*">
+							<input type='text' class="input_long" placeholder='프라이팬에 식용유를 두른 후, 볶아주세요.' name='urtxt'><br>
+							<input type='file' class="input_short" id='uploadFile1'	accept="image/*">
 						</div>
 						<button class="plus_button" value='추가' id='proceplus'>+</button>
 						<span class="guide_text">*요리 순서를 추가하시려면 버튼을 눌러주세요</span></td>
