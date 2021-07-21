@@ -5,15 +5,17 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-
+import javax.servlet.http.HttpServletRequest;
 
 import org.conan.domain.Criteria;
+import org.conan.domain.LikeVO;
 import org.conan.domain.UploadFile;
 import org.conan.domain.UrSearchResultVO;
 import org.conan.domain.UserIngreVO;
 import org.conan.domain.UserProceVO;
 import org.conan.domain.UserRecipeVO;
 import org.conan.domain.pageDTO;
+import org.conan.service.LikeService;
 import org.conan.service.UserRecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +39,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UserRecipeController {
 	private UserRecipeService service;
+	private LikeService likes;
 
 	 @RequestMapping(value = "/list")
 	public void list(Model model, Criteria cri) {
@@ -51,6 +54,7 @@ public class UserRecipeController {
 		model.addAttribute("recipe", service.get(urrid));
 		model.addAttribute("ingre", service.getingre(urrid));
 		model.addAttribute("proce", service.getproce(urrid));
+		model.addAttribute("countLike", likes.countLike2(urrid));
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -173,6 +177,30 @@ public class UserRecipeController {
 		model.addAttribute("proce", service.getproce(urrid));
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getLike")
+	public LikeVO getLike(HttpServletRequest request,@RequestParam int urrid,@RequestParam String uid) {
+		
+		int yesNo;
+		if (likes.likeOrNot(new LikeVO(urrid,uid))==null) {			//좋아요를 누른 적 없거나 지웠으면 null값 반환하니, null일 경우 insert
+			likes.insertLike(new LikeVO(urrid,uid));
+			System.out.println("insert성공");
+			likes.updateLikeCount(new LikeVO(urrid,likes.countLike2(urrid)+1,0));
+			yesNo = 1;
+		}
+		else {			//좋아요를 누른 적 있으면 delete
+			likes.deleteLike(new LikeVO(urrid,uid));
+			System.out.println("delete성공");
+			likes.updateLikeCount(new LikeVO(urrid,likes.countLike2(urrid)-1,0));
+			yesNo = 0;
+		}
+		int likeSum = likes.countLike2(urrid)==null?0:likes.countLike2(urrid);	//해당 글의 총 종아요 수를 불러온다.없으면 null이라서 0으로 바꾸어줌
+		LikeVO toggleLike = new LikeVO(likeSum,yesNo);
+		System.out.println("likeSum은 : "+likeSum);
+		return toggleLike;
+	}
+	
 	
 	
 
