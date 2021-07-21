@@ -241,7 +241,7 @@ color: darkgray;
 			
 			<div class="situational_recommend">
 				<div class="best_text">
-					<img src="/resources/proimg/recipe_book.png" class="main_icon"> <div class="icon_text"><img class="text_img" src="/resources/proimg/all_recipe.png"></div>
+					<a href='/project/recipe/list'><img src="/resources/proimg/recipe_book.png" class="main_icon"></a> <div class="icon_text"><a href='/project/recipe/list'><img class="text_img" src="/resources/proimg/all_recipe.png"></a></div>
 				<div class="text_guide">* 등록 순서에 따른 레시피 목록입니다.</div>
 				</div>
 
