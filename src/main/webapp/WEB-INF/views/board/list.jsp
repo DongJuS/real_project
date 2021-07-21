@@ -65,6 +65,18 @@ border-bottom: 0.5px solid;
 #center {
 	text-align: center;
 }
+.container{
+width: 80% !important;
+    background: white;
+    border: 1px solid #e2dede;
+}
+.justify-content-between{
+    display: inline-flex;
+    width: 100%;
+}
+.total_text{
+margin-right: auto;
+}
 </style>
 
 <!-- Bootstrap Core CSS -->
@@ -176,6 +188,14 @@ border-bottom: 0.5px solid;
 
 <!-- 		------------------------------------------------------------------------------- -->
 <div class="container">
+ <div class="big_text"></div>
+</div>
+
+
+
+
+
+<div>
 	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">게시판</h1>
@@ -186,15 +206,13 @@ border-bottom: 0.5px solid;
 	<div class="row">
 		<div class="col-lg-12 line">
 			<div class="row justify-content-between">
-				<div class="col-4 head">
-					Total
-					<c:out value='${pageMaker.total }' />
-					건
+				<div class="total_text">
+					총 ${pageMaker.total}건
 
 				</div>
 
 
-				<div class="col-6 search">
+				<div class="search">
 					<form id='searchForm' action='/board/list' method='get'>
 						<select name='type'>
 							<option value=""

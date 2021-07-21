@@ -37,6 +37,7 @@ li {
 .user_text {
 	text-align: end;
 	font-size: 11px;
+	margin-right: 10px;
 }
 
 .user_icon_img {
@@ -45,6 +46,7 @@ li {
 
 .main_image {
 	width: 70%;
+	max-width: 700px;
 }
 
 .cont {
@@ -116,7 +118,7 @@ li {
 }
 
 .main_image {
-	width: 50%;
+	width: 70%;
 }
 
 .cont {
@@ -170,6 +172,131 @@ li {
 .summary_text {
 	width: 90%;
 	margin: 0 auto;
+}
+
+.back_container {
+	width: 80%;
+	margin: -10px auto;
+	background-color: white;
+}
+
+.recipe_name_wrapper {
+	
+}
+
+.bottom_grayCont {
+	background-color: #f1f1f2;
+}
+
+hr {
+	width: 95%;
+}
+
+.result_container {
+	border: 1px solid #e2dede;
+}
+
+#like_button {
+	border: groove;
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	border-radius: 20px;
+}
+
+#likeCount {
+	font-size: 28px;
+	padding: 2px;
+}
+
+#heart_icon {
+	width: 35px;
+	cursor: pointer;
+}
+
+.like_zone {
+	display: inline-flex;
+	width: 100%;
+}
+
+.likeHR {
+	width: 45%;
+	align-self: center;
+}
+
+.likehrs {
+	border: solid 1px #e2dede;
+}
+
+#likeHRL {
+	margin-left: unset;
+}
+
+#likeHRR {
+	margin-right: unset;
+}
+
+.reply_zone {
+	text-align: start;
+}
+
+.reply_hr {
+	width: 100%;
+}
+
+.reply_timestamp {
+	margin-left: auto;
+}
+
+.reply_userinfo {
+	display: flex;
+}
+
+.user_reply {
+	padding: 0 15px;
+}
+
+.reply_content {
+	margin: 15px 5px;
+}
+
+.reply_top {
+	margin-left: 20px;
+}
+
+#reply_count {
+	color: gray;
+	font-size: 14px;
+}
+
+#reply_textarea {
+	width: 80%;
+	margin-left: 10%;
+	height: 80px;
+	border-radius: 15px 0 0 15px;
+	padding: 6px;
+}
+
+#reply_submit {
+	margin-right: 10%;
+	background: orange;
+	color: white;
+	border: darksalmon;
+	border-radius: 0 15px 15px 0;
+	text-shadow: 1px 1px black;
+}
+
+.write_area {
+	display: flex;
+}
+
+.reply_write {
+	margin: 30px 0;
+}
+.deleteText{
+font-size: 12px;
+    color: darkgray;
+    cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">
@@ -230,6 +357,41 @@ $(document).ready(function() {
      $(document).ajaxSend(function(e, xhr, options){
      	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
        });
+     
+     
+     function likeClick(){		//좋아요 눌렀을 때 스크립트
+ 		alert("클릭됨") 
+ 		var mem = "${member.id}"
+ 		if(mem){
+ 			console.log("ajax작동")
+ 			  $.ajax({
+ 					url:"getLike",
+ 					type:"get",
+ 					data: {uid : mem , rid : ${recipe.urrid} },
+ 					success:function(toggleLike){
+ 						var yn = toggleLike.yesNo;
+ 						console.log(toggleLike.likeSum)
+ 						$('#likeCount').html(toggleLike.likeSum);
+ 						let img1 = document.getElementById('heart_icon');
+ 						if(yn==0){
+ 							img1.src = "/resources/proimg/em_heart.png";
+ 						}
+ 						else{
+ 							img1.src = "/resources/proimg/f_heart.png";
+ 						}
+ 						
+ 					}
+ 				})  
+ 		}
+ 		else{
+ 			var moveToLogin = confirm('로그인 후 이용이 가능한 서비스입니다.\n[확인]을 누르시면 로그인 페이지로 이동합니다.')
+ 			if(moveToLogin){
+ 				location.href="/customLogin"
+ 			}
+ 		}
+ 		
+ 		
+ 	}
      
      })//document
 
@@ -292,7 +454,41 @@ $(document).ready(function() {
 					</c:forEach>
 				</div>
 			</div>
+			
+			<!-- 좋아요 부분 -->
+				<div class="like_zone">
+						<div class="like_left likeHR">
+							<hr id="likeHRL" class="likehrs">
+						</div>
+						<div id="like_button">
+							<div id="likeCount">
+								<c:choose>
+									<c:when test="${countLike==null}">0</c:when>
+									<c:when test="${countLike!=null}">${countLike}</c:when>
+								</c:choose>
+							</div>
+							<c:choose>
+								<c:when test="${yesOrNo==null}">
+									<img id="heart_icon" src="/resources/proimg/em_heart.png"
+										onclick="likeClick()">
+								</c:when>
+								<c:when test="${yesOrNo==0}">
+									<img id="heart_icon" src="/resources/proimg/em_heart.png"
+										onclick="likeClick()">
+								</c:when>
+								<c:when test="${yesOrNo==1}">
+									<img id="heart_icon" src="/resources/proimg/f_heart.png"
+										onclick="likeClick()">
+								</c:when>
+							</c:choose>
 
+						</div>
+						<div class="like_right likeHR">
+							<hr id="likeHRR" class="likehrs">
+						</div>
+					</div>
+					
+					
 
 			
 			
@@ -310,6 +506,73 @@ $(document).ready(function() {
 
 
 		</div>
+		
+		<!-- 댓글 -->
+		
+		<%-- 			<div class="reply_zone">
+
+						<div>
+							<hr class="reply_hr">
+							<div class="reply_top">
+								댓글<span id="reply_count">(12)</span>
+							</div>
+							<hr class="reply_hr">
+						</div>
+						<!-- 리플 한개 시작 -->
+						<!-- <div class="user_reply">
+							<div class="reply_userinfo">
+								<div>
+									<img class="user_icon_img img"
+										src="/resources/proimg/user_icon.png"><span>뜨거운여름은</span>
+								</div>
+								<div class="reply_timestamp">2021.07.14 AM10:25</div>
+							</div>
+							<div class="reply_content">호박전 너무 맛있겠음! 언젠가 꼭 해먹을테당</div>
+							<hr class="reply_hr">
+						</div> -->
+						<!-- 리플 한개 끝 -->
+						
+						
+						<!-- 리플 반복문 시작 -->
+						<c:forEach var='rvo' items='${rvoList}'>
+						<div class="user_reply">
+							<div class="reply_userinfo">
+								<div>
+									<img class="user_icon_img img" src="/resources/proimg/user_icon.png">
+										<span>${rvo.userId}</span>
+										<c:if test="${rvo.userId==member.id}">
+										<span class="deleteText" id="updateBtn${rvo.replyNo}" onclick="replyUpdate(${rvo.rid},${rvo.userId},${rvo.replyNo},'${rvo.content}')">수정</span> 
+										<span class="deleteText" onclick="replyDelete(${rvo.rid},${rvo.userId},${rvo.replyNo})">삭제</span>
+										</c:if>
+								</div>
+								<div class="reply_timestamp">${rvo.regDate}</div>
+							</div>
+							<div class="reply_content" id="content${rvo.replyNo}">${rvo.content}</div>	
+						</div>
+						<hr class="reply_hr">
+						</c:forEach>
+						<!-- 리플 반복문 끝 -->
+						
+
+						<!-- 덧글작성창 시작 -->
+						<form id="replyForm" action="replyInsert" method="post">
+							<div class="reply_write">
+								<div class="write_area">
+								<c:choose>
+								<c:when test="${empty member.id}"><textarea id="reply_textarea" name="content"
+										placeholder="댓글 작성은 로그인 후 이용이 가능합니다." readonly></textarea></c:when>
+								<c:otherwise><textarea id="reply_textarea" name="content"
+										placeholder="댓글을 입력해 주세요."></textarea></c:otherwise>
+								</c:choose>
+									
+									<input id="reply_submit" type="button" onclick="replyInsert()" value="댓글입력">
+								</div>
+							</div>
+							<input type="hidden" name="userId" value="${member.id}">
+							<input type="hidden" name="rid" value="${recipe.rid}">
+						</form>
+						<!-- 덧글작성창 끝 -->
+					</div>	 --%>	
 	</div>
 
 

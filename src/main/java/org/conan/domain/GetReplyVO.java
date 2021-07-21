@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class GetReplyVO {
 	private int rid;
+	private int urrid;
 	private int replyNo;
 	private String userId;
 	private String regDate;

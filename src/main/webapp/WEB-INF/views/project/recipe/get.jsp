@@ -365,7 +365,7 @@ font-size: 12px;
 		else{
 			var moveToLogin = confirm('로그인 후 이용이 가능한 서비스입니다.\n[확인]을 누르시면 로그인 페이지로 이동합니다.')
 			if(moveToLogin){
-				location.href="../../login"
+				location.href="/customLogin"
 			}
 		}
 		
@@ -397,7 +397,7 @@ font-size: 12px;
 		else{
 			var moveToLogin = confirm('로그인 후 작성이 가능합니다.\n[확인]을 누르시면 로그인 페이지로 이동합니다.')
 			if(moveToLogin){
-				location.href="../../login"
+				location.href="/customLogin"
 			}
 		}
 		

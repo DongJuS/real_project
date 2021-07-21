@@ -28,6 +28,17 @@ public class LoginController {
 	@Autowired
 	MemberServiceImpl MemberService;
 
+	   @RequestMapping(value = "/update", method = RequestMethod.GET)
+	   public void Update() {
+	      log.info("정보수정");
+	   }
+	   @RequestMapping(value = "/UpdateProc" , method = RequestMethod.POST)
+	   public String UpdateProc(MemberVO vo,HttpServletRequest request) {
+	      log.info("vo"+vo);
+	      MemberService.Update(vo);
+	      return null;
+	   }
+	
 	@GetMapping("/accessError") 
 	public void accessDenied(Authentication auth, Model model) {
 		log.info("access Denied : "+auth);
