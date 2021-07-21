@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +227,9 @@ $(document).ready(function() {
     	 
     	
      })
-     
+     $(document).ajaxSend(function(e, xhr, options){
+     	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+       });
      
      })//document
 
@@ -242,7 +245,7 @@ $(document).ready(function() {
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
-					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> 유저 닉네임
+					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> ${recipe.userid }
 				</p>
 				<div class='uploadFile'>
 				
@@ -291,9 +294,17 @@ $(document).ready(function() {
 			</div>
 
 
-
-
+			
+			
 			<button data-oper='list'>List</button>
+			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authorize access="isAuthenticated()">
+      		<c:if test="${pinfo.username eq recipe.userid}">
+			<button data-oper='modify'>수정</button>
+			<button data-oper='delete'>삭제</button>
+			</c:if>
+      		</sec:authorize>
+			 
 			<!-- 컨테이너 끝 -->
 			<br>
 

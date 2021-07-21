@@ -162,6 +162,17 @@
 				<a href="/project/main"><img class="logo_image"
 					src="/resources/proimg/logo.png"></a>
 			</div>
+
+			<div class="nav_bar">
+
+					  <sec:authorize access="isAuthenticated()"><a href="../customLogout">
+					  로그아웃
+					  </a></sec:authorize>  <sec:authorize access="isAnonymous()">
+					  <a href="/customLogin">로그인</a></sec:authorize> | <a href="#">마이페이지</a>
+					   | <a href="/join">회원가입</a>
+
+				
+			</div>
 			<div class="logo_text">
 				<a href="/project/main"><img class="logotext"
 					src="/resources/proimg/logotext2.png"></a>
