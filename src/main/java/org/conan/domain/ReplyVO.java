@@ -8,8 +8,10 @@ import lombok.Data;
 public class ReplyVO {
 	private Long rno;
 	private Long bno;
-	private String reply;
+	private String reply;		//댓글내용
 	private String replyer;
 	private Date replyDate;
 	private Date updateDate;
+	
+	
 }

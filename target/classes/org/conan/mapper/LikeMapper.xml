@@ -2,15 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.conan.mapper.LikeMapper">
-<select resultType="org.conan.domain.LikeVO"  parameterType="org.conan.domain.LikeVO" id="readLike">
-select * from Like_Recipe where rid=#{rid} and userid=#{userId}
+	<select id="readLike" resultType="org.conan.domain.LikeVO"  parameterType="org.conan.domain.LikeVO">
+		select * from Like_Recipe where rid=#{rid} and userid=#{userId}
 	</select>
-	
-	<select resultType="int" id="countLike">
-	select sum(checklike) from
+	<select id="countLike" resultType="Integer">
+		select sum(checklike) from
 		like_recipe where rid=#{rid}
 	</select>
-	<insert id="insertLike">
-	insert into like_recipe values (#{rid},#{userId},1)
+	<select id="countLike2" resultType="Integer">
+		select likecount from t_recipe where rid=#{rid}
+	</select>
+	<select id="likeOrNot" resultType="Integer" parameterType="org.conan.domain.LikeVO">
+		select checklike from like_recipe where rid=#{rid} and userid = #{userId}
+	</select>
+	<insert id="insertLike" parameterType="org.conan.domain.LikeVO">
+		insert into like_recipe values (#{rid},#{userId},1)
 	</insert>
+	<delete id="deleteLike" parameterType="org.conan.domain.LikeVO">
+		delete from like_recipe where rid=#{rid} and userid=#{userId}
+	</delete>
+	<select id="getMaxRid" resultType="Integer">
+		select max(rid) from t_recipe
+	</select>
+	<update id="updateLikeCount" parameterType="org.conan.domain.LikeVO"> 
+		update T_RECIPE set likecount=#{likeSum} where rid=#{rid}
+	</update>
 </mapper>

@@ -2,21 +2,25 @@ package org.conan.controller;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.conan.domain.AuthVO;
 import org.conan.domain.MemberVO;
-import org.conan.domain.pageDTO;
-import org.conan.service.MemberServiceImpl;
+import org.conan.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,136 +28,91 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/*")
 public class LoginController {
-	
 	@Autowired
-	MemberServiceImpl MemberService;
-
-	@GetMapping("/accessError") 
-	public void accessDenied(Authentication auth, Model model) {
-		log.info("access Denied : "+auth);
-		model.addAttribute("msg","Access Denied");
-		model.addAttribute("hi","hello");
-		
-	}
+	MemberService service;
 	
-	@GetMapping("/customLogin") 
-	public void loginInput(Authentication auth,String error,String username, String logout, Model model) {
-		log.info("error : "+error);
-		log.info("logout : "+logout);
-		if(error != null) {
-			model.addAttribute("error", "Login Error Check Your Account");
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public void Update() {
+		log.info("정보수정");
+	}
+	@RequestMapping(value = "/UpdateProc" , method = RequestMethod.POST)
+	public String UpdateProc(MemberVO vo,HttpServletRequest request) {
+		log.info("vo"+vo);
+		service.Update(vo);
+		return null;
+	}
+	@GetMapping("/join")
+	public void Join() {
+		log.info("회원가입");
+	}
+	@GetMapping("/joinProc")
+	public void join() {}
+	
+	@RequestMapping(value = "/joinProc", method = RequestMethod.POST)
+	public String joinProc(MemberVO vo)throws Exception {
+		log.info(vo);
+		service.register(vo);
+		return "redirect:/project/main";
+	}
+	@GetMapping("/main")
+	public void main() {
+		log.info("메인페이지");
+	}
+	@GetMapping("/login")
+	public void login() {
+		log.info("로그인");
+	}
+	@PostMapping("/loginProc")
+	public String loginProc(HttpServletRequest request,  MemberVO vo, RedirectAttributes rttr)  {
+	   log.info("loginProc!!");
+	   log.info(vo);
+	   HttpSession session = request.getSession();
+	   MemberVO lvo = service.login(vo); //lvo 객체값 저장
+	    if(lvo == null) {                                // 로그인하지않으면 로그인으로
+	        
+	        int result = 0;
+	        rttr.addFlashAttribute("result", result);
+	        return "redirect:/login";
+
+	        
+	        
+	    }
+	    
+	    session.setAttribute("member", lvo);             //  lvo에 저장된 객체값을 member에다가 저장
+	    
+	    return "redirect:project/main";
+	   
+	}
+
+	/*
+	 * @PostMapping("/logout") public String logout(HttpServletRequest request) {
+	 * log.info("濡쒓렇�븘�썐"); HttpSession session = request.getSession();
+	 * session.invalidate(); return "redirect:/main"; }
+	 */
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		log.info("濡쒓렇�븘�썐");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/project/main";
+	}
+	@GetMapping("/test")
+	public String test(HttpSession session) {
+		String id = (String)session.getAttribute("name");
+		return null;
+	}
+	@RequestMapping(value = "/Idcheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String Idcheck(String id) {
+		log.info("아이디체크");
+		int result = service.Idcheck(id);
+		log.info("아이디는?? :" + result);
+		if(result!=0) {
+			return "fail";
+
+		}else {
+			return "success";
 		}
-		if(logout != null) {
-			model.addAttribute("logout", "Logout!!");
-		}
-		
-		log.info("아이디 권한: "+ auth+"유저 네임"+ username);
-		
 	}
-	
-	@GetMapping("/customLogout")
-	public void logoutGET() {
-		
-		log.info("custom logout get");
-	}
-	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String goJoin() {
-		return "join";
-	}
-	
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String login(MemberVO mem, AuthVO au) {
-		mem.setUserpwd(new BCryptPasswordEncoder().encode(mem.getUserpwd()));
-		MemberService.join(mem);
-		MemberService.a_join(au);
-
-		return "customLogin";
-	}
-
-//	@Autowired
-//	MemberService service;
-//	@RequestMapping(value = "/update", method = RequestMethod.GET)
-//	public void Update() {
-//		log.info("정보수정");
-//	}
-//	@RequestMapping(value = "/UpdateProc" , method = RequestMethod.POST)
-//	public String UpdateProc(MemberVO vo,HttpServletRequest request) {
-//		log.info("vo"+vo);
-//		service.Update(vo);
-//		return null;
-//	}
-//	@GetMapping("/join")
-//	public void Join() {
-//		log.info("회원가입");
-//	}
-//	@GetMapping("/joinProc")
-//	public void join() {}
-//	@RequestMapping(value = "/joinProc", method = RequestMethod.POST)
-//	public String joinProc(MemberVO vo)throws Exception {
-//		log.info(vo);
-//		service.register(vo);
-//		return "redirect:/project/main";
-//	}
-//	@GetMapping("/main")
-//	public void main() {
-//		log.info("메인페이지");
-//	}
-//	@GetMapping("/login")
-//	public void login() {
-//		log.info("로그인");
-//	}
-//	@PostMapping("/loginProc")
-//	public String loginProc(HttpServletRequest request,  MemberVO vo, RedirectAttributes rttr)  {
-//	   log.info("loginProc!!");
-//	   log.info(vo);
-//	   HttpSession session = request.getSession();
-//	   MemberVO lvo = service.login(vo); //lvo 객체값 저장
-//	    if(lvo == null) {                                // 로그인하지않으면 로그인으로
-//	        
-//	        int result = 0;
-//	        rttr.addFlashAttribute("result", result);
-//	        return "redirect:/login";
-//
-//	        
-//	        
-//	    }
-//	    
-//	    session.setAttribute("member", lvo);             //  lvo에 저장된 객체값을 member에다가 저장
-//	    
-//	    return "redirect:project/main";
-//	   
-//	}
-//
-//	/*
-//	 * @PostMapping("/logout") public String logout(HttpServletRequest request) {
-//	 * log.info("濡쒓렇�븘�썐"); HttpSession session = request.getSession();
-//	 * session.invalidate(); return "redirect:/main"; }
-//	 */
-//	
-//	@GetMapping("/logout")
-//	public String logout(HttpServletRequest request) {
-//		log.info("濡쒓렇�븘�썐");
-//		HttpSession session = request.getSession();
-//		session.invalidate();
-//		return "redirect:/project/main";
-//	}
-//	@GetMapping("/test")
-//	public String test(HttpSession session) {
-//		String id = (String)session.getAttribute("name");
-//		return null;
-//	}
-//	@RequestMapping(value = "/Idcheck", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String Idcheck(String id) {
-//		log.info("아이디체크");
-//		int result = service.Idcheck(id);
-//		log.info("아이디는?? :" + result);
-//		if(result!=0) {
-//			return "fail";
-//
-//		}else {
-//			return "success";
-//		}
-//	}
 }
