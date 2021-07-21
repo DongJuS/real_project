@@ -122,6 +122,16 @@ padding:10px;
 .board_b{
 color:darkgray;
 }
+.reg_paging{
+    width: 100%;
+    display: inline-flex;
+}
+.board_paging{
+margin: 15px 25px 15px auto;
+}
+.regBtnZone{
+margin: 15px auto 15px 25px;
+}
 </style>
 
 <!-- jQuery -->
@@ -270,72 +280,11 @@ color:darkgray;
 </div>
 <!--   -->
 
-
-
-
+<div class="reg_paging">
+<div class="regBtnZone">
+<button id='regBtn' type='button'>글쓰기</button>
 </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-   <div class="row">
-      <div class="col-lg-12">
-         <h1 class="page-header">게시판</h1>
-      </div>
-      <!-- col 12 -->
-   </div>
-   <!-- row -->
-   <div class="row">
-      <div class="col-lg-12 line">
-         <div class="row justify-content-between">
-            <div class="col-4 head">
-               Total
-               <c:out value='}' />
-               건
-
-            </div>
-
-
-            <div class="col-6 search">
-               
-
-
-            </div>
-         </div>
-      </div>
-   </div>
-   <!-- row -->
-
-
-
-
-
-   <div class="row">
-      <div class="col-lg-12">
-
-         
-      </div>
-      <!-- col 12 -->
-   </div>
-   <!-- row -->
-   <button id='regBtn' type='button'>글쓰기</button>
-
-
-   <div class='pull-right'>
+<div class='board_paging'>
       <ul class='pagination'>
          <c:if test="${pageMaker.prev }">
             <li class='paginate_button previous'><a
@@ -343,7 +292,7 @@ color:darkgray;
          </c:if>
          <c:forEach var='num' begin='${pageMaker.startPage }'
             end='${pageMaker.endPage }'>
-            <li class="paginate_button ${pageMaker.cri.pageNum==num?'active":""}">
+            <li class="paginate_button ${pageMaker.cri.pageNum==num?"active":""}">
                <a href="${num }">${num }</a>
             </li>
          </c:forEach>
@@ -360,29 +309,16 @@ color:darkgray;
       <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 
    </form>
-   <div class='modal fade' id='myModal' tabindex='-1' role='dialog'
-      aria-labelledby='myModallabel' aria-hidden='true'>
-      <div class='modal-dialog'>
-         <div class='modal-content'>
-            <div class='modal-header'>
-               <button type='button' class='close' data-dismiss='modal'
-                  aria-hidden='true'>&times;</button>
-               <h4 class='modal-title' id='myModalLable'>Modal title</h4>
-            </div>
-            <div class='modal-body'>처리가 완료되었습니다.</div>
-            <div class='modal-footer'>
-               <button type='button' class='btn btn-info' data-dismiss='modal'>Close</button>
-               <button type='button' class='btn btn-primary'>Save Changes</button>
-            </div>
-         </div>
-      </div>
+   
    </div>
-   <!-- /.table-responsive -->
-
+   <!--   -->
 
 
 
 </div>
+</div>
+
+
 <!-- container -->
 <script type="text/javascript">
    $(document)
