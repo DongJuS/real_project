@@ -13,11 +13,136 @@
 <meta charset="UTF-8">
 <title>요들넷</title>
 <style>
+body {
+	margin: 8px;
+}
+
 header {
 	background-color: #FF4500;
 }
 
+#insertform {
+	padding: 30px;
+}
 
+table tr th {
+	background: #f1f2f2;
+	min-width: 200px;
+	text-align: center;
+	border: 1px solid #e2dede;
+	border-right-style: none;
+}
+
+table tr {
+	
+}
+
+table td {
+	padding: 20px;
+	background: white;
+	border: solid 1px #e2dede;
+	border-left-style: none;
+	text-align: center;
+}
+
+.proce_div {
+	margin: 10px;
+}
+
+.ingre_div {
+	margin: 10px;
+}
+
+.plus_button {
+	BORDER: SOLID 1PX #E2DEDE;
+	BACKGROUND: #f1f2f2;
+	COLOR: BLACK;
+	BORDER-RADIUS: 100PX;
+	WIDTH: 30PX;
+	HEIGHT: 30PX;
+}
+
+.guide_text {
+	font-size: 10px;
+	margin-left: 10px;
+	color: darkgray;
+}
+
+.input_long {
+	width: 80%;
+	font-size: 15px;
+}
+
+.input_short {
+	margin: 10px;
+}
+
+.input_ingre {
+	text-align: center;
+}
+#submit_buttons{
+display: inline-flex;
+padding: 25px;
+width: 100%;
+}
+#button_left{
+margin-left: 11%;
+}
+#button_middle{
+margin-left: 52%;
+}
+#button_right{
+margin-left: 10px;
+}
+.submit_icon{
+display: inline-block;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font: 14px/100% Arial, Helvetica, sans-serif;
+  padding: .5em 1em .55em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
+  border-radius: .5em;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.submit_icon:hover {
+  text-decoration: none;
+}
+.submit_icon:active {
+  position: relative;
+  top: 1px;
+}
+
+.orange {
+  color: #fef4e9;
+  border: solid 1px #da7c0c;
+  background: #f78d1d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+  background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+.orange:hover {
+  background: #f47c20;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+  background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+.orange:active {
+  color: #fcd3a5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+  background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+.main_text{
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -35,9 +160,13 @@ header {
 			e.preventDefault()
 			var str = ''
 			
-			str += "<input type='text' placeholder='재료재료이름' name='urIngre_name'>"
+/* 			str += "<input type='text' placeholder='재료재료이름' name='urIngre_name'>"
 			str += " <input type='text' placeholder='이정도' name='urIngre_count'>"
-			str += " <input type='text' placeholder='넣으셈' name='urIngre_unit'><br>"
+			str += " <input type='text' placeholder='넣으셈' name='urIngre_unit'><br>" */
+			
+			str += "<div class='ingre_div'><input class='input_ingre' type='text' placeholder='재료명' name='urIngre_name'>"
+			str += " <input class='input_ingre' type='text' placeholder='재료 수' name='urIngre_count'>"
+			str += " <input class='input_ingre' type='text' placeholder='재료 단위' name='urIngre_unit'></div>"
 			
 			$(".ingre").append(str)
 		})
@@ -46,15 +175,18 @@ header {
 			e.preventDefault()
 			var str = ''
 			
-			str += "<input type='text' placeholder='요래요래하시라' name='urtxt'>"
+			/* str += "<input type='text' placeholder='요래요래하시라' name='urtxt'>"
 			str += " <input type='file'  id='uploadFile1'  accept='image/*'><br>"
+			 */
+			str += "<input class='input_long' type='text' placeholder='요리순서에 맞는 설명을 입력해주세요'name='urtxt'><br>"
+			str += " <input class='input_short' type='file' value='참고 이미지 첨부' id='uploadFile1'  accept='image/*'>"
 			
 			$('.proce').append(str)
 		})
 		
 		$('#back').on("click",function(e){
 			e.preventDefault()
-			history.back()
+			self.location="/project/urrecipe/list"
 		})
 		
 		
@@ -200,58 +332,77 @@ header {
     }
 %>
 <jsp:include page="../include/header.jsp" flush="false" />
-	<div class='container'>
-		<form role='form' action='/project/urrecipe/register' method='post'  id='insertform' >
-		<table>
-			<tr>
-				<td>주제</td>
-				<td><input type='text' placeholder='요리주제' name='urname' ></td>
-			</tr>
-			<tr>
-				<td>소개</td>
-				<td><input type='text' placeholder='우짜다 이걸 만들엇댜?' name='ursummary'></td>
-			</tr>
-			<tr>
-				<td>대표사진</td>
-				 <td> <input type='file'  id='uploadFile' accept="image/*"></td> 
-			</tr>
-		</table>
+		<div class='container'>
+	<div class="main_text"><img src="/resources/proimg/register.png"></div>
+		<form role='form' action='/project/urrecipe/register' method='post'
+			id='insertform'>
+			<table style="margin: 0 auto;">
+				<tr>
+					<th>레시피 이름</th>
+					<td><input class="input_long" type='text'
+						placeholder='ex)10분이면 충분한 제육볶음!' name='urname'></td>
+				</tr>
+				<tr>
+					<th>레시피 한 줄 설명</th>
+					<td><input class="input_long" type='text'
+						placeholder='ex)자취생 손 머리위로 올려~! 간단하고 맛난 제육볶음 레시피' name='ursummary'></td>
+				</tr>
+				<tr>
+					<th>음식사진
+						<p style="font-size: 10px; margin-bottom: 3px;">* 한 장의 사진만 선택해
+							주세요!</p>
+					</th>
+					<td><div class='uploadResult'>
+							<ul style="list-style-type: none;"></ul>
+						</div> <input type='file' id='uploadFile' accept="image/*"></td>
+				</tr>
+
+				<tr>
+					<th>재료</th>
+
+					<td><div class='ingre'>
+							<div class='ingre_div'>
+								<input class="input_ingre" type='text' placeholder='예)참기름'
+									name='urIngre_name'> <input class="input_ingre"
+									type='text' placeholder='2' name='urIngre_count'> <input
+									class="input_ingre" type='text' placeholder='숟가락'
+									name='urIngre_unit'>
+							</div>
+						</div>
+						<button class="plus_button" value='+' id='ingreplus'>+</button>
+						<span class="guide_text">*재료를 추가하시려면 버튼을 눌러주세요</span></td>
+
+
+				</tr>
+
+				<tr>
+					<th>요리순서</th>
+
+					<td><div class='proce'>
+							<input type='text' class="input_long"
+								placeholder='프라이팬에 식용유를 두른 후, 볶아주세요.' name='txt'><br>
+							<input type='file' class="input_short" id='uploadFile1'
+								accept="image/*">
+						</div>
+						<button class="plus_button" value='추가' id='proceplus'>+</button>
+						<span class="guide_text">*요리 순서를 추가하시려면 버튼을 눌러주세요</span></td>
+
+
+				</tr>
+
+
+
+
+			</table>
+		<div id="button_left" style="display:inline-flex;">
+			<input class="submit_icon orange" type='button' value='뒤로' id='back'>
+		</div> 
+		<div id="button_middle">
+			<input class="submit_icon orange" type='button' value='저장' id='store'>
+		</div> 
+		
+		
 			
-		
-		<table>
-			<tr>
-				<td>재료</td>
-			</tr>
-			<tr>
-				<td><div class='ingre'>
-				<input type='text' placeholder='예) 후추를 후춧후춧' name='urIngre_name'> 
-				<input type='text' placeholder='2' name='urIngre_count' class='ingrecount'> 
-				<input type='text' placeholder='티수푼' name='urIngre_unit' class='ingreunit'><br> 
-			</div></td>
-			</tr>
-			<tr>
-				<td><button value='추가하고싶으면 넣어' id='ingreplus'>추가</button></td>
-			</tr>
-		</table>
-		
-		<table>
-			<tr>
-				<td>요리순서</td>
-			</tr>
-			<tr>
-				<td><div class='proce'>
-	<!-- 			<input type='text' placeholder='요래요래 하시라' name='txt'> --> 
-<!-- 				<input type='file'   id='uploadFile1' accept="image/*"><br>
- -->				</div></td>
-			</tr>
-			<tr>
-				<td><button value='추가' id='proceplus'>추가</button></td>
-			</tr>
-			<tr>
-				<td><input type='button' value='저장' id='store'></td>
-				<td><input type='button' value='뒤로' id='back'></td>
-			</tr>
-		</table>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<sec:authorize access="isAuthenticated()">
 			<input type='hidden' name='userid' value='<%=name %>'>

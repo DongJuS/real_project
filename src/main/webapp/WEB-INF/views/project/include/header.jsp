@@ -131,8 +131,8 @@
 					  <sec:authorize access="isAuthenticated()"><a href="../customLogout">
 					  로그아웃
 					  </a></sec:authorize>  <sec:authorize access="isAnonymous()">
-					  <a href="../customLogin">로그인</a></sec:authorize> | <a href="#">마이페이지</a>
-					   | <a href="join">회원가입</a>
+					  <a href="/customLogin">로그인</a></sec:authorize> | <a href="#">마이페이지</a>
+					   | <a href="/join">회원가입</a>
 
 				
 			</div>

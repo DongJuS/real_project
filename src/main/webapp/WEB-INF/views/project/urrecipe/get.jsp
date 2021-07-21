@@ -245,7 +245,7 @@ $(document).ready(function() {
 			<hr class="line1">
 			<div class="cont">
 				<p class="user_text">
-					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> 유저 닉네임
+					<img class="user_icon_img img" src="/resources/proimg/user_icon.png"> ${recipe.userid }
 				</p>
 				<div class='uploadFile'>
 				

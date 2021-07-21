@@ -1,54 +1,36 @@
 package org.conan.controller;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.conan.domain.Criteria;
+import org.conan.domain.GetReplyVO;
 import org.conan.domain.IngreVO;
 import org.conan.domain.LikeVO;
 import org.conan.domain.MemberVO;
 import org.conan.domain.ProceVO;
 import org.conan.domain.RecipeVO;
 import org.conan.domain.SearchResultVO;
-import org.conan.domain.UploadFile;
-import org.conan.mapper.RecipeMapper;
+import org.conan.domain.pageDTO;
 import org.conan.service.BoardService;
+import org.conan.service.GetReplyService;
 import org.conan.service.LikeService;
 import org.conan.service.MemberService;
 import org.conan.service.RecipeService;
-
-import org.apache.ibatis.annotations.Param;
-
-import org.conan.domain.BoardVO;
-import org.conan.domain.Criteria;
-import org.conan.domain.pageDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
@@ -63,14 +45,19 @@ public class ProjectController {
 	private BoardService board;
 	private LikeService likes;
 	private MemberService mservice;
-
+	private GetReplyService rrService;
 
 	@GetMapping("/main")
 	public void main(HttpServletRequest request,Criteria cri, Model model) {
 		log.info("메인페이지");
 		Criteria cri1=new Criteria(1,7);
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("board", board.getList(cri1)); 
+		model.addAttribute("board", board.getList(cri1));
+		List<RecipeVO> best = service.readBestRecipe();
+		request.setAttribute("bestRecipe", best);
+		List<RecipeVO> minrecip = service.readMinIngRecipe();
+		model.addAttribute("minR", minrecip);
+		
 		
 	}
 	@GetMapping("/chatbot")
@@ -84,10 +71,16 @@ public class ProjectController {
 	@GetMapping("/index")
 	public void test(HttpServletRequest request) {
 		log.info("겟으로 인덱스");
+		
+		
 	}
 	@GetMapping("/include/header")
 	public void headerTest() {
 		log.info("테스트");
+	}
+	@GetMapping("/include/footer")
+	public void footerTest() {
+		log.info("푸터테스트");
 	}
 	
 	
@@ -145,26 +138,46 @@ public class ProjectController {
 		log.info("/get");
 		 session = request.getSession();
 		  MemberVO mvo = (MemberVO)session.getAttribute("member");
+		List<GetReplyVO> rvoList = rrService.readRecipeReply(rid);
 		model.addAttribute("recipe", service.readRecipe(rid));
 		model.addAttribute("ingre", service.readIngre(rid));
 		model.addAttribute("proce", service.readProce(rid));
-		model.addAttribute("countLike", likes.countLike(rid));
+		model.addAttribute("countLike", likes.countLike2(rid));
+		model.addAttribute("rvoList", rvoList);
 		
 		/* model.addAttribute("like", likes.readLike(rid)); */
 		System.out.println("rid는 : !!"+rid);
-		/* System.out.println("rid는 : !!"+mvo.getId()); */
+		System.out.println();
+		if(mvo!=null) {
+			int yesOrNo = likes.likeOrNot(new LikeVO(rid,mvo.getId()))==null?0:1;
+			model.addAttribute("yesOrNo", yesOrNo);
+		}
 		
-		 System.out.println(likes.readLike(new LikeVO(rid, "1234"))); 
-		 //System.out.print(likes.readLike(rid,mvo.getId()).isEmpty()); 
-		  
-		//  if(likes.readLike(rid,mvo.getId()).isEmpty()) {	//
-			  
-		 // }
-			/* likes.insertLike(rid, mvo.getId()); */
-		  
 		 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/recipe/getLike")
+	public LikeVO getLike(HttpServletRequest request,@RequestParam int rid,@RequestParam String uid) {
+		
+		int yesNo;
+		if (likes.likeOrNot(new LikeVO(rid,uid))==null) {			//좋아요를 누른 적 없거나 지웠으면 null값 반환하니, null일 경우 insert
+			likes.insertLike(new LikeVO(rid,uid));
+			System.out.println("insert성공");
+			likes.updateLikeCount(new LikeVO(rid,likes.countLike2(rid)+1,0));
+			yesNo = 1;
+		}
+		else {			//좋아요를 누른 적 있으면 delete
+			likes.deleteLike(new LikeVO(rid,uid));
+			System.out.println("delete성공");
+			likes.updateLikeCount(new LikeVO(rid,likes.countLike2(rid)-1,0));
+			yesNo = 0;
+		}
+		int likeSum = likes.countLike2(rid)==null?0:likes.countLike2(rid);	//해당 글의 총 종아요 수를 불러온다.없으면 null이라서 0으로 바꾸어줌
+		LikeVO toggleLike = new LikeVO(likeSum,yesNo);
+		System.out.println("likeSum은 : "+likeSum);
+		return toggleLike;
+	}
 	
 	
 	@PostMapping("/index") 
@@ -221,6 +234,50 @@ public class ProjectController {
 		 * System.out.print(recipeNames-searchList);
 		 */
 	}
+	@ResponseBody
+	@PostMapping("recipe/replyInsert")
+	public void replyInsert(HttpServletRequest request) {
+		System.out.println("댓글작성메소드");
+		int rid = Integer.parseInt(request.getParameter("rid"));
+		String content = request.getParameter("content");
+		String userId = request.getParameter("userId");
+		GetReplyVO rvo = new GetReplyVO(rid, content, userId);
+		rrService.insertGetReply(rvo); 		//인서트기능 완성
+		System.out.println("댓글작성완료");
+		/*
+		 * GetReplyVO rvo1 = rvoList.get(0); System.out.println(rvo1.getContent());
+		 * request.setAttribute("rvoList", rvoList);
+		 */
+	}
+	
+	@ResponseBody
+	@PostMapping("recipe/replyUpdate")
+	public void replyUpdate(HttpServletRequest request) {
+		System.out.println("댓글수정메소드");
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		String content = request.getParameter("content");
+		
+		GetReplyVO rvo = new GetReplyVO(replyNo, content);
+		rrService.replyUpdate(rvo);
+		System.out.println("댓글수정완료");
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/recipe/replyDelete")
+	public void replyDelete(HttpServletRequest request,@RequestParam int rid,@RequestParam String userId,@RequestParam int replyNo) {
+		System.out.println(rid);
+		System.out.println(userId);
+		System.out.println(replyNo);
+		GetReplyVO rvo = new GetReplyVO(rid, userId, replyNo);
+		rrService.replyDelete(rvo);
+		System.out.println("댓글삭제완료");
+		
+	}
+	
+	/*
+	 * @GetMapping("recipe/replyDelete") public
+	 */
 
 
 
@@ -247,6 +304,5 @@ public class ProjectController {
 	 * 
 	 * }
 	 */
-
 
 }

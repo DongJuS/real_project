@@ -111,7 +111,8 @@ public class UserRecipeController {
 		log.info("allImg ");
 		return new ResponseEntity<>(service.allimg(), HttpStatus.OK);
 	}
-	@PreAuthorize("principal.username == #writer")
+	
+	
 	@GetMapping("/remove")
 	public String remove(@RequestParam("urrid") int urrid, RedirectAttributes rttr,Criteria cri) {
 		if (service.remove(urrid)) {
@@ -126,6 +127,7 @@ public class UserRecipeController {
 
 		return "redirect: /project/urrecipe/list";
 	}
+	
 	
 	@PostMapping("/searching")
 	public void search(@RequestParam("data1") String data1, Model model, Criteria cri) {
@@ -162,7 +164,8 @@ public class UserRecipeController {
 		int total = service.urrecipeCount(cri);
 		model.addAttribute("pageMaker", new pageDTO(cri, total));
 	}
-	@PreAuthorize("principal.username == #userid")
+	
+	
 	@GetMapping("/modify")
 	public void modify(@RequestParam("urrid") int urrid, Model model) {
 		model.addAttribute("recipe", service.get(urrid));

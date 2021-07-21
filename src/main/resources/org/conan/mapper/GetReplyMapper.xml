@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="org.conan.mapper.GetReplyMapper">
+
+	<insert parameterType="org.conan.domain.GetReplyVO"
+		id="insertGetReply">insert into T_RECIPE_REPLY(rid, userid, replyno, content)
+		values(#{rid},#{userId},replynum.nextval,#{content})
+	</insert>
+
+	<select parameterType="int" id="readRecipeReply"
+		resultType="org.conan.domain.GetReplyVO">select * from T_RECIPE_REPLY where rid=#{rid} </select>
+
+	<delete parameterType="org.conan.domain.GetReplyVO"
+		id="replyDelete">delete from t_recipe_reply where rid = #{rid} and userid =
+		#{userId} and replyNo = #{replyNo}
+	</delete>
+
+	<update parameterType="org.conan.domain.GetReplyVO"
+		id="replyUpdate">update t_recipe_reply set content=#{content}, updatedate = sysdate
+		where replyno=#{replyNo}
+	</update>
+
+</mapper>

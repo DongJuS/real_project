@@ -39,7 +39,7 @@ display: inline-block;
 		$("#regBtn").on("click", function() {
 			self.location = "/project/urrecipe/register"
 		})
-		 
+	
 
 
 	$.getJSON("/project/urrecipe/allImg",function(arr){
@@ -112,8 +112,9 @@ display: inline-block;
 			$('.down').hide()
 		})
 		
-	
-		
+		 $(document).ajaxSend(function(e, xhr, options){
+		     	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+		       });
 		
 		
 		
@@ -214,7 +215,9 @@ display: inline-block;
 						<button class='searchingre'>검색</button>
 					</div>
 					<form id='search' action='/project/urrecipe/searching'
-						method='post'></form>
+						method='post'>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
 				</div>
 			</div>
 			<div>
