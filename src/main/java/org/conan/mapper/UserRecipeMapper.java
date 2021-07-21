@@ -18,12 +18,12 @@ public interface UserRecipeMapper {
 	public void ingreinsert(UserIngreVO uringre);
 	public void proceinsert(UserProceVO urproce);
 	public int urrecipeCount(Criteria cri);
-	public int urrecipeCount();
-	public int remove(int urrid);
-	public int removeingre(int urrid);
-	public int removeproce(int urrid);
-	public List<UserIngreVO> getAll();
-	public List<String> readIngreNames(int urrid);
-	public List<String> readAllIngreNames();
-	
+    public int urrecipeCount();
+    public int remove(int urrid);
+    public int removeingre(int urrid);
+    public int removeproce(int urrid);
+    public List<UserIngreVO> getAll();
+    public List<String> readIngreNames(int urrid);
+    public List<String> readAllIngreNames();
+    
 }

@@ -65,32 +65,39 @@ border-bottom: 0.5px solid;
 #center {
 	text-align: center;
 }
+.bot_container{
+width:100%;
+background:black;
+}
+.board_container{
+width:80%;
+background:white;
+margin:0 auto;
+border: 1px solid #e2dede;
+}
+.big_text{
+padding: 40px;
+}
+#board_icon{
+height:41px;
+}
+.total_and_search{
+display:inline-flex;
+width:100%;
+}
+.hr_line{
+margin:0 auto;
+width:95%;
+}
+#total{
+margin: auto 0 0 15px;
+    padding: 10px;
+}
+#search{
+margin-left: auto;
+    padding: 25px;
+}
 </style>
-
-<!-- Bootstrap Core CSS -->
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- MetisMenu CSS -->
-<link href="/resources/vendor/metisMenu/metisMenu.min.css"
-	rel="stylesheet">
-
-<!-- DataTables CSS -->
-<link
-	href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"
-	rel="stylesheet">
-
-<!-- DataTables Responsive CSS -->
-<link
-	href="/resources/vendor/datatables-responsive/dataTables.responsive.css"
-	rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
-<link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
 
 <!-- jQuery -->
 <script
@@ -175,6 +182,20 @@ border-bottom: 0.5px solid;
 </script>
 
 <!-- 		------------------------------------------------------------------------------- -->
+<div class="bot_container">
+<div class="board_container">
+<div class="big_text"><img id="board_icon" src="/resources/proimg/board_icon.png"><img src="/resources/proimg/free_board.png"></div>
+<div class="total_and_search">
+<div id="total">총 17건</div>
+<div id="search"><input type="text"></div>
+<hr class="hr_line">
+
+</div>
+</div>
+
+</div>
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">

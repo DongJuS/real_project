@@ -12,10 +12,6 @@
 header {
 	background-color: #FF4500;
 }
-li{
-list-style: none;
-display: inline-block;
-}
 </style>
 <meta charset="UTF-8">
 <title>요들넷</title>
@@ -39,7 +35,7 @@ display: inline-block;
 		$("#regBtn").on("click", function() {
 			self.location = "/project/urrecipe/register"
 		})
-		 
+	
 
 
 	$.getJSON("/project/urrecipe/allImg",function(arr){
@@ -112,9 +108,9 @@ display: inline-block;
 			$('.down').hide()
 		})
 		
-	
-		
-		
+		 $(document).ajaxSend(function(e, xhr, options){
+		     	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);  
+		       });
 		
 		
 	})//document 끝
@@ -140,18 +136,6 @@ display: inline-block;
 							<li id='앞다리살'><a href='#' role='button'>앞다리살</a></li>
 							<li id='뒷다리살'><a href='#' role='button'>뒷다리살</a></li>
 							<li id='등갈비'><a href='#' role='button'>등갈비</a></li>
-							<!-- <li id='소고기'><a href='#' role='button'>소고기</a></li>
-						<li id='돼지고기'><a href='#' role='button'><span>돼지고기</span></a></li>
-						<li id='닭고기'><a href='#' role='button'><span>닭고기</span></a></li>
-						<li id='달걀'><a href='#' role='button'><span>달걀</span></a></li>
-						<li id='두부'><a href='#' role='button'><span>두부</span></a></li>
-						<li id='고추장'><a href='#' role='button'><span>고추장</span></a></li>
-						<li id='된장'><a href='#' role='button'><span>된장</span></a></li>
-						<li id='간장'><a href='#' role='button'><span>간장</span></a></li>
-						<li id='물엿'><a href='#' role='button'><span>물엿</span></a></li>
-						<li id='설탕'><a href='#' role='button'><span>설탕</span></a></li>
-						<li id='소금'><a href='#' role='button'><span>소금</span></a></li>
-						<li id='후추'><a href='#' role='button'><span>후추</span></a></li> -->
 						</ul>
 						<ul class='check'>
 							<li>소고기</li>
@@ -226,7 +210,9 @@ display: inline-block;
 						<button class='searchingre'>검색</button>
 					</div>
 					<form id='search' action='/project/urrecipe/searching'
-						method='post'></form>
+						method='post'>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
 				</div>
 			</div>
 			<div>
@@ -251,7 +237,7 @@ display: inline-block;
 				<tr>
 					<td>
 					<a class='move' href="<c:out value='${list.urrid }'/>" >
-					<div class='list_img<c:out value='${list.urrid}'/>'>대표사진이 없네요</div>
+					<div class='list_img<c:out value='${list.urrid}'/>'>dd</div>
 					</a>
 					</td> 
 					<td><a class='move' href="<c:out value='${list.urrid }'/>" ><c:out value='${list.urname }' /></a></td>
@@ -281,7 +267,7 @@ display: inline-block;
 			</c:if>
 		</ul>
 	</div>
-	<form id='actionForm' action='/recipe/list' method='get'>
+		<form id='actionForm' action='/recipe/list' method='get'>
 		<input type='hidden' name='pageNum'	value='${pageMaker.cri.pageNum }'> 
 		<input type='hidden' name='amount' value='${pageMaker.cri.amount }'> 
 		<%-- <input type='hidden' name='type' value="${pageMaker.cri.type }">

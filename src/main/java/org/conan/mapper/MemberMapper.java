@@ -5,16 +5,16 @@ import org.conan.domain.MemberVO;
 
 public interface MemberMapper {
 
-	public void register(MemberVO vo);
-	public MemberVO login(MemberVO vo);
-	public int Idcheck(String id);
-	public void update(MemberVO vo);
-	
-	/* ì‹œíë¦¬í‹° ì‹œì‘ */
-	public MemberVO read(String userid);
+   public void register(MemberVO vo);
+   public MemberVO login(MemberVO vo);
+   public int Idcheck(String id);
+   public void update(MemberVO vo);
+   
+   /* ½ÃÅ¥¸®Æ¼ ½ÃÀÛ */
+   public MemberVO read(String userid);
 
-	public void insertMember(MemberVO mem);/* ë©¤ë²„ ìƒì„± */
+   public void insertMember(MemberVO mem);/* ¸â¹ö »ı¼º */
 
-	public void a_insertMember(AuthVO au);/* ê¶Œí•œ ë¶€ì—¬ */
-	
+   public void a_insertMember(AuthVO au);/* ±ÇÇÑ ºÎ¿© */
+   
 }

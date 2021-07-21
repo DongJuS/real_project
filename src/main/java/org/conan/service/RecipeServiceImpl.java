@@ -101,14 +101,14 @@ public class RecipeServiceImpl implements RecipeService {
 			}
 		}
 	}
-	/* �룞二� �궡媛� �꽔湲� �떆�옉 */
 	
-//	@Override 
-//	public List<BoardVO> getList(){
-//		log.info("getList.....");
-//		return mapper.getList();
-//	}
+	@Override
+	public List<RecipeVO> readBestRecipe() {
+		return mapper.readBestRecipe();
+	}
 	
-	
-
+	@Override
+	public List<RecipeVO> readMinIngRecipe() {
+		return mapper.readMinIngRecipe();
+	}
 }

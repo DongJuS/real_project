@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -65,10 +67,51 @@ public class UploaderController {
 	public void uploadAjax() {
 		log.info("upload ajox");
 	}
-
+	
 	@PostMapping(value="/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<UploadFile>> uploadAjaxPost(MultipartFile[] uploadFile) {
+		List<UploadFile> list=new ArrayList<>();
+		String uploadFolder="c:\\upload";	
+		File uploadPath=new File(uploadFolder,getFolder());
+		if(uploadPath.exists()==false) {
+			uploadPath.mkdirs();
+		}
+
+		for(MultipartFile multipartFile: uploadFile) {
+			UploadFile upload=new UploadFile();
+			String uploadFileName=multipartFile.getOriginalFilename();
+			upload.setFilename(uploadFileName);
+			UUID uuid=UUID.randomUUID();
+			uploadFileName=uuid.toString()+"_"+uploadFileName;			
+			/* log.info(uploadFileName); */
+			File saveFile=new File(uploadPath,uploadFileName);
+
+			try {				
+				multipartFile.transferTo(saveFile);
+
+				upload.setUuid(uuid.toString());
+				upload.setUploadPath(getFolder());
+
+				
+				  if(checkImageType(saveFile)) { upload.setFiletype(true); }
+				 
+				list.add(upload);
+
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<UploadFile>> uploadAjaxPost1(MultipartFile[] uploadFile) {
 		List<UploadFile> list=new ArrayList<>();
 		String uploadFolder="c:\\upload";	
 		File uploadPath=new File(uploadFolder,getFolder());
@@ -107,7 +150,7 @@ public class UploaderController {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 
-
+	
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String filename){
@@ -139,12 +182,12 @@ public class UploaderController {
 		try { 
 			String contentType=Files.probeContentType(file.toPath()); 
 			return 	contentType.startsWith("image"); 
-		}catch (IOException e) { 
-			// TODO	Auto-generated catch block 
-			e.printStackTrace(); 
-		}
+			}catch (IOException e) { 
+					// TODO	Auto-generated catch block 
+				e.printStackTrace(); 
+				}
 		return false; 
-	}
+		}
 
 
 
