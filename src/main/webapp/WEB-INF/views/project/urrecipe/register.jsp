@@ -408,9 +408,7 @@ display: inline-block;
 		<input type='hidden' >
 		</form>
 	</div>
-	<div class='uploadResult'>
-					<ul></ul>
-				</div>
-		<jsp:include page="../include/footer.jsp" />
+
+	<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

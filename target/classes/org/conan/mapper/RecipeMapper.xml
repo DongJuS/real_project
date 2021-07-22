@@ -169,6 +169,18 @@ where rn>(#{pageNum}-1)*#{amount}]]>
 		<include refid="criteria" />
 		bno>0
 	</select>
+	
+	
+<select id="readBestRecipe" resultType="org.conan.domain.RecipeVO">
+select tr.rid, tr.name, tr.likecount,tr.img from (select rid,name,likecount,img from t_recipe order by likecount desc) tr where rownum 
+<![CDATA[ < ]]>=20 
+</select>
+
+
+<select id="readMinIngRecipe" resultType="org.conan.domain.RecipeVO">
+select a.rid, a.ingcount, a.name, a.img from (select r.rid, i.ingcount, r.name, r.img, r.summary from (select rid, count(rid) ingcount from t_ingre group by rid) i,t_recipe r where r.rid = i.rid order by i.ingcount) a where rid !=135 and rownum
+<![CDATA[ < ]]>=20 
+</select>
 
 
 

@@ -69,6 +69,11 @@ public class BoardServiceImpl implements BoardService {
 		log.info("remove..............."+bno);
 		return mapper.delete(bno)==1;
 	}
+
+	@Override
+	public int updateHits(Long bno) {
+		return mapper.updateHits(bno);
+	}
 	
 
 }

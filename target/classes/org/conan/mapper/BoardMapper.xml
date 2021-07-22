@@ -9,7 +9,7 @@
 	</select>
 	<!-- 인설트 문에 ? 대신에 #{변수이름(대소문자 구분함, 자바필드이기때문)}, 넣으면 setString등 사용X -->
 	<insert id="insert">
-		insert into tbl_board(bno, title, content, writer)
+		insert into tbl_board(seq_board.nextval, title, content, writer)
 		values(seq_board.nextval, #{title},#{content},#{writer})
 	</insert>
 
@@ -60,7 +60,7 @@ where bno =#{bno}
 		resultType="org.conan.domain.BoardVO">
 <![CDATA[select * from(
 select /*+INDEX_DESC(tbl_board pk_board)*/
-rownum rn,bno,title,content,writer,regdate,updateDate,replyCnt
+rownum rn,bno,title,content,writer,regdate,updateDate,replyCnt,hits
 from tbl_board
 where]]>
 		<include refid='criteria'></include>
@@ -76,6 +76,11 @@ where rn>(#{pageNum}-1)*#{amount}]]>
 		<include refid='criteria'></include>
 		bno>0
 	</select>
+	<update id="updateHits">
+update tbl_board
+set hits = hits+1
+where bno =#{bno}
+</update>
 
 
 

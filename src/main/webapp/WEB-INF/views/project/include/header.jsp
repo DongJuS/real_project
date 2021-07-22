@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
+=======
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags"  %>
+>>>>>>> origin/master
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,18 +51,18 @@
 	<!-- 검색창 필요한 스크립트 끝 -->
 <style>
 .logo_image {
-	width: 100px;
-	margin: 10px 0 0 15px;
+   width: 100px;
+   margin: 10px 0 0 15px;
 }
 
 .logo_text {
-	margin: 0 auto;
+   margin: 0 auto;
 }
 
 .logotext {
-	width: 300px;
-	top: 18px;
-	position: relative;
+   width: 300px;
+   top: 18px;
+   position: relative;
 }
 
 .main_top_container {
@@ -70,16 +74,16 @@
 }
 
 .top_top {
-	width: 100%;
-	height: 80px;
-	display: inline-flex;
+   width: 100%;
+   height: 80px;
+   display: inline-flex;
 }
 
 .top_bottom {
-	width: 100%;
-	height: 170px;
-	text-align: center;
-	position: relative;
+   width: 100%;
+   height: 170px;
+   text-align: center;
+   position: relative;
 }
 
 .logo {
@@ -96,62 +100,62 @@
 }
 
 .nav_bar a {
-	color: white;
+   color: white;
 }
 
 .nav_bar a:link {
-	text-decoration: none;
+   text-decoration: none;
 }
 
 #search_bar {
-	width: 70%;
-	height: 45px;
-	padding-right: 45px;
-	border-radius: 100px;
-	border-style: solid;
+   width: 70%;
+   height: 45px;
+   padding-right: 45px;
+   border-radius: 100px;
+   border-style: solid;
 }
 
 .fa-search:before {
-	content: "\f002";
-	position: relative;
-	right: 30px;
-	cursor: pointer;
+   content: "\f002";
+   position: relative;
+   right: 30px;
+   cursor: pointer;
 }
 
 #autoMaker {
-	position: relative;
-	width: 50%;
-	height: auto;
-	background: white;
-	cursor: pointer;
-	margin: 0 auto;
-	border-radius: 10px;
-	z-index: 100;
+   position: relative;
+   width: 50%;
+   height: auto;
+   background: white;
+   cursor: pointer;
+   margin: 0 auto;
+   border-radius: 10px;
+   z-index: 100;
 }
 
 #autoMaker>div {
-	border: 1px solid #a09c9c;
-	margin: 3px 3px;
-	border-radius: 15px;
+   border: 1px solid #a09c9c;
+   margin: 3px 3px;
+   border-radius: 15px;
 }
 
 #autoMaker>div:hover {
-	background: #a09c9c;
+   background: #a09c9c;
 }
 
 #search_area>div {
-	background-color: white;
-	width: auto;
-	border: 1px solid black;
-	border-radius: 100px;
-	padding: 5px;
-	display: inline-block;
-	margin: 3px;
+   background-color: white;
+   width: auto;
+   border: 1px solid black;
+   border-radius: 100px;
+   padding: 5px;
+   display: inline-block;
+   margin: 3px;
 }
 
 .icon1 {
-	border-radius: 100px;
-	width: 20px;
+   border-radius: 100px;
+   width: 20px;
 }
 </style>
 </head>
@@ -169,7 +173,11 @@
 			<div class="nav_bar">
 				<c:if test="${member == null }">
 
+<<<<<<< HEAD
 					<a href="/customLogin">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+=======
+					<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+>>>>>>> origin/master
 
 				</c:if>
 				<c:if test="${member !=null}">

@@ -23,6 +23,7 @@ import org.conan.service.GetReplyService;
 import org.conan.service.LikeService;
 import org.conan.service.MemberService;
 import org.conan.service.RecipeService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -179,7 +180,7 @@ public class ProjectController {
 		return toggleLike;
 	}
 	
-	
+	@PreAuthorize("permitAll()")
 	@PostMapping("/index") 
 	public void toIndex(HttpServletRequest request, Criteria cri, Model model) {
 		log.info("포스트로 인덱스페이지 이동");
