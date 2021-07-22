@@ -146,8 +146,8 @@ public class ProjectController {
 		model.addAttribute("rvoList", rvoList);
 		
 		/* model.addAttribute("like", likes.readLike(rid)); */
-		System.out.println("rid는 : !!"+rid);
-		System.out.println();
+		//System.out.println("rid는 : !!"+rid);
+		//System.out.println();
 		if(mvo!=null) {
 			int yesOrNo = likes.likeOrNot(new LikeVO(rid,mvo.getUserid()))==null?0:1;
 			model.addAttribute("yesOrNo", yesOrNo);

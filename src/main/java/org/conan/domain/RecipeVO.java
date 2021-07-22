@@ -15,6 +15,7 @@ public class RecipeVO {
    private String summary;	
    private int likecount;
    private int ingcount;
+   private String userid;
    
 	private List<UploadFile> fileupload; 
 

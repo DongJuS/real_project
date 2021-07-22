@@ -76,7 +76,7 @@ where rn>(#{pageNum}-1)*#{amount}]]>
 	</insert>
 
 	<select id="b_getList" resultType="org.conan.domain.BoardVO">select * from tbl_board
-		wherebno>0
+		where bno>0
 	</select>
 
 	<!-- 인설트 문에 ? 대신에 #{변수이름(대소문자 구분함, 자바필드이기때문)}, 넣으면 setString등 사용X -->

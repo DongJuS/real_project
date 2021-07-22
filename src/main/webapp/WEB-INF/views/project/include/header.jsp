@@ -169,7 +169,7 @@
 			<div class="nav_bar">
 				<c:if test="${member == null }">
 
-					<a href="/login">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
+					<a href="/customLogin">로그인</a> | <a href="/join">회원가입</a> | <a href="#">마이페이지</a>
 
 				</c:if>
 				<c:if test="${member !=null}">

@@ -523,13 +523,13 @@ font-size: 12px;
 				<div class="cont">
 					<p class="user_text">
 						<img class="user_icon_img img"
-							src="/resources/proimg/user_icon.png"> 
+							src="/resources/proimg/user_icon.png"><span>${recipe.userid }</span> 
 					</p>
 					<img class="main_image img proceImg" src="${recipe.img}" /><br>
 					<br>
 					<p class="summary_text">${recipe.summary}<br> <br>
 					</p>
-
+					
 
 
 
