@@ -151,7 +151,7 @@ public class UserRecipeController {
 		//log.info(search[1]);
 		//log.info(search.length);
 		log.info(service.urrecipeCount());
-		for(int i=1; i<=service.urrecipeCount(); i++) {
+		for(int i=2000; i<=service.urrecipeCount()+2000; i++) {
 			if(service.readIngreNames(i).size()==0) continue;
 			
 			Collection<String> rIngs=new ArrayList(service.readIngreNames(i));

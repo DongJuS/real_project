@@ -368,8 +368,8 @@ $(document).ready(function() {
      var csrfHeaderName="${_csrf.headerName}";
      var csrfTokenValue="${_csrf.token}";
   		//alert("클릭됨") 
-  		var mem = '<sec:authentication property="principal.username"/>'
-  		if(mem){
+  		var mem = '<sec:authorize access="isAuthenticated()"><sec:authentication property="principal.username"/></sec:authorize>'
+  		if(mem!=''){
   			console.log("ajax작동")
   			  $.ajax({
   					url:"/project/urrecipe/getLike",
